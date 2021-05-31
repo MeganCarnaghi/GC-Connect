@@ -15,6 +15,11 @@ import { NgAuthService } from '../app/services/ng-auth.service';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { GroupsComponent } from './components/groups/groups.component';
+import { DirectoryComponent } from './components/directory/directory.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +29,10 @@ import { ProfileComponent } from './components/profile/profile.component';
     VerifyEmailComponent,
     ForgotPasswordComponent,
     ProfileComponent,
+    NavigationComponent,
+    CalendarComponent,
+    GroupsComponent,
+    DirectoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +43,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
+    FontAwesomeModule,
   ],
   providers: [NgAuthService],
   bootstrap: [AppComponent],

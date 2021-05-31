@@ -1,0 +1,41 @@
+<!-- Parent container for all nav icons -->
+<div class="nav-container">
+  <!-- FontAwesome icons with Aria Labels for accessibility-->
+  <!-- Calendar -->
+  <a routerLink="/calendar" aria-label="Calendar">
+    <fa-icon
+      class="nav-item nav-icon"
+      routerLinkActive="active-icon"
+      [icon]="faCalendarAlt"
+      size="2x"
+    ></fa-icon
+  ></a>
+  <!-- Groups -->
+  <a routerLink="/groups" aria-label="Groups">
+    <fa-icon
+      class="nav-item nav-icon"
+      routerLinkActive="active-icon"
+      [icon]="faUserFriends"
+      size="2x"
+    ></fa-icon
+  ></a>
+  <!-- Directory -->
+  <a routerLink="/directory" aria-label="Directory">
+    <fa-icon
+      class="nav-item nav-icon"
+      routerLinkActive="active-icon"
+      [icon]="faAddressBook"
+      size="2x"
+    ></fa-icon
+  ></a>
+  <!-- End font awesome icons -->
+
+  <!-- Profile image for the user that is logged in -->
+  <!-- Profile -->
+  <a routerLink="/profile" aria-label="Profile">
+    <div
+      class="nav-item nav-profile-image"
+      routerLinkActive="active-image"
+    ></div
+  ></a>
+</div>

@@ -1,0 +1,45 @@
+/* Parent container */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding: 10px 0;
+  background-color: white;
+  border-top: 1px solid #cecece;
+}
+/* All nav children items */
+.nav-item {
+  margin: 0 30px;
+}
+
+/* Nav icons only */
+.nav-icon {
+  color: #343d46;
+}
+.nav-icon:hover {
+  color: #e0693d;
+}
+/* Profile image only */
+.nav-profile-image {
+  width: 40px;
+  max-width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border: 2px solid #343d46;
+  background-color: lightgray;
+  border-radius: 40px;
+}
+.nav-profile-image:hover {
+  border: 2px solid#e0693d;
+}
+
+/* Icon styling based on current URL */
+.active-icon {
+  color: #e0693d;
+}
+.active-image {
+  border: 2px solid#e0693d;
+}
