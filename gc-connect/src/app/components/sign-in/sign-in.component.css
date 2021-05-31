@@ -1,0 +1,130 @@
+.button {
+  border: none;
+  padding: 1em;
+  margin: 0.5em 0;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.container {
+  min-height: 100vh;
+  min-width: 100%;
+  background-color: #2d363c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-container__headings {
+  align-self: flex-start;
+}
+
+.sign-in-container__h1,
+.sign-in-container__h2 {
+  color: #fff;
+}
+
+.sign-in-container__h1 {
+  font-size: 3em;
+}
+
+.sign-in-container__h1 {
+  padding-bottom: 0.25em;
+}
+
+.sign-in-container__h2 {
+  padding-bottom: 1.75em;
+  font-weight: 300;
+}
+
+.sign-in__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in-form__email-input {
+  display: relative;
+}
+
+.email-icon {
+  position: absolute;
+  color: #fff;
+  top: 325px;
+  left: 500px;
+}
+
+.sign-in__input {
+  padding: 1em 1.5em;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  background-color: #1c242b;
+  margin-bottom: 1.5em;
+  width: 100%;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.sign-in__input::placeholder {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.forgot-password__container,
+.forgot-password__link {
+  color: #fff;
+  margin-bottom: 3em;
+  text-align: center;
+}
+
+.forgot-password__link {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.forgot-password__link:hover {
+  text-decoration: underline;
+}
+
+.forgot-password__link:visited {
+  color: #fff;
+}
+
+.button--email-sign-in {
+  background-color: #e1693d;
+}
+
+.button--email-sign-in:hover {
+  filter: brightness(80%);
+  transition: 0.3s;
+}
+
+.button--google-sign-in {
+  background-color: #7a324a;
+}
+
+.button--google-sign-in:hover {
+  filter: brightness(80%);
+  transition: 0.3s;
+}
+
+.register__link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.8em;
+  padding: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #05d0cd;
+  width: 100%;
+  text-align: center;
+  margin: 0.5em 0;
+  box-sizing: border-box;
+}
+
+.register__link:hover {
+  filter: brightness(80%);
+  transition: 0.3s;
+}
