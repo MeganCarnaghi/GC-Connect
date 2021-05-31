@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+/* FONTS
+Main Headings: font-family: 'Calistoga', cursive;
+Body Text: font-family: 'Fira Sans', sans-serif; */
+
+/*COLORS */
+
+/* GENERIC STYLING FOR APP */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100vh;
+  font-family: "Fira Sans", sans-serif;
+}
+
+input,
+button,
+label {
+  font-family: "Fira Sans", sans-serif;
+}
+
+h1 {
+  font-family: "Calistoga", cursive;
+}
