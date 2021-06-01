@@ -1,0 +1,108 @@
+/* Parent Container */
+.nav-parent-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo container*/
+.logo-container {
+  width: 150px;
+  min-width: 150px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+/* Links container */
+.links-container {
+  padding-top: 10px;
+  padding-right: 10px;
+}
+/* Buttons */
+.header-button {
+  padding: 10px;
+  min-width: 60px;
+  border: none;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.pp-button {
+  color: #343d46;
+  background-color: #efefef;
+  margin-right: 5px;
+}
+.pp-button:hover {
+  color: #343d46;
+  background-color: #dddddd;
+}
+
+.lms-button {
+  color: white;
+  background-color: #343d46;
+}
+.lms-button:hover {
+  background-color: #54616d;
+}
+
+/* Nav icons parent container */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding: 10px 0;
+  background-color: white;
+  border-top: 1px solid #cecece;
+}
+/* All nav children items */
+.nav-item {
+  margin: 0 30px;
+}
+
+/* Nav icons only */
+.nav-icon {
+  color: #343d46;
+}
+.nav-icon:hover {
+  color: #54616d;
+}
+/* Profile image only */
+.nav-profile-image {
+  width: 40px;
+  max-width: 30px;
+  min-width: 30px;
+  height: 30px;
+  border: 2px solid #343d46;
+  background-color: lightgray;
+  border-radius: 30px;
+}
+.nav-profile-image:hover {
+  border: 2px solid#54616d;
+}
+
+/* Icon styling based on current URL - MUST STAY BELOW ICON STYLING */
+.active-icon {
+  color: #e0693d;
+}
+.active-image {
+  border: 2px solid#e0693d;
+}
+
+/* MEDIA QUERIES */
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .nav-parent-container {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cecece;
+  }
+  .nav-container {
+    position: static;
+    border: none;
+    width: 400px;
+    padding: 10px 0 0 0;
+  }
+}

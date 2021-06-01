@@ -1,0 +1,61 @@
+<!-- Parent Container -->
+<div class="nav-parent-container">
+  <!-- GCC Connect Logo Container -->
+  <div class="logo-container">
+    <img src="assets/svg/gcc-logo-orange-blue.svg" alt="GC Connect logo" />
+  </div>
+
+  <!-- Navigation Container -->
+  <div class="nav-container">
+    <!-- FontAwesome icons with Aria Labels for accessibility-->
+    <!-- Calendar -->
+    <a routerLink="/calendar" aria-label="Calendar">
+      <fa-icon
+        class="nav-item nav-icon"
+        routerLinkActive="active-icon"
+        [icon]="faCalendarAlt"
+        size="lg"
+      ></fa-icon
+    ></a>
+    <!-- Groups -->
+    <a routerLink="/groups" aria-label="Groups">
+      <fa-icon
+        class="nav-item nav-icon"
+        routerLinkActive="active-icon"
+        [icon]="faUserFriends"
+        size="lg"
+      ></fa-icon
+    ></a>
+    <!-- Directory -->
+    <a routerLink="/directory" aria-label="Directory">
+      <fa-icon
+        class="nav-item nav-icon"
+        routerLinkActive="active-icon"
+        [icon]="faAddressBook"
+        size="lg"
+      ></fa-icon
+    ></a>
+
+    <!-- Profile -->
+    <a routerLink="/profile" aria-label="Profile">
+      <div
+        class="nav-item nav-profile-image"
+        routerLinkActive="active-image"
+      ></div
+    ></a>
+  </div>
+
+  <!-- Links container -->
+  <div class="links-container">
+    <!-- Need to add correct project portal link -->
+    <a href="#" target="_blank" rel="noopener noreferrer"
+      ><button class="header-button pp-button">Project Portal</button></a
+    >
+    <a
+      href="https://lms.grandcircus.co/login/index.php"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><button class="header-button lms-button">LMS</button></a
+    >
+  </div>
+</div>
