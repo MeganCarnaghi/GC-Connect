@@ -1,6 +1,7 @@
 // Required Dependencies
 const express = require("express");
 const cors = require("cors");
+const router = require('./routes');
 
 // Create instance of Express server
 const app = express();
