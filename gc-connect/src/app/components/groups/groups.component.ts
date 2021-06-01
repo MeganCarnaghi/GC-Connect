@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GcConnectService } from 'src/app/services/gc-connect.service';
 
 @Component({
   selector: 'app-groups',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
+  groups: any | null = null;
 
-  constructor() { }
+  constructor(private SQLservice: GcConnectService) { }
 
   ngOnInit(): void {
+    this.SQLservice.getAllGroups().subscribe(group => this.groups = group );
   }
 
 }
