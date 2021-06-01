@@ -13,7 +13,7 @@ export class GcConnectService {
   };
 
   getAllGroups(){
-    return this.client.get('http://localhost:3000/users');
+    return this.client.get('http://localhost:3000/groups');
   };
 
   getUserByUid(user: User){
