@@ -58,6 +58,19 @@ router.get('/group-posts/:id', async (req, res) => {
     res.json(result);
 });
 
+// get group-members by group
+router.get('/group-members/:id', async (req, res) => {
+    const result = await db.many('SELECT user_id from group_members WHERE group_id = $(id)', {
+        id: req.params.id
+    });
+
+    if (!result) {
+        return res.status(404).send('The group could not be found');
+    }
+
+    res.json(result);
+});
+
 
 
 

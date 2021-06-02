@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GcConnectService } from 'src/app/services/gc-connect.service';
 
 @Component({
   selector: 'app-directory',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./directory.component.css']
 })
 export class DirectoryComponent implements OnInit {
+  users: any | null = null;
 
-  constructor() { }
+  constructor(private SQLservice: GcConnectService) { }
 
   ngOnInit(): void {
+    this.SQLservice.getAllUsers().subscribe(user => this.users = user );
   }
 
 }
