@@ -8,16 +8,21 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { DirectoryComponent } from './components/directory/directory.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'email-verification', component: VerifyEmailComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'groups', component: GroupsComponent },
-  { path: 'directory', component: DirectoryComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
+  { path: 'groups', component: GroupsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'directory',
+    component: DirectoryComponent,
+    canActivate: [AuthGuard],
+  },
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
 ];
 
