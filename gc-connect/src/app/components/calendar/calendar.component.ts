@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
+import { Calendar } from '@fullcalendar/core';
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
+
+// let calendar = new Calendar(calendarEl, {
+//   plugins: [googleCalendarPlugin],
+//   googleCalendarApiKey: '',
+//   events: {
+//     googleCalendarId: '',
+//   },
+// });
 
 @Component({
   selector: 'app-calendar',

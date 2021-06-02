@@ -40,7 +40,7 @@
 
 .lms-button {
   color: white;
-  background-color: #343d46;
+  background-color: #2c3e50;
 }
 .lms-button:hover {
   background-color: #54616d;
@@ -65,7 +65,7 @@
 
 /* Nav icons only */
 .nav-icon {
-  color: #343d46;
+  color: #2c3e50;
 }
 .nav-icon:hover {
   color: #54616d;
@@ -76,7 +76,7 @@
   max-width: 30px;
   min-width: 30px;
   height: 30px;
-  border: 2px solid #343d46;
+  border: 2px solid #2c3e50;
   background-color: lightgray;
   border-radius: 30px;
 }
