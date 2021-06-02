@@ -1,2 +1,11 @@
 <app-navigation></app-navigation>
-<p>directory works!</p>
+<p>Search for a user ... </p>
+
+<div *ngFor='let user of users' class='item-container'>
+    <img src={{user.photo}} class='round-photo'/>
+    <div class='item-details'>
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <p>{{user.bootcamp}}</p> 
+    </div>
+    <p>{{user.type}}</p> 
+</div>
