@@ -1,5 +1,11 @@
 <div class="container">
   <div class="sign-in__container">
+    <img
+      class="sign-in-container__logo"
+      src="assets/svg/gcc-logo-orange-white.svg"
+      alt="GC Connect logo"
+    />
+
     <div class="sign-in-container__headings">
       <h1 class="sign-in-container__h1">Welcome Back!</h1>
       <h2 class="sign-in-container__h2">We've missed you.</h2>
@@ -10,7 +16,7 @@
       <input
         type="text"
         class="sign-in__input email"
-        placeholder="Email"
+        placeholder="&#xf0e0;&nbsp;&nbsp;Email"
         name="email"
         #userName
         required
@@ -19,13 +25,13 @@
       <input
         type="password"
         class="sign-in__input password"
-        placeholder="Password"
+        placeholder="&#xf023;&nbsp;&nbsp;Password"
         name="password"
         #userPassword
         required
       />
-      <div class="forgot-password__container">
-        <span
+      <div class="forgot-password">
+        <span class="forgot-password__span"
           >Trouble logging in?
           <a class="forgot-password__link" routerLink="/forgot-password"
             >Reset Password</a
@@ -45,7 +51,7 @@
       >
         Sign in with Google
       </button>
-      <a class="register__link" routerLink="/sign-up"> Register</a>
+      <a class="register__link" routerLink="/sign-up">Register</a>
     </form>
   </div>
 </div>

@@ -18,6 +18,14 @@
   align-items: center;
 }
 
+.sign-in__container {
+  width: 330px;
+}
+
+.sign-in-container__logo {
+  margin: 2em 0;
+}
+
 .sign-in-container__headings {
   align-self: flex-start;
 }
@@ -45,17 +53,6 @@
   flex-direction: column;
 }
 
-.sign-in-form__email-input {
-  display: relative;
-}
-
-.email-icon {
-  position: absolute;
-  color: #fff;
-  top: 325px;
-  left: 500px;
-}
-
 .sign-in__input {
   padding: 1em 1.5em;
   border-radius: 5px;
@@ -65,6 +62,7 @@
   width: 100%;
   box-sizing: border-box;
   color: #fff;
+  font-family: FontAwesome, "Fira Sans", sans-serif;
 }
 
 .sign-in__input::placeholder {
@@ -72,11 +70,15 @@
   text-transform: uppercase;
 }
 
-.forgot-password__container,
+.forgot-password,
 .forgot-password__link {
   color: #fff;
   margin-bottom: 3em;
   text-align: center;
+}
+
+.forgot-password__span {
+  font-size: 1em;
 }
 
 .forgot-password__link {
