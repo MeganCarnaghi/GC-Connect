@@ -9,10 +9,21 @@ import firebase from 'firebase/app';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
+  userState: any;
+
   constructor(
     public ngAuthService: NgAuthService,
     public afAuth: AngularFireAuth
-  ) {}
+  ) {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.userState = user;
+        localStorage.setItem('user', JSON.stringify(this.userState));
+      } else {
+        localStorage.removeItem('user');
+      }
+    });
+  }
 
   ngOnInit(): void {}
 

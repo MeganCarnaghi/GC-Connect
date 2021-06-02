@@ -19,16 +19,14 @@ export class NgAuthService {
     public router: Router,
     public ngZone: NgZone
   ) {
-    // this.afAuth.authState.subscribe((user: any) => {
-    //   if (user) {
-    //     this.userState = user;
-    //     localStorage.setItem('user', JSON.stringify(this.userState));
-    //     JSON.parse(localStorage.getItem('user'));
-    //   } else {
-    //     localStorage.setItem('user', null);
-    //     JSON.parse(localStorage.getItem('user'));
-    //   }
-    // });
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.userState = user;
+        localStorage.setItem('user', JSON.stringify(this.userState));
+      } else {
+        localStorage.removeItem('user');
+      }
+    });
   }
 
   SignIn(email: any, password: any) {
@@ -76,27 +74,12 @@ export class NgAuthService {
       });
   }
 
-  // get isLoggedIn(): boolean {
-  //   const user = JSON.parse(localStorage.getItem('user'));
-  //   return user !== null && user.emailVerified !== false ? true : false;
-  // }
-
-  // GoogleAuth() {
-  //   return this.AuthLogin(new auth.GoogleAuthProvider());
-  // }
-
-  AuthLogin(provider: any) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        });
-        this.SetUserData(result.user);
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
+  get isLoggedIn(): any {
+    const stored = localStorage.getItem('user');
+    if (stored) {
+      const user = JSON.parse(stored);
+      return user !== null && user.emailVerified !== false ? true : false;
+    }
   }
 
   SetUserData(user: any) {
