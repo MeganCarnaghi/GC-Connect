@@ -1,53 +1,60 @@
-<div class="displayTable">
-  <div class="displayTableCell">
-    <div class="authBlock">
-      <h3>Register User</h3>
+<div class="container">
+  <div class="sign-up__container">
+    <img
+      class="sign-up-container__logo"
+      src="assets/svg/gcc-logo-orange-white.svg"
+      alt="GC Connect logo"
+    />
 
-      <div class="formGroup">
-        <input
-          type="email"
-          class="form-control"
-          placeholder="Email Address"
-          #userEmail
-          required
-        />
-      </div>
-
-      <div class="formGroup">
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Password"
-          #userPwd
-          required
-        />
-      </div>
-
-      <div class="formGroup">
-        <input
-          type="button"
-          class="btn btn-block btn-primary"
-          value="Sign Up"
-          (click)="ngAuthService.SignUp(userEmail.value, userPwd.value)"
-        />
-      </div>
-
-      <div class="formGroup">
-        <button
-          type="button"
-          class="btn btn-block btn-danger"
-          (click)="signUpWithGoogle()"
-        >
-          Sign Up with Google
-        </button>
-      </div>
+    <div class="sign-up-container__headings">
+      <h1 class="sign-up-container__h1">Welcome!</h1>
+      <h2 class="sign-up-container__h2">Create your account.</h2>
     </div>
 
-    <div class="redirectToLogin">
-      <span
-        >Already have an account?
-        <span class="redirect" routerLink="/sign-in">Log In</span></span
+    <form class="sign-up__form">
+      <label for="email"></label>
+      <input
+        type="email"
+        class="sign-up__input"
+        placeholder="&#xf0e0;&nbsp;&nbsp;Email"
+        name="email"
+        #userEmail
+        required
+      />
+
+      <label for="password"></label>
+      <input
+        type="password"
+        class="sign-up__input"
+        placeholder="&#xf023;&nbsp;&nbsp;Password"
+        name="password"
+        #userPwd
+        required
+      />
+
+      <input
+        type="button"
+        class="button button--email-sign-up"
+        value="Sign Up"
+        (click)="ngAuthService.SignUp(userEmail.value, userPwd.value)"
+      />
+
+      <button
+        type="button"
+        class="button button--google-sign-up"
+        (click)="signUpWithGoogle()"
       >
-    </div>
+        Sign Up with Google
+      </button>
+
+      <div class="redirect-to-login">
+        <span class="redirect-to-login__span"
+          >Already have an account?
+          <a class="redirect-to-login__link" routerLink="/sign-in"
+            >Log In</a
+          ></span
+        >
+      </div>
+    </form>
   </div>
 </div>
