@@ -15,7 +15,7 @@
       <label for="email"></label>
       <input
         type="email"
-        class="sign-up__input"
+        class="sign-up-form__input"
         placeholder="&#xf0e0;&nbsp;&nbsp;Email"
         name="email"
         #userEmail
@@ -25,7 +25,7 @@
       <label for="password"></label>
       <input
         type="password"
-        class="sign-up__input"
+        class="sign-up-form__input"
         placeholder="&#xf023;&nbsp;&nbsp;Password"
         name="password"
         #userPwd
@@ -39,19 +39,19 @@
         (click)="ngAuthService.SignUp(userEmail.value, userPwd.value)"
       />
 
-      <button
+      <!-- <button
         type="button"
         class="button button--google-sign-up"
         (click)="signUpWithGoogle()"
       >
         Sign Up with Google
-      </button>
+      </button> -->
 
-      <div class="redirect-to-login">
+      <div class="redirect-to-login__div">
         <span class="redirect-to-login__span"
           >Already have an account?
           <a class="redirect-to-login__link" routerLink="/sign-in"
-            >Log In</a
+            >Sign In</a
           ></span
         >
       </div>

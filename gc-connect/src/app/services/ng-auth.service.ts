@@ -37,6 +37,7 @@ export class NgAuthService {
           this.router.navigate(['profile']);
         });
         this.SetUserData(result.user);
+        console.log(result.user);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -44,11 +45,13 @@ export class NgAuthService {
   }
 
   SignUp(email: any, password: any) {
+    // check against users table if email exists, if not alert "not authorized, please contact your admin"
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SendVerificationMail();
         this.SetUserData(result.user);
+        console.log(result.user);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -67,7 +70,10 @@ export class NgAuthService {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        window.alert(
+          'Password reset email has been sent. Please check your inbox.'
+        );
+        this.router.navigate(['sign-in']);
       })
       .catch((error) => {
         window.alert(error);

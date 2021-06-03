@@ -15,7 +15,7 @@
       <label for="email"></label>
       <input
         type="text"
-        class="sign-in__input email"
+        class="sign-in-form__input"
         placeholder="&#xf0e0;&nbsp;&nbsp;Email"
         name="email"
         #userName
@@ -24,13 +24,13 @@
       <label for="password"></label>
       <input
         type="password"
-        class="sign-in__input password"
+        class="sign-in-form__input"
         placeholder="&#xf023;&nbsp;&nbsp;Password"
         name="password"
         #userPassword
         required
       />
-      <div class="forgot-password">
+      <div class="forgot-password__div">
         <span class="forgot-password__span"
           >Trouble logging in?
           <a class="forgot-password__link" routerLink="/forgot-password"
@@ -44,13 +44,6 @@
         value="Sign in"
         (click)="ngAuthService.SignIn(userName.value, userPassword.value)"
       />
-      <button
-        type="button"
-        class="button button--google-sign-in"
-        (click)="signInWithGoogle()"
-      >
-        Sign in with Google
-      </button>
       <a class="register__link" routerLink="/sign-up">Register</a>
     </form>
   </div>
