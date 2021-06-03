@@ -30,10 +30,9 @@ export class CalendarComponent implements AfterViewInit {
 
     let calendar = new Calendar(this.calendar.nativeElement, {
       plugins: [googleCalendarPlugin],
-      googleCalendarApiKey: 'AIzaSyC0Eh7HDlVgNMrCKut_4VdE3S9Sm18LTuk',
+      googleCalendarApiKey: '',
       events: {
-        googleCalendarId:
-          'c_619crt1ebto70ujnpp3m8v6i2g@group.calendar.google.com',
+        googleCalendarId: '',
       },
     });
   }
