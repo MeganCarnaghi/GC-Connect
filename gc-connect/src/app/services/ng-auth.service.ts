@@ -39,6 +39,7 @@ export class NgAuthService {
           this.router.navigate(['profile']);
         });
         this.SetUserData(result.user);
+        console.log(result.user);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -46,14 +47,15 @@ export class NgAuthService {
   }
 
   SignUp(email: any, password: any) {
-    //check that email exists and is authorized
+    // check against users table if email exists, if not alert "not authorized, please contact your admin"
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SendVerificationMail();
         this.SetUserData(result.user);
-        // when add a way to add approved emails/users then turn on these comments
+        // when create a way to add approved emails/users then turn on these comments
         // this.SQLservice.updateUserUID(result.user?.email, result.user?.uid);
+
       })
       .catch((error) => {
         window.alert(error.message);
@@ -72,7 +74,10 @@ export class NgAuthService {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        window.alert(
+          'Password reset email has been sent. Please check your inbox.'
+        );
+        this.router.navigate(['sign-in']);
       })
       .catch((error) => {
         window.alert(error);

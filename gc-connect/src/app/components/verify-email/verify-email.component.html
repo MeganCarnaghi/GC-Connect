@@ -1,24 +1,23 @@
-<div class="displayTable">
-  <div class="displayTableCell">
-    <div class="authBlock">
-      <h3>Thank You for Signing up</h3>
+<div class="container">
+  <div class="email-verification__container">
+    <img
+      class="email-verification__logo"
+      src="assets/svg/gcc-logo-orange-white.svg"
+      alt="GC Connect logo"
+    />
 
-      <div class="formGroup" *ngIf="ngAuthService.userState as user">
-        <p class="text-center">
-          Confirmation mail has been sent to <strong>{{ user.email }}</strong
-          >.
-        </p>
-      </div>
-
-      <div class="formGroup">
-        <button
-          type="button"
-          class="btn btn-block btn-success"
-          (click)="ngAuthService.SendVerificationMail()"
-        >
-          Resend Verification Email
-        </button>
-      </div>
+    <div
+      class="email-verification-container__headings"
+      *ngIf="ngAuthService.userState as user"
+    >
+      <h1 class="email-verification-container__h1">Thank You!</h1>
+      <p class="email-verification-container__p">
+        A confirmation email has been sent to
+        <span class="email-verification__span">{{ user.email }}</span
+        >. Click on the link in the email to verify your email address and
+        create your account.
+      </p>
     </div>
+    <a class="sign-in__link" routerLink="/sign-in">Sign In</a>
   </div>
 </div>

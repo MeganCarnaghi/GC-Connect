@@ -28,18 +28,11 @@
 
 .sign-in-container__headings {
   align-self: flex-start;
-}
-
-.sign-in-container__h1,
-.sign-in-container__h2 {
   color: #fff;
 }
 
 .sign-in-container__h1 {
   font-size: 3em;
-}
-
-.sign-in-container__h1 {
   padding-bottom: 0.25em;
 }
 
@@ -53,31 +46,27 @@
   flex-direction: column;
 }
 
-.sign-in__input {
+.sign-in-form__input {
   padding: 1em 1.5em;
   border-radius: 5px;
   border: 1px solid #fff;
   background-color: #1c242b;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   width: 100%;
   box-sizing: border-box;
   color: #fff;
   font-family: FontAwesome, "Fira Sans", sans-serif;
 }
 
-.sign-in__input::placeholder {
+.sign-in-form__input::placeholder {
   color: #fff;
   text-transform: uppercase;
 }
 
-.forgot-password,
-.forgot-password__link {
+.forgot-password__div {
   color: #fff;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   text-align: center;
-}
-
-.forgot-password__span {
   font-size: 1em;
 }
 
@@ -99,15 +88,6 @@
 }
 
 .button--email-sign-in:hover {
-  filter: brightness(80%);
-  transition: 0.3s;
-}
-
-.button--google-sign-in {
-  background-color: #7a324a;
-}
-
-.button--google-sign-in:hover {
   filter: brightness(80%);
   transition: 0.3s;
 }
