@@ -6,6 +6,7 @@ import {
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
+import { GcConnectService } from './gc-connect.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class NgAuthService {
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    private SQLservice: GcConnectService
   ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -51,7 +53,9 @@ export class NgAuthService {
       .then((result) => {
         this.SendVerificationMail();
         this.SetUserData(result.user);
-        console.log(result.user);
+        // when create a way to add approved emails/users then turn on these comments
+        // this.SQLservice.updateUserUID(result.user?.email, result.user?.uid);
+
       })
       .catch((error) => {
         window.alert(error.message);

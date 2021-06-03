@@ -20,7 +20,7 @@ router.get('/groups', async (req, res) => {
 });
 
 // get user by id for profile/popup
-router.get('/user/:uid', async (req, res) => {
+router.get('/users/:uid', async (req, res) => {
     const result = await db.one('SELECT * from users WHERE firebase_uid = $(uid)', {
         uid: req.params.uid
     });
@@ -33,7 +33,7 @@ router.get('/user/:uid', async (req, res) => {
 });
 
 // get group by id for details
-router.get('/group/:id', async (req, res) => {
+router.get('/groups/:id', async (req, res) => {
     const result = await db.one('SELECT * from groups WHERE id = $(id)', {
         id: req.params.id
     });
@@ -71,7 +71,68 @@ router.get('/group-members/:id', async (req, res) => {
     res.json(result);
 });
 
+// get all users for phonebook list
+router.post('/users', async (req, res) => {
+    try{
 
+        await db.none('INSERT INTO users (firebase_uid, email, first_name, last_name, type, bootcamp, authorized) VALUES ($(firebase_uid), $(email), $(first_name), $(last_name), $(type), $(bootcamp), $(authorized))', {
+            firebase_uid: req.body.firebase_uid,
+            email: req.body.email,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            type: req.body.type,
+            bootcamp: req.body.bootcamp,
+            authorized: req.body.authorized
+        });
+
+        const user = await db.one('SELECT email FROM users WHERE email = $(email)', {
+            email: req.body.email
+        });
+
+        res.status(201).json(user);
+
+    } catch (error) {
+        // if (error.constraint === 'users_pkey'){
+        //     return res.status(400).send('The state already exists');
+        // }
+        console.log(error);
+        res.status(500).send(error);
+    }
+
+});
+
+// update a user record with the firebase UID when person signs up
+router.put('/users/:email', async (req, res) => {
+
+    try{
+        const user = await db.oneOrNone('SELECT email FROM users WHERE email = $(email)', {
+            email: req.params.email
+        });
+
+        console.log(user);
+
+        if (!user){
+            return res.status(404).send('User email does not exist.')
+        }
+
+        await db.oneOrNone('UPDATE users SET firebase_uid = $(firebase_uid) WHERE email = $(email)', {
+            email: req.params.email,
+            firebase_uid: req.body.firebase_uid,
+        });
+
+        const updatedUser = await db.one('SELECT email, firebase_uid FROM users WHERE email = $(email)', {
+            email: req.params.email
+        });
+
+        res.status(201).json(updatedUser);
+
+    } catch (error) {
+        
+        console.log(error);
+        res.status(500).send(error);
+    }
+    
+});
 
 
 module.exports = router;
