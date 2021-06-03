@@ -20,6 +20,7 @@
 
 .sign-up__container {
   width: 330px;
+  color: #fff;
 }
 
 .sign-up-container__logo {
@@ -28,7 +29,6 @@
 
 .sign-up-container__headings {
   align-self: flex-start;
-  color: #fff;
 }
 
 .sign-up-container__h1 {
@@ -39,6 +39,7 @@
 .sign-up-container__h2 {
   padding-bottom: 1.75em;
   font-weight: 300;
+  font-family: "Fira Sans", sans-serif;
 }
 
 .sign-up__form {
@@ -78,13 +79,13 @@
 }
 
 .redirect-to-login__span {
-  color: #fff;
   font-size: 1em;
 }
 
 .redirect-to-login__link {
   text-decoration: none;
   font-weight: 700;
+  color: #fff;
 }
 
 .redirect-to-login__link:hover {
