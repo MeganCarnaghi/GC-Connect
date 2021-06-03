@@ -20,6 +20,7 @@
 
 .sign-in__container {
   width: 330px;
+  color: #fff;
 }
 
 .sign-in-container__logo {
@@ -28,7 +29,6 @@
 
 .sign-in-container__headings {
   align-self: flex-start;
-  color: #fff;
 }
 
 .sign-in-container__h1 {
@@ -39,6 +39,7 @@
 .sign-in-container__h2 {
   padding-bottom: 1.75em;
   font-weight: 300;
+  font-family: "Fira Sans", sans-serif;
 }
 
 .sign-in__form {
@@ -64,7 +65,6 @@
 }
 
 .forgot-password__div {
-  color: #fff;
   margin-bottom: 1em;
   text-align: center;
   font-size: 1em;
@@ -73,6 +73,7 @@
 .forgot-password__link {
   text-decoration: none;
   font-weight: 700;
+  color: #fff;
 }
 
 .forgot-password__link:hover {

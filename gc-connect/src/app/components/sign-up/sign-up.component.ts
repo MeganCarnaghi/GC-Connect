@@ -8,8 +8,9 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
+  emailPlaceholder: string = 'EMAIL';
+
   queryParams: Params | undefined;
-  userEmail: string = '';
 
   constructor(
     public ngAuthService: NgAuthService,
@@ -20,14 +21,11 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Store parameter values on URL changes
+  // Store query parameter values on URL changes
   getQueryParams() {
     // Query parameters
     this.activatedRoute.queryParams.subscribe((params) => {
       this.queryParams = params;
-      console.log(this.queryParams);
-      this.userEmail = this.queryParams.email;
-      console.log(this.userEmail);
     });
   }
 }
