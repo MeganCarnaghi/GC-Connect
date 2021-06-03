@@ -28,18 +28,11 @@
 
 .sign-up-container__headings {
   align-self: flex-start;
-}
-
-.sign-up-container__h1,
-.sign-up-container__h2 {
   color: #fff;
 }
 
 .sign-up-container__h1 {
   font-size: 3em;
-}
-
-.sign-up-container__h1 {
   padding-bottom: 0.25em;
 }
 
@@ -53,19 +46,19 @@
   flex-direction: column;
 }
 
-.sign-up__input {
+.sign-up-form__input {
   padding: 1em 1.5em;
   border-radius: 5px;
   border: 1px solid #fff;
   background-color: #1c242b;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   width: 100%;
   box-sizing: border-box;
   color: #fff;
   font-family: FontAwesome, "Fira Sans", sans-serif;
 }
 
-.sign-up__input::placeholder {
+.sign-up-form__input::placeholder {
   color: #fff;
   text-transform: uppercase;
 }
@@ -79,16 +72,7 @@
   transition: 0.3s;
 }
 
-.button--google-sign-up {
-  background-color: #7a324a;
-}
-
-.button--google-sign-up:hover {
-  filter: brightness(80%);
-  transition: 0.3s;
-}
-
-.redirect-to-login {
+.redirect-to-login__div {
   text-align: center;
   margin: 1em 0;
 }
@@ -101,7 +85,6 @@
 .redirect-to-login__link {
   text-decoration: none;
   font-weight: 700;
-  color: #fff;
 }
 
 .redirect-to-login__link:hover {
