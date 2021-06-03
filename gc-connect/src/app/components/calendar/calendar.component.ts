@@ -1,27 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/angular';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar } from '@fullcalendar/core';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
-
-// let calendar = new Calendar(calendarEl, {
-//   plugins: [googleCalendarPlugin],
-//   googleCalendarApiKey: '',
-//   events: {
-//     googleCalendarId: '',
-//   },
-// });
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements AfterViewInit {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
   };
 
+  @ViewChild('calendar') calendar: ElementRef | null = null;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    if (!this.calendar) {
+      return;
+    }
+
+    let calendar = new Calendar(this.calendar.nativeElement, {
+      plugins: [googleCalendarPlugin],
+      googleCalendarApiKey: 'AIzaSyC0Eh7HDlVgNMrCKut_4VdE3S9Sm18LTuk',
+      events: {
+        googleCalendarId:
+          'c_619crt1ebto70ujnpp3m8v6i2g@group.calendar.google.com',
+      },
+    });
+  }
 }
