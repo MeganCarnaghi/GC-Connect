@@ -19,7 +19,7 @@ export class CalendarComponent implements AfterViewInit {
     initialView: 'dayGridMonth',
   };
 
-  @ViewChild('calendar') calendar: ElementRef | null = null;
+  @ViewChild('calendar') calendar: any;
 
   constructor() {}
 
@@ -27,13 +27,17 @@ export class CalendarComponent implements AfterViewInit {
     if (!this.calendar) {
       return;
     }
+    console.log(this.calendar);
 
-    let calendar = new Calendar(this.calendar.nativeElement, {
+    let calendar = new Calendar(this.calendar.element.nativeElement, {
       plugins: [googleCalendarPlugin],
       googleCalendarApiKey: '',
       events: {
         googleCalendarId: '',
       },
     });
+    console.log(calendar);
+
+    calendar.render();
   }
 }
