@@ -26,3 +26,15 @@ h1,
 h2 {
   font-family: "Calistoga", cursive;
 }
+
+.bg-gray{
+  background-color: #f0f0f0;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.letter-space{
+  letter-spacing: 2px;
+}

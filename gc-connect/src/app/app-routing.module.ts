@@ -9,6 +9,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { DirectoryComponent } from './components/directory/directory.component';
 import { AuthGuard } from './auth.guard';
+import { GroupDetailsComponent } from './components/group-details/group-details.component';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
   { path: 'groups', component: GroupsComponent, canActivate: [AuthGuard] },
+  { path: 'groups/:id', component: GroupDetailsComponent, canActivate: [AuthGuard] },
   {
     path: 'directory',
     component: DirectoryComponent,

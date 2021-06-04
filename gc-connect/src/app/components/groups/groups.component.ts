@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GcConnectService } from 'src/app/services/gc-connect.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-groups',
@@ -8,6 +10,8 @@ import { GcConnectService } from 'src/app/services/gc-connect.service';
 })
 export class GroupsComponent implements OnInit {
   groups: any | null = null;
+  faPlus = faPlus;
+  faSearch = faSearch;
 
   constructor(private SQLservice: GcConnectService) { }
 

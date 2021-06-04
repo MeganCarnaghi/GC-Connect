@@ -23,6 +23,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import { GroupsComponent } from './components/groups/groups.component';
 import { DirectoryComponent } from './components/directory/directory.component';
+import { GroupDetailsComponent } from './components/group-details/group-details.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -42,6 +43,7 @@ FullCalendarModule.registerPlugins([
     CalendarComponent,
     GroupsComponent,
     DirectoryComponent,
+    GroupDetailsComponent,
   ],
   imports: [
     BrowserModule,
