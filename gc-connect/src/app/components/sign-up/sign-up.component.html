@@ -19,6 +19,7 @@
         placeholder="&#xf0e0;&nbsp;&nbsp;Email"
         name="email"
         #userEmail
+        [value]="queryParams?.email"
         required
       />
 
@@ -38,14 +39,6 @@
         value="Sign Up"
         (click)="ngAuthService.SignUp(userEmail.value, userPwd.value)"
       />
-
-      <!-- <button
-        type="button"
-        class="button button--google-sign-up"
-        (click)="signUpWithGoogle()"
-      >
-        Sign Up with Google
-      </button> -->
 
       <div class="redirect-to-login__div">
         <span class="redirect-to-login__span"

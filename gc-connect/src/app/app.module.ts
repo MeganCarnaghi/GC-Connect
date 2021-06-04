@@ -18,9 +18,18 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import { GroupsComponent } from './components/groups/groups.component';
 import { DirectoryComponent } from './components/directory/directory.component';
 import { GroupDetailsComponent } from './components/group-details/group-details.component';
+
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+]);
 
 @NgModule({
   declarations: [
@@ -46,6 +55,7 @@ import { GroupDetailsComponent } from './components/group-details/group-details.
     AngularFireStorageModule,
     AngularFireAuthModule,
     FontAwesomeModule,
+    FullCalendarModule,
   ],
   providers: [NgAuthService],
   bootstrap: [AppComponent],
