@@ -95,3 +95,7 @@
 .redirect-to-login__link:visited {
   color: #fff;
 }
+
+.hide {
+  display: none;
+}
