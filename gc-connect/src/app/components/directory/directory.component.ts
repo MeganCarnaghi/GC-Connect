@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GcConnectService } from 'src/app/services/gc-connect.service';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-directory',
@@ -8,6 +10,8 @@ import { GcConnectService } from 'src/app/services/gc-connect.service';
 })
 export class DirectoryComponent implements OnInit {
   users: any | null = null;
+  faSearch = faSearch;
+  faArrowRight = faArrowRight;
 
   constructor(private SQLservice: GcConnectService) { }
 

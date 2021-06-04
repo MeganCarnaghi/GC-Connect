@@ -20,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { DirectoryComponent } from './components/directory/directory.component';
+import { GroupDetailsComponent } from './components/group-details/group-details.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DirectoryComponent } from './components/directory/directory.component';
     CalendarComponent,
     GroupsComponent,
     DirectoryComponent,
+    GroupDetailsComponent,
   ],
   imports: [
     BrowserModule,

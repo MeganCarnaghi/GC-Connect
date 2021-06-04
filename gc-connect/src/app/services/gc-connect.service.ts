@@ -16,21 +16,15 @@ export class GcConnectService {
     return this.client.get('http://localhost:3000/groups');
   };
 
-  getUserByUid(user: User){
-    let uid = user.uid;
-
+  getUserByUid(uid: any){
     return this.client.get(`http://localhost:3000/users/${uid}`);
   };
 
-  getGroupById(group: any){
-    let id = group.id;
-
+  getGroupById(id: any){
     return this.client.get(`http://localhost:3000/groups/${id}`);
   };
 
-  getGroupPostsById(group: any){
-    let id = group.id;
-
+  getGroupPostsById(id: any){
     return this.client.get(`http://localhost:3000/group-posts/${id}`);
   };
 
