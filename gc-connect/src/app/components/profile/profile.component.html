@@ -1,3 +1,55 @@
 <app-navigation></app-navigation>
 
-<p>profile works!</p>
+<!-- White Profile headline and tag for student/staff -->
+<div class="profile-header">
+  <h2>Profile</h2>
+  <div>Placeholder</div>
+</div>
+
+<!-- Gray body with inputs for sgned in user to edit -->
+<div class="profile-body">
+  <form class="user-bio">
+    <!-- Name -->
+    <label for="name" class="input-label">NAME</label>
+    <div class="input-parent">
+      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+      <input type="text" class="input-text" name="name" />
+    </div>
+    <!-- Bootcamp -->
+    <label for="bootcamp" class="input-label">BOOTCAMP</label>
+    <div class="input-parent">
+      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+      <!-- Non-editable section to display user's bootcamp -->
+      <p class="disabled-text">AHBC Front-End</p>
+    </div>
+    <!-- Bio -->
+    <label for="bio" class="input-label">BIO</label>
+    <div class="input-parent">
+      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+      <textarea
+        class="input-text"
+        name="bio"
+        rows="4"
+        maxlength="200"
+      ></textarea>
+    </div>
+    <!-- Linkedin -->
+    <label for="linkedin" class="input-label">LINKEDIN</label>
+    <div class="input-parent">
+      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+      <input type="text" class="input-text" name="linkedin" />
+    </div>
+    <!-- Github -->
+    <label for="github" class="input-label">GITHUB</label>
+    <div class="input-parent">
+      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+      <input type="text" class="input-text" name="github" />
+    </div>
+    <!-- Calendly -->
+    <label for="calendly" class="input-label">CALENDLY</label>
+    <div class="input-parent">
+      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+      <input type="text" class="input-text" name="calendly" />
+    </div>
+  </form>
+</div>

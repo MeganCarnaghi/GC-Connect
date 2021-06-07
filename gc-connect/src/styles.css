@@ -2,7 +2,14 @@
 Main Headings: font-family: 'Calistoga', cursive;
 Body Text: font-family: 'Fira Sans', sans-serif; */
 
-/*COLORS */
+/*COLORS 
+Background Gray: #f5f5f5
+Input Icon Gray: #bfbfbf
+Blue: #343d46
+Orange: #e0693d
+Teal: #05d0cd
+Purple: #7a324a
+*/
 
 /* GENERIC STYLING FOR APP */
 * {
@@ -18,7 +25,8 @@ body {
 
 input,
 button,
-label {
+label,
+textarea {
   font-family: "Fira Sans", sans-serif;
 }
 
@@ -27,14 +35,14 @@ h2 {
   font-family: "Calistoga", cursive;
 }
 
-.bg-gray{
+.bg-gray {
   background-color: #f0f0f0;
 }
 
-.uppercase{
+.uppercase {
   text-transform: uppercase;
 }
 
-.letter-space{
+.letter-space {
   letter-spacing: 2px;
 }
