@@ -11,7 +11,7 @@ const db = pgp({
 
 // get all users for phonebook list
 router.get('/users', async (req, res) => {
-    res.json(await db.many('SELECT * from users'));
+    res.json(await db.many('SELECT * from users ORDER BY last_name'));
 });
 
 // get all groups for group list
@@ -45,9 +45,9 @@ router.get('/groups/:id', async (req, res) => {
     res.json(result);
 });
 
-// get group-posts by group
+// get group-posts by group with user id name & photo
 router.get('/group-posts/:id', async (req, res) => {
-    const result = await db.many('SELECT * from group_posts WHERE group_id = $(id)', {
+    const result = await db.many('SELECT gp.id, gp.group_id, gp.date, gp.user_id, gp.body, u.first_name, u.last_name, u.photo FROM group_posts gp INNER JOIN users u ON u.id = gp.user_id WHERE gp.group_id = $(id)', {
         id: req.params.id
     });
 

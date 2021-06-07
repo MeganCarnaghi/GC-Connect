@@ -1,5 +1,57 @@
 <app-navigation></app-navigation>
+<img src={{group?.photo}} class='header-photo'/>
 
-<h2>{{group?.name}}</h2>
-<p>{{group?.type}}</p>
-<p>{{group?.bio}}</p>
+<section class='group-header'>
+    <div class='group-details'>
+        <div>
+            <h2>{{group?.name}}</h2>
+            <p class='uppercase letter-space type'>{{group?.type}}</p>
+        </div>
+
+        <button class='join bg-gray uppercase'>Join</button>
+    </div>
+
+    <p class='bio'>{{group?.bio}}</p>
+    
+    <form>
+        <textarea 
+            type='text'
+            name='group-comment-box'
+            placeholder='Write something...'
+        ></textarea>  
+        <fa-icon
+            class='comment-icon'
+            [icon]="faEdit"
+            size="lg"
+        ></fa-icon>
+    </form> 
+
+    <button class='create-save'>
+        <fa-icon
+        class=''
+        [icon]="faPlus"
+        size="sm"
+      ></fa-icon>
+        Create Post
+    </button>
+</section>
+
+
+<section class='group-posts bg-gray'>
+
+    <div *ngFor='let post of groupPosts' class='item-container'>
+        <div class='user-details'>
+            <div class='item-details'>
+                <img src='{{post.photo}}' class='round-photo'/>
+                <h3>{{post.first_name}} {{post.last_name}}</h3>
+            </div>
+            <p class='letter-space date'>
+                {{post.date | date:'MM/dd/YY'}}
+            </p>   
+        </div>
+        <p class='body'>
+            {{post.body}}
+        </p>
+    </div>
+
+</section>
