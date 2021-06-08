@@ -24,6 +24,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import { GroupsComponent } from './components/groups/groups.component';
 import { DirectoryComponent } from './components/directory/directory.component';
 import { GroupDetailsComponent } from './components/group-details/group-details.component';
+import { FilestackClient } from './helpers.ts/filestack';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -60,4 +61,8 @@ FullCalendarModule.registerPlugins([
   providers: [NgAuthService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    FilestackClient.initialize();
+  }
+}
