@@ -8,48 +8,103 @@
 
 <!-- Gray body with inputs for sgned in user to edit -->
 <div class="profile-body">
+  <!-- Profile Picture -->
+  <!-- Image and button go here -->
   <form class="user-bio">
     <!-- Name -->
-    <label for="name" class="input-label">NAME</label>
-    <div class="input-parent">
-      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
-      <input type="text" class="input-text" name="name" />
+    <div class="full-name">
+      <!-- First name -->
+      <div class="first-name">
+        <label for="first-name" class="input-label">FIRST NAME</label>
+        <div class="input-parent">
+          <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+          <input
+            type="text"
+            class="input-text"
+            name="first-name"
+            placeholder="Paige"
+          />
+        </div>
+      </div>
+      <!-- Last Name -->
+      <div class="last-name">
+        <label for="last-name" class="input-label">LAST NAME</label>
+        <div class="input-parent">
+          <!-- <fa-icon [icon]="faUser" class="input-icon"></fa-icon> -->
+          <input
+            type="text"
+            class="input-text"
+            name="last-name"
+            placeholder="Blakeslee"
+          />
+        </div>
+      </div>
     </div>
     <!-- Bootcamp -->
     <label for="bootcamp" class="input-label">BOOTCAMP</label>
-    <div class="input-parent">
-      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+    <div class="disabled-input-parent">
+      <fa-icon [icon]="faLock" class="input-icon"></fa-icon>
       <!-- Non-editable section to display user's bootcamp -->
-      <p class="disabled-text">AHBC Front-End</p>
+      <input
+        type="text"
+        class="disabled-text input-text"
+        placeholder="AHBC Front-End"
+        name="bootcamp"
+        disabled
+      />
     </div>
     <!-- Bio -->
     <label for="bio" class="input-label">BIO</label>
-    <div class="input-parent">
-      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+    <div class="input-parent multi-row">
+      <fa-icon [icon]="faEdit" class="input-icon"></fa-icon>
       <textarea
         class="input-text"
         name="bio"
         rows="4"
         maxlength="200"
+        placeholder="Tell us about yourself..."
       ></textarea>
     </div>
     <!-- Linkedin -->
     <label for="linkedin" class="input-label">LINKEDIN</label>
     <div class="input-parent">
-      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
-      <input type="text" class="input-text" name="linkedin" />
+      <fa-icon [icon]="faLinkedin" class="input-icon"></fa-icon>
+      <input
+        type="text"
+        class="input-text"
+        name="linkedin"
+        placeholder="https://www.linkedin.com/"
+      />
     </div>
     <!-- Github -->
     <label for="github" class="input-label">GITHUB</label>
     <div class="input-parent">
-      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
-      <input type="text" class="input-text" name="github" />
+      <fa-icon [icon]="faGithub" class="input-icon"></fa-icon>
+      <input
+        type="text"
+        class="input-text"
+        name="github"
+        placeholder="https://www.github.com/"
+      />
     </div>
     <!-- Calendly -->
     <label for="calendly" class="input-label">CALENDLY</label>
     <div class="input-parent">
-      <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
-      <input type="text" class="input-text" name="calendly" />
+      <fa-icon [icon]="faLink" class="input-icon"></fa-icon>
+      <input
+        type="text"
+        class="input-text"
+        name="calendly"
+        placeholder="https://www.calendly.com/"
+      />
     </div>
+    <button class="save-changes profile-button" type="submit">
+      <fa-icon [icon]="faSave" class="button-icon"></fa-icon>
+      <span>Save Changes</span>
+    </button>
   </form>
+  <button class="sign-out profile-button" (click)="authService.SignOut()">
+    <fa-icon [icon]="faSignOutAlt" class="button-icon"></fa-icon>
+    <span>Sign Out</span>
+  </button>
 </div>
