@@ -1,0 +1,117 @@
+/* White section above gray body */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+/* Gray section containing bio inputs */
+.profile-body {
+  background-color: #f5f5f5;
+  height: 100vh;
+  padding: 15px;
+}
+
+.input-label {
+  letter-spacing: 0.1rem;
+}
+/* Parent container for the icon and input tag */
+.input-parent {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px #d7d7d7 solid;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 1em;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.input-icon {
+  padding: 15px;
+  color: #bfbfbf;
+}
+
+.input-text {
+  width: 100%;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* First & Last Name */
+.full-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.first-name,
+.last-name {
+  width: 100%;
+}
+
+.first-name {
+  margin-right: 15px;
+}
+.last-name input {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* Class for disabled inputs */
+input[type="text"]:disabled {
+  background: none;
+}
+
+.disabled-input-parent {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px #d7d7d7 solid;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  font-size: 1em;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* Styling for text area */
+textarea.input-text {
+  resize: none;
+  padding-top: 15px;
+}
+
+.multi-row {
+  align-items: flex-start;
+}
+
+/* BUtton styling */
+.profile-button {
+  height: 55px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 5px 0;
+  font-size: 1.1em;
+}
+
+.button-icon {
+  padding-right: 15px;
+}
+
+.save-changes {
+  background-color: #05d0cd;
+}
+
+.sign-out {
+  background-color: #7a324a;
+}
