@@ -23,13 +23,14 @@
         Create Group
     </a>
 
-    <a *ngFor='let group of groups' class='item-container'
-    routerLink="/groups/{{group.id}}">
-        <img src={{group.photo}} class='round-photo'/>
-        <div class='item-details'>
-            <h2>{{group.name}}</h2>
-            <p class='uppercase letter-space type'>{{group.type}}</p>    
-        </div>
+    <div *ngFor='let group of groups' class='item-container'>
+        <a class= 'item-link-container' routerLink="/groups/{{group.id}}">
+            <img src={{group.photo}} class='round-photo'/>
+            <div class='item-details'>
+                <h2>{{group.name}}</h2>
+                <p class='uppercase letter-space type'>{{group.type}}</p>    
+            </div>
+        </a>
         <button class='join bg-gray uppercase'>Join</button>
-    </a>
+    </div>
 </section>
