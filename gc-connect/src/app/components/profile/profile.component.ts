@@ -26,8 +26,8 @@ export class ProfileComponent implements OnInit {
   faSave = faSave;
   faSignOutAlt = faSignOutAlt;
 
-  constructor(public authService: NgAuthService) {}
-  // constructor(private SQLservice: GcConnectService) {}
+  // constructor(public authService: NgAuthService) {}
+  constructor(private SQLservice: GcConnectService) {}
 
   ngOnInit(): void {}
 }
