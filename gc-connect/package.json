@@ -31,6 +31,7 @@
     "@fullcalendar/interaction": "^5.7.0",
     "@fullcalendar/list": "^5.7.0",
     "@fullcalendar/timegrid": "^5.7.0",
+    "dotenv": "^10.0.0",
     "firebase": "^8.6.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
