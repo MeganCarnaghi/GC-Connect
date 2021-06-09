@@ -4,6 +4,7 @@ import { Calendar } from '@fullcalendar/core';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-calendar',
@@ -44,7 +45,7 @@ export class CalendarComponent implements AfterViewInit {
         calendar.setOption('height', calendarHeight);
       },
 
-      googleCalendarApiKey: 'AIzaSyCKRYZ_1cqytLIn4R8YlqrKo6Ha9hdUIv4',
+      googleCalendarApiKey: environment.googleCalendar.apiKey,
       events: {
         googleCalendarId:
           'c_619crt1ebto70ujnpp3m8v6i2g@group.calendar.google.com',

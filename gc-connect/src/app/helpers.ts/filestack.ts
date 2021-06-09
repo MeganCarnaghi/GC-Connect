@@ -1,3 +1,5 @@
+import { environment } from '../../environments/environment';
+
 declare var filestack: any;
 export class FilestackClient {
   static instance: any;
@@ -22,6 +24,6 @@ export class FilestackClient {
       });
   }
   static initialize() {
-    FilestackClient.instance = filestack.init('AnjkxIXpGRNeLQsUSfgk7z');
+    FilestackClient.instance = filestack.init(environment.filestack.apiKey);
   }
 }

@@ -1,3 +1,5 @@
+import { databases } from '../environments/api.environment.prod';
+
 export const environment = {
-  production: true
+  ...databases,
 };
