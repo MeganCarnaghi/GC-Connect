@@ -2,11 +2,20 @@ const express = require('express');
 const pgp = require('pg-promise')();
 const router = express.Router();
 
+require('dotenv').config();
 router.use(express.json());
 
 // *** Database here
 const db = pgp({
-    database: 'gc-connect' 
+    host: process.env.PGHOST,
+    port: process.env.PGPORT,
+    database: process.env.PGDATABASE,
+    user: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
+    ssl: {
+		rejectUnauthorized: false
+	},
+    max: process.env.PGMAX
 });
 
 // get all users for phonebook list
@@ -71,7 +80,30 @@ router.get('/group-members/:id', async (req, res) => {
     res.json(result);
 });
 
-// get all users for phonebook list
+// get list of groups that user is apart of
+router.get('/groups-joined-by-user/:uid', async (req, res) => {
+
+    const userId = await db.oneOrNone('SELECT id FROM users WHERE firebase_uid = $(uid)', {
+        uid: req.params.uid
+    });
+
+    if (!userId) {
+        return res.status(404).send('The user could not be found');
+    }
+
+    const groupList = await db.many('SELECT group_id from group_members WHERE user_id = $(id)', {
+        id: userId.id
+    });
+
+    if (!groupList) {
+        let emptyArray = [];
+        return res.json(emptyArray).send('The user is not in any groups');
+    }
+
+    res.json(groupList);
+});
+
+// create a new user
 router.post('/users', async (req, res) => {
     try{
 
@@ -109,8 +141,6 @@ router.put('/users/:email', async (req, res) => {
             email: req.params.email
         });
 
-        console.log(user);
-
         if (!user){
             return res.status(404).send('User email does not exist.')
         }
@@ -132,6 +162,32 @@ router.put('/users/:email', async (req, res) => {
         res.status(500).send(error);
     }
     
+});
+
+
+//add a user to a group (join button)
+router.post('/group-members', async (req, res) => {
+    try{
+
+        const ins = await db.oneOrNone('INSERT INTO group-members (group_id, user_id) VALUES ($(group_id), $(user_id)) RETURNING id', {
+            group_id: req.body.group_id,
+            user_id: req.body.user_id
+        });
+
+        const groupMember = await db.one('SELECT * FROM group-members WHERE id = $(id)', {
+            id: ins.id
+        });
+
+        res.status(201).json(groupMember);
+
+    } catch (error) {
+        // if (error.constraint === 'users_pkey'){
+        //     return res.status(400).send('The state already exists');
+        // }
+        console.log(error);
+        res.status(500).send(error);
+    }
+
 });
 
 
