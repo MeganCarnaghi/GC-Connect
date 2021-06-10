@@ -25,6 +25,7 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { DirectoryComponent } from './components/directory/directory.component';
 import { GroupDetailsComponent } from './components/group-details/group-details.component';
 import { FilestackClient } from './helpers.ts/filestack';
+import { UserPopupComponent } from './components/user-popup/user-popup.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -45,6 +46,7 @@ FullCalendarModule.registerPlugins([
     GroupsComponent,
     DirectoryComponent,
     GroupDetailsComponent,
+    UserPopupComponent,
   ],
   imports: [
     BrowserModule,
