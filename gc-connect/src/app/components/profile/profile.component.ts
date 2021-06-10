@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { FilestackClient } from 'src/app/helpers.ts/filestack';
+import { NgAuthService } from '../../services/ng-auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,6 @@ import { FilestackClient } from 'src/app/helpers.ts/filestack';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-
   faUser = faUser;
   faLock = faLock;
   faEdit = faEdit;
@@ -27,7 +27,10 @@ export class ProfileComponent implements OnInit {
   faSave = faSave;
   faSignOutAlt = faSignOutAlt;
 
-  constructor(private SQLservice: GcConnectService) {}
+  constructor(
+    private SQLservice: GcConnectService,
+    public ngAuthService: NgAuthService
+  ) {}
 
   ngOnInit() {}
 
@@ -35,5 +38,4 @@ export class ProfileComponent implements OnInit {
     const url = await FilestackClient.pick();
     console.log(url);
   }
-
 }

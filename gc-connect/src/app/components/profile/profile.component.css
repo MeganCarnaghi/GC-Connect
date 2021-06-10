@@ -115,3 +115,10 @@ textarea.input-text {
 .sign-out {
   background-color: #7a324a;
 }
+
+.save-changes:hover,
+.sign-out:hover {
+  cursor: pointer;
+  filter: brightness(80%);
+  transition: 0.3s;
+}
