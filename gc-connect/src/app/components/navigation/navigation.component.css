@@ -28,21 +28,21 @@
   border-radius: 5px;
 }
 
-.pp-button {
+.gray-button {
   color: #343d46;
   background-color: #efefef;
   margin-right: 5px;
 }
-.pp-button:hover {
+.gray-button:hover {
   color: #343d46;
   background-color: #dddddd;
 }
 
-.lms-button {
+.blue-button {
   color: white;
   background-color: #2c3e50;
 }
-.lms-button:hover {
+.blue-button:hover {
   background-color: #54616d;
 }
 
@@ -104,5 +104,32 @@
     border: none;
     width: 400px;
     padding: 10px 0 0 0;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .nav-parent-container {
+    flex-direction: column;
+    align-items: center;
+    /* width: 100%; */
+  }
+  .logo-container {
+    padding-top: 15px;
+    padding-left: 15px;
+  }
+
+  .links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 95%;
+    padding-left: 10px;
+  }
+  .links-container a {
+    flex-grow: 1;
+    margin: 2.5px;
+  }
+  .header-button {
+    width: 100%;
   }
 }
