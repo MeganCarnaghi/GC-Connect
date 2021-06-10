@@ -106,7 +106,7 @@
     </button>
   </form>
   <!-- <button class="sign-out profile-button" (click)="authService.SignOut()"> -->
-  <button class="sign-out profile-button">
+  <button class="sign-out profile-button" (click)="ngAuthService.SignOut()">
     <fa-icon [icon]="faSignOutAlt" class="button-icon"></fa-icon>
     <span>Sign Out</span>
   </button>
