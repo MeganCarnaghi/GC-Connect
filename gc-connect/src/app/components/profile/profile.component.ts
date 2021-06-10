@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import {
   faEdit,
@@ -26,13 +26,27 @@ export class ProfileComponent implements OnInit {
   faLink = faLink;
   faSave = faSave;
   faSignOutAlt = faSignOutAlt;
+  users: any | null = 'Paige';
+  firstName: any | null = 'Paige';
+  lastName: any | null = 'Blakesee';
+  bootcamp: any | null = 'AHBC Front-End';
+  bio: any | null = 'Tell us about yourself...';
+  linkedin: any | null = 'https://www.linkedin.com/';
+  github: any | null = 'https://www.github.com/';
+  calendly: any | null = 'https://www.calendly.com/';
+
+  @Input() user: any = '';
 
   constructor(
     private SQLservice: GcConnectService,
     public ngAuthService: NgAuthService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    // this.SQLservice.getUserByUid('uid').subscribe(
+    //   (user) => (this.users = user)
+    // );
+  }
 
   async uploadFile() {
     const url = await FilestackClient.pick();

@@ -5,7 +5,12 @@
 <!-- White Profile headline and tag for student/staff -->
 <div class="profile-header">
   <h2>Profile</h2>
-  <div>Placeholder</div>
+  <p
+    class="uppercase user-type"
+    [ngClass]="user.type === 'Student' ? 'bg-maroon' : 'bg-orange'"
+  >
+    {{ user.type }}
+  </p>
 </div>
 
 <!-- Gray body with inputs for sgned in user to edit -->
@@ -24,7 +29,7 @@
             type="text"
             class="input-text"
             name="first-name"
-            placeholder="Paige"
+            placeholder="{{ user.first_name }}"
           />
         </div>
       </div>
@@ -34,10 +39,11 @@
         <div class="input-parent">
           <!-- <fa-icon [icon]="faUser" class="input-icon"></fa-icon> -->
           <input
+            #userLastName
             type="text"
             class="input-text"
             name="last-name"
-            placeholder="Blakeslee"
+            placeholder="{{ lastName }}"
           />
         </div>
       </div>
@@ -48,10 +54,11 @@
       <fa-icon [icon]="faLock" class="input-icon"></fa-icon>
       <!-- Non-editable section to display user's bootcamp -->
       <input
+        #userBootcamp
         type="text"
         class="disabled-text input-text"
         placeholder="AHBC Front-End"
-        name="bootcamp"
+        name="{{ bootcamp }}"
         disabled
       />
     </div>
@@ -60,11 +67,12 @@
     <div class="input-parent multi-row">
       <fa-icon [icon]="faEdit" class="input-icon"></fa-icon>
       <textarea
+        #userBio
         class="input-text"
         name="bio"
         rows="4"
         maxlength="200"
-        placeholder="Tell us about yourself..."
+        placeholder="{{ bio }}"
       ></textarea>
     </div>
     <!-- Linkedin -->
@@ -72,10 +80,11 @@
     <div class="input-parent">
       <fa-icon [icon]="faLinkedin" class="input-icon"></fa-icon>
       <input
+        #userLinkedIn
         type="text"
         class="input-text"
         name="linkedin"
-        placeholder="https://www.linkedin.com/"
+        placeholder="{{ linkedin }}"
       />
     </div>
     <!-- Github -->
@@ -83,10 +92,11 @@
     <div class="input-parent">
       <fa-icon [icon]="faGithub" class="input-icon"></fa-icon>
       <input
+        #userGithub
         type="text"
         class="input-text"
         name="github"
-        placeholder="https://www.github.com/"
+        placeholder="{{ github }}"
       />
     </div>
     <!-- Calendly -->
@@ -94,10 +104,11 @@
     <div class="input-parent">
       <fa-icon [icon]="faLink" class="input-icon"></fa-icon>
       <input
+        #userCalendly
         type="text"
         class="input-text"
         name="calendly"
-        placeholder="https://www.calendly.com/"
+        placeholder="{{ calendly }}"
       />
     </div>
     <button class="save-changes profile-button" type="submit">
