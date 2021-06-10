@@ -1,4 +1,5 @@
 <app-navigation></app-navigation>
+<app-user-popup *ngIf='displayDetails' [user]='currentUser' (closed)='onClose($event)'></app-user-popup>
 
 <form>
     <input 
@@ -23,7 +24,7 @@
 </form> 
 
 <section class='bg-gray'>
-    <a *ngFor='let user of users' class='item-container'>
+    <a *ngFor='let user of users' class='item-container' routerLink="[]" (click)='onUserSelect(user)'>
         <img src={{user.photo}} class='round-photo'/>
         <div class='item-details'>
             <h2>{{user.first_name}} {{user.last_name}}</h2>

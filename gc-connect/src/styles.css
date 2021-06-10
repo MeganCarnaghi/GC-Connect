@@ -40,6 +40,18 @@ h3 {
   background-color: #f0f0f0;
 }
 
+.bg-transp-black{
+  background-color: rgba(0,0,0,0.6);
+}
+
+.bg-maroon{
+    background-color: #7a324a;;
+}
+
+.bg-orange{
+    background-color: #e1693d;
+}
+
 .uppercase {
   text-transform: uppercase;
 }

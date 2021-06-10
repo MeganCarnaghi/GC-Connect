@@ -5,7 +5,6 @@ form, section{
 
 
 /* Search Form Styling */
-
 form{
     margin-top: 15px;
     position: relative;
@@ -105,12 +104,4 @@ p.user-type{
     border: none;
     padding: 4px 12px;
     border-radius: 20px;
-}
-
-.bg-maroon{
-    background-color: #7a324a;;
-}
-
-.bg-orange{
-    background-color: #e1693d;
 }
