@@ -11,6 +11,7 @@ import {
 import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { FilestackClient } from 'src/app/helpers.ts/filestack';
 import { NgAuthService } from '../../services/ng-auth.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-profile',
@@ -26,13 +27,18 @@ export class ProfileComponent implements OnInit {
   faLink = faLink;
   faSave = faSave;
   faSignOutAlt = faSignOutAlt;
-
+  user: any | null = null;
+  
+ 
   constructor(
     private SQLservice: GcConnectService,
     public ngAuthService: NgAuthService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.SQLservice.getUserByUid(this.ngAuthService.userState.uid).subscribe(user => this.user = user );
+    console.log(this.ngAuthService.userState.uid);
+  }
 
   async uploadFile() {
     const url = await FilestackClient.pick();
