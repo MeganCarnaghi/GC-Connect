@@ -11,7 +11,6 @@ import {
 import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { FilestackClient } from 'src/app/helpers.ts/filestack';
 import { NgAuthService } from '../../services/ng-auth.service';
-import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-profile',
@@ -28,15 +27,16 @@ export class ProfileComponent implements OnInit {
   faSave = faSave;
   faSignOutAlt = faSignOutAlt;
   user: any | null = null;
-  
- 
+
   constructor(
     private SQLservice: GcConnectService,
     public ngAuthService: NgAuthService
   ) {}
 
   ngOnInit(): void {
-    this.SQLservice.getUserByUid(this.ngAuthService.userState.uid).subscribe(user => this.user = user );
+    this.SQLservice.getUserByUid(this.ngAuthService.userState.uid).subscribe(
+      (user) => (this.user = user)
+    );
     console.log(this.ngAuthService.userState.uid);
   }
 
