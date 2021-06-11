@@ -1,7 +1,12 @@
 full-calendar {
   padding-top: 15px;
+  color: black !important;
 }
 
 div .fc .fc-toolbar.fc-header-toolbar {
   padding-left: 15px;
+}
+
+td {
+  color: red;
 }

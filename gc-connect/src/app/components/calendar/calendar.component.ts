@@ -4,7 +4,12 @@ import { Calendar } from '@fullcalendar/core';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
+<<<<<<< HEAD
 import { environment } from 'src/environments/environment';
+=======
+import { environment } from '../../../environments/environment';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+>>>>>>> 819de147323c40886df82c3fa5ea8c5dfd49a24b
 
 @Component({
   selector: 'app-calendar',
@@ -33,7 +38,12 @@ export class CalendarComponent implements AfterViewInit {
         end: 'dayGridMonth,dayGridWeek,dayGridDay,dayGridlist',
       },
       height: window.innerHeight - 60,
-      plugins: [googleCalendarPlugin, dayGridPlugin, listPlugin],
+      plugins: [
+        googleCalendarPlugin,
+        dayGridPlugin,
+        listPlugin,
+        bootstrapPlugin,
+      ],
       handleWindowResize: true,
       windowResize: function () {
         let calendarHeight = 0;
@@ -46,10 +56,50 @@ export class CalendarComponent implements AfterViewInit {
       },
 
       googleCalendarApiKey: environment.googleCalendar.apiKey,
-      events: {
-        googleCalendarId:
-          'c_619crt1ebto70ujnpp3m8v6i2g@group.calendar.google.com',
-      },
+      eventSources: [
+        {
+          googleCalendarId:
+            'c_619crt1ebto70ujnpp3m8v6i2g@group.calendar.google.com',
+          className: 'gc-connect-master',
+          color: '#e0693d',
+        },
+        {
+          googleCalendarId:
+            'c_lg99su7t0ag5673nm4o76624j0@group.calendar.google.com',
+          className: 'after-hours-front-end',
+          color: '#7a324a',
+        },
+        {
+          googleCalendarId:
+            'c_04i292nr3gd4vran0ho1ush71c@group.calendar.google.com',
+          className: 'career-services',
+          color: '#05d0cd',
+        },
+        {
+          googleCalendarId:
+            'c_ekacd1flhrlsm6pimnkop984jc@group.calendar.google.com',
+          className: 'after-hours-full-stack-c#-net',
+          color: '#8E24AA',
+        },
+        {
+          googleCalendarId:
+            'c_seuh6h8gpbn134dvbi2kdufv20@group.calendar.google.com',
+          className: 'after-hours-full-stack-javascript',
+          color: '#B39EDB',
+        },
+        {
+          googleCalendarId:
+            'c_42rkph0dq3jvd8vhg9k4ivk634@group.calendar.google.com',
+          className: 'full-stack-c#-net',
+          color: '#3F50B5',
+        },
+        {
+          googleCalendarId:
+            'c_jmiuucoiar8lb6ghbr8e1c1q2s@group.calendar.google.com',
+          className: 'full-stack-javascript',
+          color: '#4285F4',
+        },
+      ],
     });
     console.log(calendar);
 

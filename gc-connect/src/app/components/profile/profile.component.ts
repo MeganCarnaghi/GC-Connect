@@ -12,7 +12,6 @@ import {
 import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { FilestackClient } from 'src/app/helpers.ts/filestack';
 import { NgAuthService } from '../../services/ng-auth.service';
-import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-profile',
