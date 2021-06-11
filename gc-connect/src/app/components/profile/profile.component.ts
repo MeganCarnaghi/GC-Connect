@@ -11,6 +11,7 @@ import {
 import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { FilestackClient } from 'src/app/helpers.ts/filestack';
 import { NgAuthService } from '../../services/ng-auth.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-profile',
@@ -26,16 +27,10 @@ export class ProfileComponent implements OnInit {
   faLink = faLink;
   faSave = faSave;
   faSignOutAlt = faSignOutAlt;
-  users: any | null = 'Paige';
-  firstName: any | null = 'Paige';
-  lastName: any | null = 'Blakesee';
-  bootcamp: any | null = 'AHBC Front-End';
-  bio: any | null = 'Tell us about yourself...';
-  linkedin: any | null = 'https://www.linkedin.com/';
-  github: any | null = 'https://www.github.com/';
-  calendly: any | null = 'https://www.calendly.com/';
-
-  @Input() user: any = '';
+  user: any | null = null;
+  url: string = '';
+  userStateId: string = '';
+  sessionUid: any;
 
   constructor(
     private SQLservice: GcConnectService,
@@ -43,13 +38,23 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.SQLservice.getUserByUid('uid').subscribe(
-    //   (user) => (this.users = user)
-    // );
+    this.sessionUid = sessionStorage.getItem('key');
+    console.log(this.sessionUid);
+
+    if (!this.userStateId) {
+      this.userStateId = NgAuthService.userState.uid;
+    }
+    this.SQLservice.getUserByUid(this.userStateId).subscribe(
+      (user) => (this.user = user)
+    );
+
+    // console.log(this.ngAuthService.userState.uid);
+    // console.log(this.user.first_name);
   }
 
   async uploadFile() {
     const url = await FilestackClient.pick();
+    this.url = url;
     console.log(url);
   }
 }

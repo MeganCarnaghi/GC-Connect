@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import 'firebase/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -12,7 +13,7 @@ import { GcConnectService } from './gc-connect.service';
   providedIn: 'root',
 })
 export class NgAuthService {
-  userState: any;
+  static userState: any;
 
   constructor(
     public afs: AngularFirestore,
@@ -23,23 +24,35 @@ export class NgAuthService {
   ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this.userState = user;
-        localStorage.setItem('user', JSON.stringify(this.userState));
+        NgAuthService.userState = user;
+        localStorage.setItem('user', JSON.stringify(NgAuthService.userState));
       } else {
         localStorage.removeItem('user');
       }
     });
   }
 
+  static loadUserState() {
+    const stored = localStorage.getItem('user');
+    if (stored) {
+      this.userState = JSON.parse(stored);
+    }
+  }
+
   SignIn(email: any, password: any) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['profile']);
-        });
-        this.SetUserData(result.user);
-        console.log(result.user);
+    this.afAuth
+      .setPersistence('session')
+      .then(() => {
+        this.afAuth
+          .signInWithEmailAndPassword(email, password)
+          .then((result) => {
+            this.ngZone.run(() => {
+              this.router.navigate(['profile']);
+            });
+            this.SetUserData(result.user);
+            // this.SQLservice.updateUserUID(result.user?.email, result.user?.uid);
+            console.log(result.user);
+          });
       })
       .catch((error) => {
         window.alert(error.message);
@@ -55,7 +68,6 @@ export class NgAuthService {
         this.SetUserData(result.user);
         // when create a way to add approved emails/users then turn on these comments
         // this.SQLservice.updateUserUID(result.user?.email, result.user?.uid);
-
       })
       .catch((error) => {
         window.alert(error.message);

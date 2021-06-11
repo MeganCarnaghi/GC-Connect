@@ -1,3 +1,11 @@
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: 1px #d7d7d7 solid;
+  /* background-image: url("src/assets/gcc-square-default.png"); */
+}
+
 /* White section above gray body */
 .profile-header {
   display: flex;
@@ -89,7 +97,7 @@ textarea.input-text {
   align-items: flex-start;
 }
 
-/* BUtton styling */
+/* Button styling */
 .profile-button {
   height: 55px;
   color: white;

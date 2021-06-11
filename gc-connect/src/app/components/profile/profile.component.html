@@ -1,5 +1,11 @@
 <app-navigation></app-navigation>
 
+<img
+  class="profile-pic"
+  src="{{ this.url }}"
+  alt="User Profile Image"
+  onerror="this.onerror=null;this.src='/assets/gc-profile-default.png';"
+/>
 <button (click)="uploadFile()">Upload file</button>
 
 <!-- White Profile headline and tag for student/staff -->
@@ -43,7 +49,7 @@
             type="text"
             class="input-text"
             name="last-name"
-            placeholder="{{ lastName }}"
+            placeholder="{{ user.last_name }}"
           />
         </div>
       </div>
@@ -57,8 +63,8 @@
         #userBootcamp
         type="text"
         class="disabled-text input-text"
-        placeholder="AHBC Front-End"
-        name="{{ bootcamp }}"
+        placeholder="{{ user.bootcamp }}"
+        name="bootcamp"
         disabled
       />
     </div>
@@ -72,7 +78,7 @@
         name="bio"
         rows="4"
         maxlength="200"
-        placeholder="{{ bio }}"
+        placeholder="{{ user.bio }}"
       ></textarea>
     </div>
     <!-- Linkedin -->
@@ -84,7 +90,7 @@
         type="text"
         class="input-text"
         name="linkedin"
-        placeholder="{{ linkedin }}"
+        placeholder="{{ user.linked_in }}"
       />
     </div>
     <!-- Github -->
@@ -96,7 +102,7 @@
         type="text"
         class="input-text"
         name="github"
-        placeholder="{{ github }}"
+        placeholder="{{ user.github }}"
       />
     </div>
     <!-- Calendly -->
@@ -108,7 +114,7 @@
         type="text"
         class="input-text"
         name="calendly"
-        placeholder="{{ calendly }}"
+        placeholder="{{ user.calendly }}"
       />
     </div>
     <button class="save-changes profile-button" type="submit">
