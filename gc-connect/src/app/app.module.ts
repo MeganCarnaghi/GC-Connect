@@ -66,5 +66,6 @@ FullCalendarModule.registerPlugins([
 export class AppModule {
   constructor() {
     FilestackClient.initialize();
+    NgAuthService.loadUserState();
   }
 }

@@ -1,4 +1,4 @@
-import { databases } from '../environments/api.environment.prod';
+import { databases } from 'src/environments/api.environments';
 
 export const environment = {
   ...databases,

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import {
   faEdit,
   faLink,
   faLock,
+  faPencilAlt,
   faSave,
   faSignOutAlt,
   faUser,
@@ -25,8 +26,17 @@ export class ProfileComponent implements OnInit {
   faGithub = faGithub;
   faLink = faLink;
   faSave = faSave;
+  faPencilAlt = faPencilAlt;
   faSignOutAlt = faSignOutAlt;
-  user: any | null = null;
+  url: string = '';
+  userStateId: string = '';
+  sessionUid: any;
+  displayDetails: boolean = false;
+  displayLinkedIn: boolean = true;
+  displayGithub: boolean = true;
+  displayCalendly: boolean = true;
+
+  @Input() user: any = '';
 
   constructor(
     private SQLservice: GcConnectService,
@@ -34,14 +44,27 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.SQLservice.getUserByUid(this.ngAuthService.userState.uid).subscribe(
+    this.sessionUid = sessionStorage.getItem('key');
+    console.log(this.sessionUid);
+
+    if (!this.userStateId) {
+      this.userStateId = NgAuthService.userState.uid;
+    }
+    this.SQLservice.getUserByUid(this.userStateId).subscribe(
       (user) => (this.user = user)
     );
-    console.log(this.ngAuthService.userState.uid);
+
+    this.displayLinkedIn = this.user.linked_in;
+    this.displayGithub = this.user.github;
+    this.displayCalendly = this.user.calendly;
+
+    // console.log(this.ngAuthService.userState.uid);
+    // console.log(this.user.first_name);
   }
 
   async uploadFile() {
     const url = await FilestackClient.pick();
+    this.url = url;
     console.log(url);
   }
 }
