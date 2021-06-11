@@ -6,13 +6,11 @@
       alt="GC Connect logo"
     />
 
-    <!-- This goes below class="email-verification-container_headings" in the div 
-      *ngIf="NgAuthService.userState as user" -->
     <div class="email-verification-container__headings">
       <h1 class="email-verification-container__h1">Thank You!</h1>
       <p class="email-verification-container__p">
         A confirmation email has been sent to
-        <!-- <span class="email-verification__span">{{ user.email }}</span> -->
+        <span class="email-verification__span">{{ staticUserState }}</span>
         . Click on the link in the email to verify your email address and
         complete your account setup.
       </p>

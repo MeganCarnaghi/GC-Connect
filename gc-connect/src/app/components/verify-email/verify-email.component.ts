@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgAuthService } from '../../services/ng-auth.service';
 
 @Component({
@@ -8,6 +8,10 @@ import { NgAuthService } from '../../services/ng-auth.service';
 })
 export class VerifyEmailComponent implements OnInit {
   constructor(public ngAuthService: NgAuthService) {}
+
+  get staticUserState() {
+    return NgAuthService.userState.email;
+  }
 
   ngOnInit(): void {}
 }
