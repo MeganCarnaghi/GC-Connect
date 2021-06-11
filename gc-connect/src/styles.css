@@ -40,16 +40,16 @@ h3 {
   background-color: #f0f0f0;
 }
 
-.bg-transp-black{
-  background-color: rgba(0,0,0,0.6);
+.bg-transp-black {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-.bg-maroon{
-    background-color: #7a324a;;
+.bg-maroon {
+  background-color: #7a324a;
 }
 
-.bg-orange{
-    background-color: #e1693d;
+.bg-orange {
+  background-color: #e1693d;
 }
 
 .uppercase {
@@ -58,4 +58,10 @@ h3 {
 
 .letter-space {
   letter-spacing: 2px;
+}
+
+/* Styling for Calendar Component (has to be in here)*/
+.fc-event-title,
+.fc-event-time {
+  color: #000000;
 }
