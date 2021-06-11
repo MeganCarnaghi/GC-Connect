@@ -4,12 +4,8 @@ import { Calendar } from '@fullcalendar/core';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
-<<<<<<< HEAD
-import { environment } from 'src/environments/environment';
-=======
 import { environment } from '../../../environments/environment';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
->>>>>>> 819de147323c40886df82c3fa5ea8c5dfd49a24b
 
 @Component({
   selector: 'app-calendar',
