@@ -33,17 +33,16 @@
   background-color: #efefef;
   margin-right: 5px;
 }
-.gray-button:hover {
-  color: #343d46;
-  background-color: #dddddd;
-}
 
 .blue-button {
   color: white;
   background-color: #2c3e50;
 }
-.blue-button:hover {
-  background-color: #54616d;
+.blue-button:hover,
+.gray-button:hover {
+  cursor: pointer;
+  filter: brightness(80%);
+  transition: 0.3s;
 }
 
 /* Nav icons parent container */
@@ -68,7 +67,8 @@
   color: #2c3e50;
 }
 .nav-icon:hover {
-  color: #54616d;
+  color: #7d8c9a;
+  transition: 0.3s;
 }
 /* Profile image only */
 .nav-profile-image {
@@ -82,6 +82,7 @@
 }
 .nav-profile-image:hover {
   border: 2px solid#54616d;
+  transition: 0.3s;
 }
 
 /* Icon styling based on current URL - MUST STAY BELOW ICON STYLING */

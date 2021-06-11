@@ -4,6 +4,7 @@ import {
   faEdit,
   faLink,
   faLock,
+  faPencilAlt,
   faSave,
   faSignOutAlt,
   faUser,
@@ -26,11 +27,17 @@ export class ProfileComponent implements OnInit {
   faGithub = faGithub;
   faLink = faLink;
   faSave = faSave;
+  faPencilAlt = faPencilAlt;
   faSignOutAlt = faSignOutAlt;
-  user: any | null = null;
   url: string = '';
   userStateId: string = '';
   sessionUid: any;
+  displayDetails: boolean = false;
+  displayLinkedIn: boolean = true;
+  displayGithub: boolean = true;
+  displayCalendly: boolean = true;
+
+  @Input() user: any = '';
 
   constructor(
     private SQLservice: GcConnectService,
@@ -47,6 +54,10 @@ export class ProfileComponent implements OnInit {
     this.SQLservice.getUserByUid(this.userStateId).subscribe(
       (user) => (this.user = user)
     );
+
+    this.displayLinkedIn = this.user.linked_in;
+    this.displayGithub = this.user.github;
+    this.displayCalendly = this.user.calendly;
 
     // console.log(this.ngAuthService.userState.uid);
     // console.log(this.user.first_name);
