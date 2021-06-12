@@ -32,9 +32,6 @@ export class NgAuthService {
     });
   }
 
-  get staticUserState() {
-    return NgAuthService.userState;
-  }
   static loadUserState() {
     const stored = localStorage.getItem('user');
     if (stored) {

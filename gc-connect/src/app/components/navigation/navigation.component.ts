@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   faCalendarAlt,
   faAddressBook,
 } from '@fortawesome/free-regular-svg-icons';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { GcConnectService } from 'src/app/services/gc-connect.service';
 
 @Component({
   selector: 'app-navigation',
@@ -14,7 +15,9 @@ export class NavigationComponent implements OnInit {
   faCalendarAlt = faCalendarAlt;
   faUserFriends = faUserFriends;
   faAddressBook = faAddressBook;
-  constructor() {}
+
+  @Input() user: any = '';
+  constructor(private SQLservice: GcConnectService) {}
 
   ngOnInit(): void {}
 }
