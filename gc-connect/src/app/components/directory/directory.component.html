@@ -1,36 +1,45 @@
 <app-navigation></app-navigation>
-<app-user-popup *ngIf='displayDetails' [user]='currentUser' (closed)='onClose($event)'></app-user-popup>
+<app-user-popup
+  *ngIf="displayDetails"
+  [user]="currentUser"
+  (closed)="onClose($event)"
+></app-user-popup>
 
 <form>
-    <input 
-        type='text'
-        name='group-search-text'
-        placeholder='Search for a user...'
-    >    
-    
-    <fa-icon
-        class='search-icon'
-        [icon]="faSearch"
-        size="lg"
-    ></fa-icon>
+  <input
+    type="text"
+    name="group-search-text"
+    placeholder="Search for a user..."
+  />
 
-    <button class='arrow'>
-        <fa-icon
-            class='arrow-icon'
-            [icon]="faArrowRight"
-            size="lg"
-        ></fa-icon>
-    </button>
-</form> 
+  <fa-icon class="search-icon" [icon]="faSearch" size="lg"></fa-icon>
 
-<section class='bg-gray'>
-    <a *ngFor='let user of users' class='item-container' routerLink="[]" (click)='onUserSelect(user)'>
-        <img src={{user.photo}} class='round-photo'/>
-        <div class='item-details'>
-            <h2>{{user.first_name}} {{user.last_name}}</h2>
-            <p class='uppercase letter-space class-type'>{{user.bootcamp}}</p> 
-        </div>
-        <p class='uppercase user-type ' [ngClass]="user.type === 'Student'? 'bg-maroon' : 'bg-orange'">{{user.type}}</p> 
-    </a>
+  <button class="arrow">
+    <fa-icon class="arrow-icon" [icon]="faArrowRight" size="lg"></fa-icon>
+  </button>
+</form>
+
+<section class="bg-gray">
+  <a
+    *ngFor="let user of users"
+    class="item-container"
+    routerLink="[]"
+    (click)="onUserSelect(user)"
+  >
+    <img
+      src="{{ user.photo }}"
+      class="round-photo"
+      onerror="this.onerror=null;this.src='/assets/gc-profile-default.png'"
+    />
+    <div class="item-details">
+      <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+      <p class="uppercase letter-space class-type">{{ user.bootcamp }}</p>
+    </div>
+    <p
+      class="uppercase user-type"
+      [ngClass]="user.type === 'Student' ? 'bg-maroon' : 'bg-orange'"
+    >
+      {{ user.type }}
+    </p>
+  </a>
 </section>
-

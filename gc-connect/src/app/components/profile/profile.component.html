@@ -8,7 +8,7 @@
         class="profile-pic"
         src="{{ this.url }}"
         alt="User Profile Image"
-        onerror="this.onerror=null;this.src='/assets/gc-profile-default.png';"
+        onerror="this.onerror=null;this.src='/assets/gc-profile-default.png'"
       />
 
       <div class="item-details">
@@ -61,6 +61,7 @@
   <!-- Profile Picture -->
   <!-- Image and button go here -->
   <h2>Edit Profile</h2>
+  <!-- [formGroup]="uploadForm" (ngSubmit)="onSubmit()" -->
   <form class="user-bio">
     <!-- Name -->
     <div class="full-name">
@@ -155,12 +156,15 @@
         placeholder="{{ user.calendly }}"
       />
     </div>
-    <button class="save-changes profile-button" type="submit">
+    <button
+      class="save-changes profile-button"
+      type="submit"
+      (click)="onSubmit()"
+    >
       <fa-icon [icon]="faSave" class="button-icon"></fa-icon>
       <span>Save Changes</span>
     </button>
   </form>
-  <!-- <button class="sign-out profile-button" (click)="authService.SignOut()"> -->
   <button class="sign-out profile-button" (click)="ngAuthService.SignOut()">
     <fa-icon [icon]="faSignOutAlt" class="button-icon"></fa-icon>
     <span>Sign Out</span>

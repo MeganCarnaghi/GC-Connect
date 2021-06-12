@@ -12,6 +12,7 @@ import {
 import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { FilestackClient } from 'src/app/helpers.ts/filestack';
 import { NgAuthService } from '../../services/ng-auth.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -40,7 +41,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private SQLservice: GcConnectService,
-    public ngAuthService: NgAuthService
+    public ngAuthService: NgAuthService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +59,17 @@ export class ProfileComponent implements OnInit {
     this.displayLinkedIn = this.user.linked_in;
     this.displayGithub = this.user.github;
     this.displayCalendly = this.user.calendly;
+  }
+
+  onSubmit() {
+    console.log('Saved!');
+    if (!this.userStateId) {
+      this.userStateId = NgAuthService.userState.uid;
+    }
+    console.log(this.userStateId);
+    this.SQLservice.updateProfile(this.userStateId).subscribe(
+      (user) => (this.user = user)
+    );
 
     // console.log(this.ngAuthService.userState.uid);
     // console.log(this.user.first_name);
