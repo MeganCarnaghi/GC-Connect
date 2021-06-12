@@ -12,7 +12,7 @@ import {
 import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { FilestackClient } from 'src/app/helpers.ts/filestack';
 import { NgAuthService } from '../../services/ng-auth.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -66,10 +66,10 @@ export class ProfileComponent implements OnInit {
     if (!this.userStateId) {
       this.userStateId = NgAuthService.userState.uid;
     }
-    console.log(this.userStateId);
-    this.SQLservice.updateProfile(this.userStateId).subscribe(
-      (user) => (this.user = user)
-    );
+    console.log(this.user.first_name, this.user.last_name, this.user.bio);
+    // this.SQLservice.updateProfile(this.userStateId).subscribe(
+    //   (user) => (this.user = user)
+    // );
 
     // console.log(this.ngAuthService.userState.uid);
     // console.log(this.user.first_name);
