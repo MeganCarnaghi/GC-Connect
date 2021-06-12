@@ -1,3 +1,21 @@
+.onboarding-checklist__link {
+  text-decoration: none;
+  color: #0097a7;
+}
+
+.onboarding-checklist__link:hover {
+  text-decoration: underline;
+  color: #0097a7;
+}
+
+.onboarding-checklist__link:focus {
+  color: #0097a7;
+}
+
+.onboarding-checklist__link:visited {
+  color: #0097a7;
+}
+
 .onboarding-checklist__container {
   padding: 15px;
 }
