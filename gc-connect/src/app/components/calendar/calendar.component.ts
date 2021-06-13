@@ -95,6 +95,12 @@ export class CalendarComponent implements AfterViewInit {
           className: 'full-stack-javascript',
           color: '#4285F4',
         },
+        {
+          googleCalendarId:
+            'c_bf16562pc9clsip4ddmfuhas1o@group.calendar.google.com',
+          className: 'lgbtq-group',
+          color: '#0B8043',
+        },
       ],
     });
     console.log(calendar);
