@@ -62,7 +62,7 @@
   <!-- Image and button go here -->
   <h2>Edit Profile</h2>
   <!-- [formGroup]="uploadForm" (ngSubmit)="onSubmit()" -->
-  <form class="user-bio">
+  <form class="user-bio" ng-submit="onSubmit()" novalidate>
     <!-- Name -->
     <div class="full-name">
       <!-- First name -->
@@ -71,6 +71,7 @@
         <div class="input-parent">
           <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
           <input
+            #userFirstName
             type="text"
             class="input-text"
             name="first-name"
@@ -85,7 +86,6 @@
         <div class="input-parent">
           <!-- <fa-icon [icon]="faUser" class="input-icon"></fa-icon> -->
           <input
-            #userLastName
             type="text"
             class="input-text"
             name="last-name"
@@ -101,7 +101,6 @@
       <fa-icon [icon]="faLock" class="input-icon"></fa-icon>
       <!-- Non-editable section to display user's bootcamp -->
       <input
-        #userBootcamp
         type="text"
         class="disabled-text input-text"
         [(ngModel)]="user.bootcamp"
@@ -115,7 +114,6 @@
     <div class="input-parent multi-row">
       <fa-icon [icon]="faEdit" class="input-icon"></fa-icon>
       <textarea
-        #userBio
         class="input-text"
         name="bio"
         rows="4"
@@ -129,7 +127,6 @@
     <div class="input-parent">
       <fa-icon [icon]="faLinkedin" class="input-icon"></fa-icon>
       <input
-        #userLinkedIn
         type="text"
         class="input-text"
         name="linkedin"
@@ -142,7 +139,6 @@
     <div class="input-parent">
       <fa-icon [icon]="faGithub" class="input-icon"></fa-icon>
       <input
-        #userGithub
         type="text"
         class="input-text"
         name="github"
@@ -155,7 +151,6 @@
     <div class="input-parent">
       <fa-icon [icon]="faLink" class="input-icon"></fa-icon>
       <input
-        #userCalendly
         type="text"
         class="input-text"
         name="calendly"
@@ -166,7 +161,7 @@
     <button
       class="save-changes profile-button"
       type="submit"
-      (click)="onSubmit()"
+      (click)="onSubmit(userFirstName.value)"
     >
       <fa-icon [icon]="faSave" class="button-icon"></fa-icon>
       <span>Save Changes</span>

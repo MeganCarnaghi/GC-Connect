@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.sessionUid = sessionStorage.getItem('key');
-    console.log(this.sessionUid);
+    // console.log(this.sessionUid);
 
     if (!this.userStateId) {
       this.userStateId = NgAuthService.userState.uid;
@@ -61,18 +61,13 @@ export class ProfileComponent implements OnInit {
     this.displayCalendly = this.user.calendly;
   }
 
-  onSubmit() {
-    console.log('Saved!');
-    if (!this.userStateId) {
-      this.userStateId = NgAuthService.userState.uid;
-    }
-    console.log(this.user.first_name, this.user.last_name, this.user.bio);
-    // this.SQLservice.updateProfile(this.userStateId).subscribe(
-    //   (user) => (this.user = user)
-    // );
+  onSubmit(userFirstName: any) {
+    let userTest: Object = {
+      first_name: userFirstName,
+    };
+    this.SQLservice.updateProfile(this.user.id, userFirstName);
 
-    // console.log(this.ngAuthService.userState.uid);
-    // console.log(this.user.first_name);
+    console.log(userTest);
   }
 
   async uploadFile() {

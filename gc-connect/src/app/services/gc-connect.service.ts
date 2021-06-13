@@ -32,10 +32,6 @@ export class GcConnectService {
     return this.client.post('http://localhost:3000/users', user);
   }
 
-  updateProfile(user: any) {
-    return this.client.put('http://localhost:3000/users', user);
-  }
-
   updateUserUID(email: any, uid: any) {
     let firebase_uid: Object = {
       firebase_uid: uid,
@@ -43,6 +39,24 @@ export class GcConnectService {
 
     return this.client
       .put(`http://localhost:3000/users/${email}`, firebase_uid)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
+  updateProfile(id: any, userFirstName: any) {
+    let targetedUser: Object = {
+      first_name: userFirstName,
+      // last_name: user.last_namem,
+      // bio: user.bio,
+      // photo: user.photo,
+      // linked_in: user.linked_in,
+      // github: user.github,
+      // calendly: user.calendly,
+    };
+    console.log(targetedUser);
+    return this.client
+      .put(`http://localhost:3000/users-profile/${id}`, targetedUser)
       .subscribe((data) => {
         console.log(data);
       });
