@@ -1,0 +1,276 @@
+<div
+  class="onboarding-checklist__container"
+  *ngIf="
+    slackCheckbox === false ||
+    tuitionCheckbox === false ||
+    surveyCheckbox === false ||
+    profileCheckbox === false ||
+    lmsCheckbox === false ||
+    zoomCheckbox === false ||
+    calendarCheckbox === false ||
+    csCheckbox === false ||
+    groupsCheckbox === false
+  "
+>
+  <h2 class="onboarding-checklist__heading">Welcome to GC-Connect!</h2>
+  <p class="onboarding-checklist__info">
+    Welcome to Grand Circus (GC) Connect! GC-Connect will serve as the main hub
+    for all of your Bootcamp, Career Services, Affinity Group and Events
+    information needs. Below you will find a checklist of items you need to
+    complete prior to your first day of class.
+  </p>
+  <table class="onboarding-checklist_table">
+    <!-- TABLE HEADINGS -->
+    <thead>
+      <tr>
+        <th>Action Item</th>
+        <th>Contact for Questions</th>
+        <th>Completed</th>
+      </tr>
+    </thead>
+    <!-- ACTION ITEM 1 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: slackCheckbox }">
+        Set up your Slack account (check email for invite).
+      </td>
+      <td>
+        <a
+          class="onboarding-checklist__link"
+          href="mailto:support@grandcircus.co"
+          >support@grandcircus.co</a
+        >
+      </td>
+      <td class="checkbox">
+        <label for="slack"></label>
+        <input
+          type="checkbox"
+          id="slack"
+          name="slack"
+          [checked]="slackCheckbox"
+          (change)="updateSlackCheckbox()"
+        />
+      </td>
+    </tr>
+    <!-- ACTION ITEM  2 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: tuitionCheckbox }">
+        Pay the remainder of
+        <a
+          class="onboarding-checklist__link"
+          href="https://www.grandcircus.co/bootcamp-tuition-payment-form/"
+          target="_blank"
+          >your tuition</a
+        >.
+      </td>
+      <td>
+        <a
+          class="onboarding-checklist__link"
+          href="mailto:admissions@grandcircus.co"
+          >admissions@grandcircus.co</a
+        >
+      </td>
+      <td class="checkbox">
+        <label for="tuition"></label>
+        <input
+          type="checkbox"
+          id="tuition"
+          name="tuition"
+          [checked]="tuitionCheckbox"
+          (change)="updateTuitionCheckbox()"
+        />
+      </td>
+    </tr>
+    <!-- ACTION ITEM  3 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: surveyCheckbox }">
+        Complete the
+        <a
+          class="onboarding-checklist__link"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSch55JBSBviZDHHUgs6_wv4hnmicj_KtUwAvPlEUx5NkEa6UA/viewform"
+          target="_blank"
+          >Getting to Know You Survey</a
+        >
+        prior to orientation.
+      </td>
+      <td>
+        <a
+          class="onboarding-checklist__link"
+          href="mailto:admissions@grandcircus.co"
+          >admissions@grandcircus.co</a
+        >
+      </td>
+      <td class="checkbox">
+        <label for="survey"></label>
+        <input
+          type="checkbox"
+          id="survey"
+          name="survey"
+          [checked]="surveyCheckbox"
+          (change)="updateSurveyCheckbox()"
+        />
+      </td>
+    </tr>
+    <!-- ACTION ITEM  4 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: profileCheckbox }">
+        Complete your GC-Connect profile (upload a picture, fill out your bio,
+        add your LinkedIn and GitHub url's, etc.)
+      </td>
+      <td>Not applicable</td>
+      <td class="checkbox">
+        <label for="profile"></label>
+        <input
+          type="checkbox"
+          id="profile"
+          name="profile"
+          [checked]="profileCheckbox"
+          (change)="updateProfileCheckbox()"
+        />
+      </td>
+    </tr>
+    <!-- ACTION ITEM  5 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: lmsCheckbox }">
+        Complete all intro exercises in the
+        <a
+          class="onboarding-checklist__link"
+          href="https://lms.grandcircus.co/login/index.php"
+          target="_blank"
+          >LMS</a
+        >.
+      </td>
+      <td>
+        <a
+          class="onboarding-checklist__link"
+          href="mailto:instructor@grandcircus.co"
+          >instructor@grandcircus.co</a
+        >
+      </td>
+      <td class="checkbox">
+        <label for="lms-exercises"></label>
+        <input
+          type="checkbox"
+          id="lms-exercises"
+          name="lms-exercises"
+          [checked]="lmsCheckbox"
+          (change)="updateLmsCheckbox()"
+        />
+      </td>
+    </tr>
+    <!-- ACTION ITEM  6 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: zoomCheckbox }">
+        Bookmark your class's
+        <a
+          class="onboarding-checklist__link"
+          href="https://grandcircus.zoom.us/j/92346514391?pwd=YUpreDFZQTB0czlSL2hObE9UT2NGZz09#success"
+          target="_blank"
+          >Zoom link</a
+        >. You'll be using this link 3x a week. Having it bookmarked in your
+        browser allows you to find it quickly!
+      </td>
+      <td>
+        <a
+          class="onboarding-checklist__link"
+          href="mailto:instructor@grandcircus.co"
+          >instructor@grandcircus.co</a
+        >
+      </td>
+      <td class="checkbox">
+        <label for="zoom-link"></label>
+        <input
+          type="checkbox"
+          id="zoom-link"
+          name="zoom-link"
+          [checked]="zoomCheckbox"
+          (change)="updateZoomCheckbox()"
+        />
+      </td>
+    </tr>
+    <!-- ACTION ITEM  7 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: calendarCheckbox }">
+        Review the
+        <a
+          class="onboarding-checklist__link"
+          routerLink="/calendar"
+          target="_blank"
+          >GC calendar</a
+        >. Make note of any important dates (orientation, first day of class,
+        soft skills sessions, etc.)
+      </td>
+      <td>
+        <a
+          class="onboarding-checklist__link"
+          href="mailto:admissions@grandcircus.co"
+          >admissions@grandcircus.co</a
+        >
+      </td>
+      <td class="checkbox">
+        <label for="calendar"></label>
+        <input
+          type="checkbox"
+          id="calendar"
+          name="calendar"
+          [checked]="calendarCheckbox"
+          (change)="updateCalendarCheckbox()"
+        />
+      </td>
+    </tr>
+    <!-- ACTION ITEM  8 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: csCheckbox }">
+        Explore the
+        <a
+          class="onboarding-checklist__link"
+          href="https://docs.google.com/document/d/1zHc9eWbT3OyAk_16MB7QxyiSqOhUW5pYZqvW75uvsjk/edit"
+          target="_blank"
+          >Career Services Syllabus</a
+        >. Learn about the CS team members, review the requirements for
+        graduation, make note of the upcoming Soft Skills session dates and
+        assignment due dates, begin scheduling your 1:1 sessions, etc.
+      </td>
+      <td>
+        <a
+          class="onboarding-checklist__link"
+          href="mailto:careerservices@grandcircus.co"
+          >careerservices@grandcircus.co</a
+        >
+      </td>
+      <td class="checkbox">
+        <label for="career-services"></label>
+        <input
+          type="checkbox"
+          id="career-services"
+          name="career-services"
+          [checked]="csCheckbox"
+          (change)="updateCsCheckbox()"
+        />
+      </td>
+    </tr>
+    <!-- ACTION ITEM  9 -->
+    <tr>
+      <td class="action-item" [ngClass]="{ completed: groupsCheckbox }">
+        Explore the
+        <a
+          class="onboarding-checklist__link"
+          routerLink="/groups"
+          target="_blank"
+          >GC Affinity Groups</a
+        >. Join any of the groups that are of interest to you or create a new
+        group!
+      </td>
+      <td>Not applicable</td>
+      <td class="checkbox">
+        <label for="groups"></label>
+        <input
+          type="checkbox"
+          id="groups"
+          name="groups"
+          [checked]="groupsCheckbox"
+          (change)="updateGroupsCheckbox()"
+        />
+      </td>
+    </tr>
+  </table>
+</div>

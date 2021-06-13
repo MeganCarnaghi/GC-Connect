@@ -20,7 +20,7 @@ const db = pgp({
 
 // get all users for phonebook list
 router.get('/users', async (req, res) => {
-    res.json(await db.many('SELECT * from users ORDER BY last_name'));
+    res.json(await db.many('SELECT * from users WHERE authorized = true ORDER BY last_name'));
 });
 
 // get all groups for group list
@@ -56,7 +56,7 @@ router.get('/groups/:id', async (req, res) => {
 
 // get group-posts by group with user id name & photo
 router.get('/group-posts/:id', async (req, res) => {
-    const result = await db.many('SELECT gp.id, gp.group_id, gp.date, gp.user_id, gp.body, u.first_name, u.last_name, u.photo FROM group_posts gp INNER JOIN users u ON u.id = gp.user_id WHERE gp.group_id = $(id)', {
+    const result = await db.many('SELECT gp.id, gp.group_id, gp.date, gp.user_id, gp.body, u.first_name, u.last_name, u.photo FROM group_posts gp INNER JOIN users u ON u.id = gp.user_id WHERE gp.group_id = $(id) ORDER BY date DESC', {
         id: req.params.id
     });
 
@@ -107,6 +107,14 @@ router.get('/groups-joined-by-user/:uid', async (req, res) => {
 router.post('/users', async (req, res) => {
     try{
 
+        const user = await db.oneOrNone('SELECT email FROM users WHERE email = $(email)', {
+            email: req.body.email
+        });
+
+        if (user) {
+            return res.status(404).send('User email already exists.')
+        }
+
         await db.none('INSERT INTO users (firebase_uid, email, first_name, last_name, type, bootcamp, authorized) VALUES ($(firebase_uid), $(email), $(first_name), $(last_name), $(type), $(bootcamp), $(authorized))', {
             firebase_uid: req.body.firebase_uid,
             email: req.body.email,
@@ -117,16 +125,13 @@ router.post('/users', async (req, res) => {
             authorized: req.body.authorized
         });
 
-        const user = await db.one('SELECT email FROM users WHERE email = $(email)', {
+        const newUser = await db.one('SELECT email FROM users WHERE email = $(email)', {
             email: req.body.email
         });
 
-        res.status(201).json(user);
+        res.status(201).json(newUser);
 
     } catch (error) {
-        // if (error.constraint === 'users_pkey'){
-        //     return res.status(400).send('The state already exists');
-        // }
         console.log(error);
         res.status(500).send(error);
     }
@@ -179,6 +184,36 @@ router.post('/group-members', async (req, res) => {
         });
 
         res.status(201).json(groupMember);
+
+    } catch (error) {
+        // if (error.constraint === 'users_pkey'){
+        //     return res.status(400).send('The state already exists');
+        // }
+        console.log(error);
+        res.status(500).send(error);
+    }
+
+});
+
+//add a comment to a group
+router.post('/group-posts', async (req, res) => {
+    try{
+
+        const user = await db.oneOrNone('SELECT id FROM users WHERE firebase_uid = $(uid)', {
+            uid: req.body.uid
+        })
+
+        const ins = await db.oneOrNone('INSERT INTO group_posts (group_id, user_id, body) VALUES ($(group_id), $(user_id),$(comment)) RETURNING id', {
+            group_id: req.body.group_id,
+            user_id: user.id,
+            comment: req.body.comment
+        });
+
+        const groupPost = await db.one('SELECT * FROM group_posts WHERE id = $(id)', {
+            id: ins.id
+        });
+
+        res.status(201).json(groupPost);
 
     } catch (error) {
         // if (error.constraint === 'users_pkey'){

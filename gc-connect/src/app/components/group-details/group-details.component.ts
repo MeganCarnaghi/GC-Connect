@@ -5,6 +5,8 @@ import { switchMap } from 'rxjs/operators';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
+import { NgAuthService } from 'src/app/services/ng-auth.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-group-details',
@@ -18,18 +20,42 @@ export class GroupDetailsComponent implements OnInit {
   subscription2: any;
   faEdit = faEdit;
   faPlus = faPlus;
+  commentForm = this.formbuilder.group({
+    comment: ''
+  });
 
-  constructor(private SQLservice: GcConnectService, private route: ActivatedRoute) { }
+  constructor(
+    private SQLservice: GcConnectService, 
+    private NgAuthService: NgAuthService, 
+    private route: ActivatedRoute,
+    private formbuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.subscription = this.route.paramMap.pipe(switchMap(p => this.SQLservice.getGroupById(p?.get('id')))).subscribe(group => this.group = group);
 
-    this.subscription2 = this.route.paramMap.pipe(switchMap(p => this.SQLservice.getGroupPostsById(p?.get('id')))).subscribe(posts => this.groupPosts = posts);
+    this.getComments();
   }
 
   ngOnDestroy():void{
     this.subscription.unsubscribe();
     this.subscription2.unsubscribe();
   }
+
+  getComments(){
+    this.subscription2 = this.route.paramMap.pipe(switchMap(p => this.SQLservice.getGroupPostsById(p?.get('id')))).subscribe(posts => this.groupPosts = posts);
+  }
+
+  postComment(comment: any){
+    let uid = NgAuthService.userState.uid;
+    let groupId = this.group.id;
+    
+    this.SQLservice.addPostToGroup(uid, groupId, comment);
+    
+    this.getComments();
+    window.location.reload();
+
+    this.commentForm.reset();
+  }
+
 
 }

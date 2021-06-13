@@ -13,27 +13,31 @@
 
     <p class='bio'>{{group?.bio}}</p>
     
-    <form>
+    <form [formGroup]='commentForm' (ngSubmit)='postComment(comment.value)'>
         <textarea 
+            name='comment'
             type='text'
-            name='group-comment-box'
+            formControlName='comment'
             placeholder='Write something...'
+            ([ngModel])='comment'
+            #comment
         ></textarea>  
         <fa-icon
             class='comment-icon'
             [icon]="faEdit"
             size="lg"
         ></fa-icon>
+        <button type='submit' class='create-save'>
+            <fa-icon
+            class=''
+            [icon]="faPlus"
+            size="sm"
+        ></fa-icon>
+            Create Post
+        </button>
     </form> 
 
-    <button class='create-save'>
-        <fa-icon
-        class=''
-        [icon]="faPlus"
-        size="sm"
-      ></fa-icon>
-        Create Post
-    </button>
+    
 </section>
 
 

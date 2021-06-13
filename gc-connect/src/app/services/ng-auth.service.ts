@@ -46,12 +46,11 @@ export class NgAuthService {
         this.afAuth
           .signInWithEmailAndPassword(email, password)
           .then((result) => {
+            this.SQLservice.updateUserUID(result.user?.email, result.user?.uid);
             this.ngZone.run(() => {
               this.router.navigate(['profile']);
             });
             this.SetUserData(result.user);
-            // this.SQLservice.updateUserUID(result.user?.email, result.user?.uid);
-            console.log(result.user);
           });
       })
       .catch((error) => {
@@ -64,10 +63,9 @@ export class NgAuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
+        this.SQLservice.addFirebaseUser(result.user?.email, result.user?.uid);
         this.SendVerificationMail();
         this.SetUserData(result.user);
-        // when create a way to add approved emails/users then turn on these comments
-        // this.SQLservice.updateUserUID(result.user?.email, result.user?.uid);
       })
       .catch((error) => {
         window.alert(error.message);
