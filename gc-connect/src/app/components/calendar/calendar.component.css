@@ -1,12 +1,62 @@
 full-calendar {
-  padding-top: 15px;
-  color: black !important;
+  padding: 20px 10px;
 }
 
-div .fc .fc-toolbar.fc-header-toolbar {
-  padding-left: 15px;
+.calendar-key__container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 5px 0 0 5px;
+  font-size: 14px;
 }
 
-td {
-  color: red;
+.calendar-key__key {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 7px 5px;
+}
+
+.calendar-key__circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  margin-right: 3px;
+}
+
+.gc-global {
+  background-color: #e0693d;
+}
+
+.career-services {
+  background-color: #05d0cd;
+}
+
+.ahfs-cNET {
+  background-color: #8e24aa;
+}
+
+.ahfs-javascript {
+  background-color: #b39edb;
+}
+
+.fs-cNET {
+  background-color: #3f50b5;
+}
+
+.fs-javascript {
+  background-color: #4285f4;
+}
+
+.ahfe-bootcamp {
+  background-color: #7a324a;
+}
+
+.lgbtq-group {
+  background-color: #0b8043;
+}
+
+.equity-group {
+  background-color: #d81c60;
 }
