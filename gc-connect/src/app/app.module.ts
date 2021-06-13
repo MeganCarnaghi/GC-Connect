@@ -62,6 +62,7 @@ FullCalendarModule.registerPlugins([
     AngularFireAuthModule,
     FontAwesomeModule,
     FullCalendarModule,
+    ReactiveFormsModule,
   ],
   providers: [NgAuthService],
   bootstrap: [AppComponent],

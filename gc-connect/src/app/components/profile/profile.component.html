@@ -7,10 +7,10 @@
   <div class="item-content">
     <div class="item-header">
       <img
+        #userPhoto
         class="profile-pic"
-        src="{{ this.url }}"
+        src="{{ user.photo }}"
         alt="User Profile Image"
-        onerror="this.onerror=null;this.src='/assets/gc-profile-default.png';"
       />
       <div class="item-details">
         <h2>{{ user.first_name }} {{ user.last_name }}</h2>
@@ -62,7 +62,8 @@
   <!-- Profile Picture -->
   <!-- Image and button go here -->
   <h2>Edit Profile</h2>
-  <form class="user-bio">
+  <!-- [formGroup]="uploadForm" (ngSubmit)="onSubmit()" -->
+  <form class="user-bio" ng-submit="onSubmit()" novalidate>
     <!-- Name -->
     <div class="full-name">
       <!-- First name -->
@@ -71,10 +72,12 @@
         <div class="input-parent">
           <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
           <input
+            #userFirstName
             type="text"
             class="input-text"
             name="first-name"
-            placeholder="{{ user.first_name }}"
+            [(ngModel)]="user.first_name"
+            placeholder="Enter your first name"
           />
         </div>
       </div>
@@ -88,7 +91,8 @@
             type="text"
             class="input-text"
             name="last-name"
-            placeholder="{{ user.last_name }}"
+            [(ngModel)]="user.last_name"
+            placeholder="Enter your last name"
           />
         </div>
       </div>
@@ -102,7 +106,8 @@
         #userBootcamp
         type="text"
         class="disabled-text input-text"
-        placeholder="{{ user.bootcamp }}"
+        [(ngModel)]="user.bootcamp"
+        placeholder="Bootcamp Cohort"
         name="bootcamp"
         disabled
       />
@@ -117,7 +122,8 @@
         name="bio"
         rows="4"
         maxlength="200"
-        placeholder="{{ user.bio }}"
+        [(ngModel)]="user.bio"
+        placeholder="Say somehthing about yourself..."
       ></textarea>
     </div>
     <!-- Linkedin -->
@@ -125,11 +131,12 @@
     <div class="input-parent">
       <fa-icon [icon]="faLinkedin" class="input-icon"></fa-icon>
       <input
-        #userLinkedIn
+        #userLinkedin
         type="text"
         class="input-text"
         name="linkedin"
-        placeholder="{{ user.linked_in }}"
+        [(ngModel)]="user.linked_in"
+        placeholder="Link your LinkedIn"
       />
     </div>
     <!-- Github -->
@@ -141,7 +148,8 @@
         type="text"
         class="input-text"
         name="github"
-        placeholder="{{ user.github }}"
+        [(ngModel)]="user.github"
+        placeholder="Link your Github"
       />
     </div>
     <!-- Calendly -->
@@ -153,15 +161,30 @@
         type="text"
         class="input-text"
         name="calendly"
-        placeholder="{{ user.calendly }}"
+        [(ngModel)]="user.calendly"
+        placeholder="Link your Calendly"
       />
     </div>
-    <button class="save-changes profile-button" type="submit">
+    <button
+      class="save-changes profile-button"
+      type="submit"
+      (click)="
+        onSubmit(
+          userPhoto.src,
+          userFirstName.value,
+          userLastName.value,
+          userBio.value,
+          userBootcamp.value,
+          userLinkedin.value,
+          userGithub.value,
+          userCalendly.value
+        )
+      "
+    >
       <fa-icon [icon]="faSave" class="button-icon"></fa-icon>
       <span>Save Changes</span>
     </button>
   </form>
-  <!-- <button class="sign-out profile-button" (click)="authService.SignOut()"> -->
   <button class="sign-out profile-button" (click)="ngAuthService.SignOut()">
     <fa-icon [icon]="faSignOutAlt" class="button-icon"></fa-icon>
     <span>Sign Out</span>

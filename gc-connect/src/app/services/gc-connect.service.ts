@@ -9,26 +9,29 @@ import { Observable } from 'rxjs';
 export class GcConnectService {
   constructor(private client: HttpClient) {}
 
-  getAllUsers(){
+  getAllUsers() {
     return this.client.get('http://localhost:3000/users');
-  };
+  }
 
-  getAllGroups(){
+  getAllGroups() {
     return this.client.get('http://localhost:3000/groups');
-  };
+  }
 
-  getUserByUid(uid: any){
+  getUserByUid(uid: any) {
     return this.client.get(`http://localhost:3000/users/${uid}`);
-  };
+  }
 
-  getGroupById(id: any){
+  getGroupById(id: any) {
     return this.client.get(`http://localhost:3000/groups/${id}`);
-  };
+  }
 
-  getGroupPostsById(id: any){
+  getGroupPostsById(id: any) {
     return this.client.get(`http://localhost:3000/group-posts/${id}`);
-  };
+  }
 
+  addNewUser(user: any) {
+    return this.client.post('http://localhost:3000/users', user);
+    
   addPostToGroup(uid: any, groupId: any, comment: any){
     let post: Object = {
       uid: uid,
@@ -50,13 +53,49 @@ export class GcConnectService {
     return this.client.post(`http://localhost:3000/users`, newUser).subscribe(data => {console.log(data)});
   }
 
-  updateUserUID(email: any, uid: any){
-    
+  updateUserUID(email: any, uid: any) {
     let firebase_uid: Object = {
-      firebase_uid: uid
+      firebase_uid: uid,
     };
 
-    return this.client.put(`http://localhost:3000/users/${email}`, firebase_uid ).subscribe(data => data);
+    return this.client
+      .put(`http://localhost:3000/users/${email}`, firebase_uid)
+      .subscribe((data) => {
+        console.log(data);
+      });
+
   }
 
+  updateProfile(
+    id: any,
+    userPhoto: any,
+    userFirstName: any,
+    userLastName: any,
+    userBio: any,
+    userBootcamp: any,
+    userLinkedin: any,
+    userGithub: any,
+    userCalendly: any
+  ) {
+    let targetedUser: Object = {
+      photo: userPhoto,
+      first_name: userFirstName,
+      last_name: userLastName,
+      bio: userBio,
+      bootcamp: userBootcamp,
+      linked_in: userLinkedin,
+      github: userGithub,
+      calendly: userCalendly,
+    };
+    console.log(targetedUser);
+    return this.client
+      .put(`http://localhost:3000/users-profile/${id}`, targetedUser)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
+  getUserPhoto(id: any) {
+    return this.client.get(`http://localhost:3000/user-photo/${id}`);
+  }
 }
