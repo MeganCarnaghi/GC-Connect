@@ -8,11 +8,7 @@
     ></fa-icon>
     <div class="item-content">
       <div class="item-header">
-        <img
-          src="{{ user.photo }}"
-          class="round-photo"
-          onerror="this.onerror=null;this.src='/assets/gc-profile-default.png'"
-        />
+        <img src="{{ user.photo }}" class="round-photo" />
         <div class="item-details">
           <h2>{{ user.first_name }} {{ user.last_name }}</h2>
           <p class="uppercase letter-space class-type">{{ user.bootcamp }}</p>

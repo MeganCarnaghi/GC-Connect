@@ -5,10 +5,10 @@
   <div class="item-content">
     <div class="item-header">
       <img
+        #userPhoto
         class="profile-pic"
-        src="{{ this.url }}"
+        src="{{ user.photo }}"
         alt="User Profile Image"
-        onerror="this.onerror=null;this.src='/assets/gc-profile-default.png'"
       />
 
       <div class="item-details">
@@ -86,6 +86,7 @@
         <div class="input-parent">
           <!-- <fa-icon [icon]="faUser" class="input-icon"></fa-icon> -->
           <input
+            #userLastName
             type="text"
             class="input-text"
             name="last-name"
@@ -101,6 +102,7 @@
       <fa-icon [icon]="faLock" class="input-icon"></fa-icon>
       <!-- Non-editable section to display user's bootcamp -->
       <input
+        #userBootcamp
         type="text"
         class="disabled-text input-text"
         [(ngModel)]="user.bootcamp"
@@ -114,6 +116,7 @@
     <div class="input-parent multi-row">
       <fa-icon [icon]="faEdit" class="input-icon"></fa-icon>
       <textarea
+        #userBio
         class="input-text"
         name="bio"
         rows="4"
@@ -127,6 +130,7 @@
     <div class="input-parent">
       <fa-icon [icon]="faLinkedin" class="input-icon"></fa-icon>
       <input
+        #userLinkedin
         type="text"
         class="input-text"
         name="linkedin"
@@ -139,6 +143,7 @@
     <div class="input-parent">
       <fa-icon [icon]="faGithub" class="input-icon"></fa-icon>
       <input
+        #userGithub
         type="text"
         class="input-text"
         name="github"
@@ -151,6 +156,7 @@
     <div class="input-parent">
       <fa-icon [icon]="faLink" class="input-icon"></fa-icon>
       <input
+        #userCalendly
         type="text"
         class="input-text"
         name="calendly"
@@ -161,7 +167,18 @@
     <button
       class="save-changes profile-button"
       type="submit"
-      (click)="onSubmit(userFirstName.value)"
+      (click)="
+        onSubmit(
+          userPhoto.src,
+          userFirstName.value,
+          userLastName.value,
+          userBio.value,
+          userBootcamp.value,
+          userLinkedin.value,
+          userGithub.value,
+          userCalendly.value
+        )
+      "
     >
       <fa-icon [icon]="faSave" class="button-icon"></fa-icon>
       <span>Save Changes</span>

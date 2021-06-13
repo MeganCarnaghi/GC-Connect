@@ -44,15 +44,26 @@ export class GcConnectService {
       });
   }
 
-  updateProfile(id: any, userFirstName: any) {
+  updateProfile(
+    id: any,
+    userPhoto: any,
+    userFirstName: any,
+    userLastName: any,
+    userBio: any,
+    userBootcamp: any,
+    userLinkedin: any,
+    userGithub: any,
+    userCalendly: any
+  ) {
     let targetedUser: Object = {
+      photo: userPhoto,
       first_name: userFirstName,
-      // last_name: user.last_namem,
-      // bio: user.bio,
-      // photo: user.photo,
-      // linked_in: user.linked_in,
-      // github: user.github,
-      // calendly: user.calendly,
+      last_name: userLastName,
+      bio: userBio,
+      bootcamp: userBootcamp,
+      linked_in: userLinkedin,
+      github: userGithub,
+      calendly: userCalendly,
     };
     console.log(targetedUser);
     return this.client
@@ -60,5 +71,9 @@ export class GcConnectService {
       .subscribe((data) => {
         console.log(data);
       });
+  }
+
+  getUserPhoto(id: any) {
+    return this.client.get(`http://localhost:3000/user-photo/${id}`);
   }
 }

@@ -32,10 +32,11 @@ export class ProfileComponent implements OnInit {
   url: string = '';
   userStateId: string = '';
   sessionUid: any;
-  displayDetails: boolean = false;
+  displayDetails: boolean = true;
   displayLinkedIn: boolean = true;
   displayGithub: boolean = true;
   displayCalendly: boolean = true;
+  userPhoto: any = null;
 
   @Input() user: any = '';
 
@@ -61,18 +62,48 @@ export class ProfileComponent implements OnInit {
     this.displayCalendly = this.user.calendly;
   }
 
-  onSubmit(userFirstName: any) {
+  onSubmit(
+    userPhoto: any,
+    userFirstName: any,
+    userLastName: any,
+    userBio: any,
+    userBootcamp: any,
+    userLinkedin: any,
+    userGithub: any,
+    userCalendly: any
+  ) {
     let userTest: Object = {
+      photo: userPhoto,
       first_name: userFirstName,
+      last_name: userLastName,
+      bio: userBio,
+      bootcamp: userBootcamp,
+      linked_in: userLinkedin,
+      github: userGithub,
+      calendly: userCalendly,
     };
-    this.SQLservice.updateProfile(this.user.id, userFirstName);
+
+    this.SQLservice.updateProfile(
+      this.user.id,
+      userPhoto,
+      userFirstName,
+      userLastName,
+      userBio,
+      userBootcamp,
+      userLinkedin,
+      userGithub,
+      userCalendly
+    );
+
+    // this.SQLservice.getUserPhoto(this.user.id);
 
     console.log(userTest);
+    window.location.reload();
   }
 
   async uploadFile() {
     const url = await FilestackClient.pick();
-    this.url = url;
+    this.user.photo = url;
     console.log(url);
   }
 }
