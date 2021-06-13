@@ -20,7 +20,7 @@ const db = pgp({
 
 // get all users for phonebook list
 router.get('/users', async (req, res) => {
-    res.json(await db.many('SELECT * from users ORDER BY last_name'));
+    res.json(await db.many('SELECT * from users WHERE authorized = true ORDER BY last_name'));
 });
 
 // get all groups for group list
@@ -107,6 +107,14 @@ router.get('/groups-joined-by-user/:uid', async (req, res) => {
 router.post('/users', async (req, res) => {
     try{
 
+        const user = await db.oneOrNone('SELECT email FROM users WHERE email = $(email)', {
+            email: req.body.email
+        });
+
+        if (user) {
+            return res.status(404).send('User email already exists.')
+        }
+
         await db.none('INSERT INTO users (firebase_uid, email, first_name, last_name, type, bootcamp, authorized) VALUES ($(firebase_uid), $(email), $(first_name), $(last_name), $(type), $(bootcamp), $(authorized))', {
             firebase_uid: req.body.firebase_uid,
             email: req.body.email,
@@ -117,16 +125,13 @@ router.post('/users', async (req, res) => {
             authorized: req.body.authorized
         });
 
-        const user = await db.one('SELECT email FROM users WHERE email = $(email)', {
+        const newUser = await db.one('SELECT email FROM users WHERE email = $(email)', {
             email: req.body.email
         });
 
-        res.status(201).json(user);
+        res.status(201).json(newUser);
 
     } catch (error) {
-        // if (error.constraint === 'users_pkey'){
-        //     return res.status(400).send('The state already exists');
-        // }
         console.log(error);
         res.status(500).send(error);
     }
