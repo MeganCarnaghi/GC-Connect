@@ -32,13 +32,24 @@ export class GcConnectService {
     return this.client.post('http://localhost:3000/users',user);
   }
 
+  addPostToGroup(uid: any, groupId: any, comment: any){
+    let post: Object = {
+      uid: uid,
+      group_id: groupId,
+      comment: comment
+    }
+
+    return this.client.post(`http://localhost:3000/group-posts`, post).subscribe(data => {console.log(data)});
+
+  }
+
   updateUserUID(email: any, uid: any){
     
     let firebase_uid: Object = {
       firebase_uid: uid
     };
 
-    return this.client.put(`http://localhost:3000/users/${email}`, firebase_uid ).subscribe(data => {console.log(data)});
+    return this.client.put(`http://localhost:3000/users/${email}`, firebase_uid );
   }
 
 }
