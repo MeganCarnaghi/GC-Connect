@@ -13,6 +13,8 @@ import bootstrapPlugin from '@fullcalendar/bootstrap';
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent implements AfterViewInit {
+  calendarHeight = 0;
+
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
   };
@@ -31,9 +33,12 @@ export class CalendarComponent implements AfterViewInit {
       headerToolbar: {
         start: 'prev,next today',
         center: 'title',
-        end: 'dayGridMonth,dayGridWeek,dayGridDay,dayGridlist',
+        end: 'dayGridMonth,dayGridWeek,dayGridDay',
       },
-      height: window.innerHeight - 60,
+      height:
+        window.innerWidth <= 768
+          ? (this.calendarHeight = window.innerHeight - 140)
+          : (this.calendarHeight = window.innerHeight - 60),
       plugins: [
         googleCalendarPlugin,
         dayGridPlugin,
@@ -44,7 +49,7 @@ export class CalendarComponent implements AfterViewInit {
       windowResize: function () {
         let calendarHeight = 0;
         if (window.innerWidth <= 768) {
-          calendarHeight = window.innerHeight - 102;
+          calendarHeight = window.innerHeight - 140;
         } else {
           calendarHeight = window.innerHeight - 60;
         }

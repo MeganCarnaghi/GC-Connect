@@ -1,6 +1,16 @@
 <app-navigation></app-navigation>
 <!-- MEGAN TESTING ONBOARDING CHECKLIST -->
-<app-onboarding-checklist></app-onboarding-checklist>
+<div class="onboard-section">
+  <div class="toggle-section">
+    <p>Onboarding Checklist</p>
+    <button class="toggle" (click)="toggleShow()">
+      <fa-icon [icon]="faEye"></fa-icon> Show / Hide
+    </button>
+  </div>
+  <div class="onboard-parent" *ngIf="isShown">
+    <app-onboarding-checklist></app-onboarding-checklist>
+  </div>
+</div>
 
 <!-- White Profile headline and tag for student/staff -->
 <div class="profile-header">

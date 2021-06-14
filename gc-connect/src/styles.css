@@ -65,3 +65,53 @@ h3 {
 .fc-event-time {
   color: #000000;
 }
+
+.fc-button-group
+  .fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active,
+.fc-button-group
+  .fc-dayGridDay-button.fc-button.fc-button-primary.fc-button-active,
+.fc-button-group
+  .fc-dayGridWeek-button.fc-button.fc-button-primary.fc-button-active {
+  background-color: #7a324a;
+  border: 1px solid #7a324a;
+  color: white;
+}
+
+.fc-dayGridWeek-button.fc-button.fc-button-primary,
+.fc-dayGridDay-button.fc-button.fc-button-primary,
+.fc-dayGridMonth-button.fc-button.fc-button-primary {
+  background-color: white;
+  color: #000000;
+  border: 1px solid #bfbfbf;
+}
+
+.fc-dayGridDay-button.fc-button.fc-button-primary:hover,
+.fc-dayGridWeek-button.fc-button.fc-button-primary:hover,
+.fc-dayGridMonth-button.fc-button.fc-button-primary:hover {
+  background-color: #7a324a;
+  border: 1px solid #7a324a;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  padding: 25px 15px 0px 15px;
+  margin-bottom: 0em;
+}
+
+.fc-next-button.fc-button.fc-button-primary,
+.fc-prev-button.fc-button.fc-button-primary {
+  background-color: #efefef;
+  color: #343d46;
+  border: none;
+}
+
+.fc-next-button.fc-button.fc-button-primary:hover,
+.fc-prev-button.fc-button.fc-button-primary:hover {
+  background-color: #d3d3d3;
+  transition: 0.3s;
+  color: #343d46;
+}
+
+/* .fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active {
+  background-color: #7a324a;
+  color: white;
+} */

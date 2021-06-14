@@ -1,49 +1,51 @@
 <app-navigation></app-navigation>
-<div class="calendar-key__container">
-  <!-- CALENDAR 1 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle gc-global"></div>
-    <p>Grand Circus Global</p>
-  </div>
-  <!-- CALENDAR 2 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle career-services"></div>
-    <p>Career Services</p>
-  </div>
-  <!-- CALENDAR 8 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle ahfe-bootcamp"></div>
-    <p>After-Hours Front-End Bootcamp</p>
-  </div>
-  <!-- CALENDAR 3 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle ahfs-cNET"></div>
-    <p>After-Hours Full-Stack C# .NET Bootcamp</p>
-  </div>
-  <!-- CALENDAR 4 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle ahfs-javascript"></div>
-    <p>After-Hours Full-Stack JavaScript Bootcamp</p>
-  </div>
-  <!-- CALENDAR 5 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle fs-cNET"></div>
-    <p>Full-Stack C# .NET Bootcamp</p>
-  </div>
-  <!-- CALENDAR 6 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle fs-javascript"></div>
-    <p>Full-Stack JavaScript Bootcamp</p>
-  </div>
-  <!-- CALENDAR 7 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle lgbtq-group"></div>
-    <p>LGBTQ+ Affinity Group</p>
-  </div>
-  <!-- CALENDAR 8 -->
-  <div class="calendar-key__key">
-    <div class="calendar-key__circle equity-group"></div>
-    <p>Equity in Tech Affinity Group</p>
+<div class="calendar-parent">
+  <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+  <div class="calendar-key__container">
+    <!-- CALENDAR 1 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle gc-global"></div>
+      <p>Grand Circus Global</p>
+    </div>
+    <!-- CALENDAR 2 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle career-services"></div>
+      <p>Career Services</p>
+    </div>
+    <!-- CALENDAR 8 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle ahfe-bootcamp"></div>
+      <p>After-Hours Front-End Bootcamp</p>
+    </div>
+    <!-- CALENDAR 3 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle ahfs-cNET"></div>
+      <p>After-Hours Full-Stack C# .NET Bootcamp</p>
+    </div>
+    <!-- CALENDAR 4 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle ahfs-javascript"></div>
+      <p>After-Hours Full-Stack JavaScript Bootcamp</p>
+    </div>
+    <!-- CALENDAR 5 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle fs-cNET"></div>
+      <p>Full-Stack C# .NET Bootcamp</p>
+    </div>
+    <!-- CALENDAR 6 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle fs-javascript"></div>
+      <p>Full-Stack JavaScript Bootcamp</p>
+    </div>
+    <!-- CALENDAR 7 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle lgbtq-group"></div>
+      <p>LGBTQ+ Affinity Group</p>
+    </div>
+    <!-- CALENDAR 8 -->
+    <div class="calendar-key__key">
+      <div class="calendar-key__circle equity-group"></div>
+      <p>Equity in Tech Affinity Group</p>
+    </div>
   </div>
 </div>
-<full-calendar #calendar [options]="calendarOptions"></full-calendar>
