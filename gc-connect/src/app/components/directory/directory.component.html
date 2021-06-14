@@ -26,15 +26,18 @@
     routerLink="[]"
     (click)="onUserSelect(user)"
   >
-    <img
-      src="{{ user.photo }}"
-      class="round-photo"
-      onerror="this.onerror=null;this.src='/assets/gc-profile-default.png'"
-    />
-    <div class="item-details">
-      <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-      <p class="uppercase letter-space class-type">{{ user.bootcamp }}</p>
+    <div class='flex-align-center'>
+      <img
+        src="{{ user.photo }}"
+        class="round-photo"
+        onerror="this.onerror=null;this.src='/assets/gc-profile-default.png'"
+      />
+      <div class="item-details">
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <p class="uppercase letter-space class-type">{{ user.bootcamp }}</p>
+      </div>
     </div>
+    
     <p
       class="uppercase user-type"
       [ngClass]="user.type === 'Student' ? 'bg-maroon' : 'bg-orange'"
