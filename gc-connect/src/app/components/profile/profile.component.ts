@@ -105,7 +105,7 @@ export class ProfileComponent implements OnInit {
     // this.SQLservice.getUserPhoto(this.user.id);
 
     console.log(userTest);
-    alert('Profile successfully updated!');
+    // window.location.reload();
   }
 
   async uploadFile() {

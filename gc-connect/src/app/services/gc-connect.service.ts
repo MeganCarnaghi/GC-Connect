@@ -100,8 +100,4 @@ export class GcConnectService {
         console.log(data);
       });
   }
-
-  getUserPhoto(id: any) {
-    return this.client.get(`http://localhost:3000/user-photo/${id}`);
-  }
 }
