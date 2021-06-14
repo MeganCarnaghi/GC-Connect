@@ -79,8 +79,12 @@ h2{
     min-height: 75px;
 }
 
+.flex-align-center{
+    display: flex;
+    align-items: center;
+}
+
 div.item-details{
-    width: 65%;
     padding-left: 25px;
 }
 

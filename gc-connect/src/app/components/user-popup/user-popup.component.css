@@ -1,6 +1,6 @@
 /*Background styling  */
 section{
-    margin-top: -48px;
+    margin-top: -58px;
     height: 100vh;
     z-index: 2000;
     position: absolute;
@@ -43,8 +43,12 @@ div.item-header{
     padding-top: 10px;
 }
 
+.flex-align-center{
+    display: flex;
+    align-items: center;
+}
+
 div.item-details{
-    width: 65%;
     padding-left: 25px;
 }
 
@@ -100,6 +104,13 @@ div.link-container{
 
 .link-container a fa-icon{
     padding-right: 10px;
+}
+
+.link-container a:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;;
+  filter: brightness(90%);
+  transition: 0.3s;
 }
 
 .margin-left{

@@ -30,7 +30,9 @@ button.join{
 }
 
 button.join:hover{
-    background-color: #dddddd;
+    cursor: pointer;
+    filter: brightness(80%);
+    transition: 0.3s;
 }
 
 p.type{
@@ -92,6 +94,12 @@ button.create-save{
 
 button.create-save fa-icon{
     padding-right: 10px;
+}
+
+button.create-save:hover{
+    cursor: pointer;
+    filter: brightness(80%);
+    transition: 0.3s;
 }
 
 
