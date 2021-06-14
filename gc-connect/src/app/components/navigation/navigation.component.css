@@ -4,6 +4,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 /* Logo container*/
@@ -77,8 +78,8 @@
   min-width: 30px;
   height: 30px;
   border: 2px solid #2c3e50;
-  background-color: lightgray;
   border-radius: 30px;
+  padding: 3px;
 }
 .nav-profile-image:hover {
   border: 2px solid#54616d;
@@ -97,7 +98,6 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .nav-parent-container {
-    padding-bottom: 10px;
     border-bottom: 1px solid #cecece;
   }
   .nav-container {

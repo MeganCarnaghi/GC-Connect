@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import {
   faEdit,
+  faEye,
   faLink,
   faLock,
   faPencilAlt,
@@ -29,6 +30,7 @@ export class ProfileComponent implements OnInit {
   faSave = faSave;
   faPencilAlt = faPencilAlt;
   faSignOutAlt = faSignOutAlt;
+  faEye = faEye;
   url: string = '';
   userStateId: string = '';
   sessionUid: any;
@@ -37,6 +39,7 @@ export class ProfileComponent implements OnInit {
   displayGithub: boolean = true;
   displayCalendly: boolean = true;
   userPhoto: any = null;
+  isShown: boolean = true;
 
   @Input() user: any = '';
 
@@ -60,6 +63,10 @@ export class ProfileComponent implements OnInit {
     this.displayLinkedIn = this.user.linked_in;
     this.displayGithub = this.user.github;
     this.displayCalendly = this.user.calendly;
+  }
+
+  toggleShow() {
+    this.isShown = !this.isShown;
   }
 
   onSubmit(
@@ -98,7 +105,7 @@ export class ProfileComponent implements OnInit {
     // this.SQLservice.getUserPhoto(this.user.id);
 
     console.log(userTest);
-    window.location.reload();
+    alert('Profile successfully updated!');
   }
 
   async uploadFile() {
