@@ -22,7 +22,7 @@ const db = pgp({
 router.get("/users", async (req, res) => {
 	res.json(
 		await db.many(
-			"SELECT * from users WHERE authorized = true ORDER BY last_name"
+			"SELECT * from users WHERE authorized = true AND firebase_uid != 'UID' ORDER BY last_name"
 		)
 	);
 });
