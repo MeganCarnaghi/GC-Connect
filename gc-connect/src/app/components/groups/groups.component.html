@@ -1,36 +1,32 @@
 <app-navigation></app-navigation>
 
 <form>
-    <input 
-        type='text'
-        name='group-search-text'
-        placeholder='Search for a group...'
-    >    
-    <fa-icon
-        class='search-icon'
-        [icon]="faSearch"
-        size="lg"
-    ></fa-icon>
-</form> 
+  <input
+    type="text"
+    name="group-search-text"
+    placeholder="Search for a group..."
+    [(ngModel)]="query"
+  />
+  <fa-icon class="search-icon" [icon]="faSearch" size="lg"></fa-icon>
+</form>
 
-<section class='bg-gray'>
-    <a href='/groups/' class='a-button'>
-        <fa-icon
-        class=''
-        [icon]="faPlus"
-        size="sm"
-      ></fa-icon>
-        Create Group
+<section class="bg-gray">
+  <a href="/groups/" class="a-button">
+    <fa-icon class="" [icon]="faPlus" size="sm"></fa-icon>
+    Create Group
+  </a>
+
+  <div
+    *ngFor="let group of groups | searchFilter: query"
+    class="item-container"
+  >
+    <a class="item-link-container" routerLink="/groups/{{ group.id }}">
+      <img src="{{ group.photo }}" class="round-photo" />
+      <div class="item-details">
+        <h2>{{ group.name }}</h2>
+        <p class="uppercase letter-space type">{{ group.type }}</p>
+      </div>
     </a>
-
-    <div *ngFor='let group of groups' class='item-container'>
-        <a class= 'item-link-container' routerLink="/groups/{{group.id}}">
-            <img src={{group.photo}} class='round-photo'/>
-            <div class='item-details'>
-                <h2>{{group.name}}</h2>
-                <p class='uppercase letter-space type'>{{group.type}}</p>    
-            </div>
-        </a>
-        <button class='join bg-gray uppercase'>Join</button>
-    </div>
+    <button class="join bg-gray uppercase">Join</button>
+  </div>
 </section>

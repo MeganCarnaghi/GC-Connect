@@ -10,23 +10,24 @@
     type="text"
     name="group-search-text"
     placeholder="Search for a user..."
+    [(ngModel)]="query"
   />
 
   <fa-icon class="search-icon" [icon]="faSearch" size="lg"></fa-icon>
 
-  <button class="arrow">
+  <!-- <button class="arrow">
     <fa-icon class="arrow-icon" [icon]="faArrowRight" size="lg"></fa-icon>
-  </button>
+  </button> -->
 </form>
 
 <section class="bg-gray">
   <a
-    *ngFor="let user of users"
+    *ngFor="let user of users | searchFilter: query"
     class="item-container"
     routerLink="[]"
     (click)="onUserSelect(user)"
   >
-    <div class='flex-align-center'>
+    <div class="flex-align-center">
       <img
         src="{{ user.photo }}"
         class="round-photo"
@@ -37,7 +38,7 @@
         <p class="uppercase letter-space class-type">{{ user.bootcamp }}</p>
       </div>
     </div>
-    
+
     <p
       class="uppercase user-type"
       [ngClass]="user.type === 'Student' ? 'bg-maroon' : 'bg-orange'"

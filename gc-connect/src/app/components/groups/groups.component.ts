@@ -6,17 +6,19 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.css']
+  styleUrls: ['./groups.component.css'],
 })
 export class GroupsComponent implements OnInit {
   groups: any | null = null;
   faPlus = faPlus;
   faSearch = faSearch;
 
-  constructor(private SQLservice: GcConnectService) { }
+  public searchFilter: any = '';
+  query: any;
+
+  constructor(private SQLservice: GcConnectService) {}
 
   ngOnInit(): void {
-    this.SQLservice.getAllGroups().subscribe(group => this.groups = group );
+    this.SQLservice.getAllGroups().subscribe((group) => (this.groups = group));
   }
-
 }

@@ -27,6 +27,7 @@ import { GroupDetailsComponent } from './components/group-details/group-details.
 import { FilestackClient } from './helpers.ts/filestack';
 import { UserPopupComponent } from './components/user-popup/user-popup.component';
 import { OnboardingChecklistComponent } from './components/onboarding-checklist/onboarding-checklist.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -49,6 +50,7 @@ FullCalendarModule.registerPlugins([
     GroupDetailsComponent,
     UserPopupComponent,
     OnboardingChecklistComponent,
+    SearchFilterPipe,
   ],
   imports: [
     BrowserModule,
