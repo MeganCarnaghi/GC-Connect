@@ -6,7 +6,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-directory',
   templateUrl: './directory.component.html',
-  styleUrls: ['./directory.component.css']
+  styleUrls: ['./directory.component.css'],
 })
 export class DirectoryComponent implements OnInit {
   users: any | null = null;
@@ -15,20 +15,22 @@ export class DirectoryComponent implements OnInit {
   faArrowRight = faArrowRight;
   displayDetails: boolean = false;
 
-  constructor(private SQLservice: GcConnectService) { }
+  // Variable for search text in filter
+  public searchFilter: any = '';
+  query: any;
+
+  constructor(private SQLservice: GcConnectService) {}
 
   ngOnInit(): void {
-    this.SQLservice.getAllUsers().subscribe(user => this.users = user );
+    this.SQLservice.getAllUsers().subscribe((user) => (this.users = user));
   }
 
-  onUserSelect(user: any){
+  onUserSelect(user: any) {
     this.currentUser = user;
     this.displayDetails = true;
   }
 
-  onClose(event: any){
+  onClose(event: any) {
     this.displayDetails = false;
-
   }
-
 }
