@@ -66,6 +66,17 @@ h3 {
   color: #000000;
 }
 
+.fc-daygrid-event-harness {
+  margin-top: 0 !important;
+}
+
+.fc-daygrid-event.fc-daygrid-dot-event.fc-event.fc-event-start.fc-event-end.fc-event-future,
+.fc-daygrid-event.fc-daygrid-dot-event.fc-event.fc-event-start.fc-event-end.fc-event-past {
+  white-space: normal;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
 .fc-button-group
   .fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active,
 .fc-button-group
