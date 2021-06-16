@@ -1,0 +1,77 @@
+.career-services__container {
+  margin: 1em;
+}
+
+.career-services__h2 {
+  margin-bottom: 1em;
+}
+
+.career-services-team__container,
+.career-services-requirements__container,
+.career-services-resources__container {
+  margin: 1.5em 0;
+}
+
+.team-members__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 20%;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.team-member__img {
+  width: 150px;
+  border-radius: 50%;
+  margin-bottom: 0.5em;
+}
+
+.team-member__title {
+  font-style: italic;
+}
+
+.requirements__table {
+  text-align: left;
+  margin: 2em 0 1em 0;
+}
+
+th {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+td {
+  padding: 0.5em 1em 0.5em 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.resources__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.resources__column {
+  display: flex;
+  flex-direction: column;
+  /* width: 33.3%; */
+}
+
+.resources__list {
+  padding: 1em;
+}
+
+.resources__listItem {
+  padding: 0.5em 0;
+}
+
+.fa-video-camera {
+  padding: 0 0.5em;
+}
