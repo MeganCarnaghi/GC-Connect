@@ -26,12 +26,12 @@
         {{ user.bio }}
       </p>
       <div class="link-container">
-        <a *ngIf="displayLinkedIn" href="{{ user.linked_in }}" target="_blank">
+        <a *ngIf="!user.linked_in? false : true" href="{{ user.linked_in }}" target="_blank">
           <fa-icon [icon]="faLinkedin"></fa-icon>
           LinkedIn
         </a>
         <a
-          *ngIf="displayGithub"
+          *ngIf="!user.github? false : true"
           href="{{ user.github }}"
           target="_blank"
           class="margin-left"
@@ -40,7 +40,7 @@
           Github
         </a>
         <a
-          *ngIf="displayCalendly"
+          *ngIf=" !user.calendly? false : true "
           href="{{ user.calendly }}"
           target="_blank"
           class="margin-left"

@@ -1,7 +1,4 @@
 import { Component, OnInit, EventEmitter,Input, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { faTimes, faLink } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
@@ -23,12 +20,10 @@ export class UserPopupComponent implements OnInit {
   @Input() user:any = '';
   @Output() closed = new EventEmitter<boolean>();
 
-  constructor(private SQLservice: GcConnectService, private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.displayLinkedIn = this.user.linked_in;
-    this.displayGithub = this.user.github;
-    this.displayCalendly = this.user.calendly;
+    
   }
 
   closeWindow(){

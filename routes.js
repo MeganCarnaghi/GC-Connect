@@ -48,6 +48,22 @@ router.get("/users/:uid", async (req, res) => {
 	res.json(result);
 });
 
+// get user by id for profile/popup
+router.get("/users-id/:id", async (req, res) => {
+	const result = await db.one(
+		"SELECT * from users WHERE id = $(id)",
+		{
+			id: req.params.id,
+		}
+	);
+
+	if (!result) {
+		return res.status(404).send("The user could not be found");
+	}
+
+	res.json(result);
+});
+
 // get group by id for details
 router.get("/groups/:id", async (req, res) => {
 	const result = await db.one("SELECT * from groups WHERE id = $(id)", {
