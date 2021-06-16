@@ -18,6 +18,8 @@ export class GroupDetailsComponent implements OnInit {
   groupPosts: any | null = null;
   subscription: any;
   subscription2: any;
+  currentUser: any | null = null;
+  displayDetails: boolean = false;
   faEdit = faEdit;
   faPlus = faPlus;
   commentForm = this.formbuilder.group({
@@ -55,6 +57,15 @@ export class GroupDetailsComponent implements OnInit {
     window.location.reload();
 
     this.commentForm.reset();
+  }
+
+  onUserSelect(userId: any) {
+    this.SQLservice.getUserById(userId).subscribe(user => this.currentUser = user);
+    this.displayDetails = true;
+  }
+
+  onClose(event: any) {
+    this.displayDetails = false;
   }
 
 

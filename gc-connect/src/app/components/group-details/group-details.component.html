@@ -1,3 +1,8 @@
+<app-user-popup
+  *ngIf="displayDetails"
+  [user]="currentUser"
+  (closed)="onClose($event)"
+></app-user-popup>
 <app-navigation></app-navigation>
 <img src={{group?.photo}} class='header-photo'/>
 
@@ -45,10 +50,11 @@
 
     <div *ngFor='let post of groupPosts' class='item-container'>
         <div class='user-details'>
-            <div class='item-details'>
+            <a class='item-details' routerLink="[]"
+            (click)="onUserSelect(post.user_id)">
                 <img src='{{post.photo}}' class='round-photo'/>
                 <h3>{{post.first_name}} {{post.last_name}}</h3>
-            </div>
+            </a>
             <p class='letter-space date'>
                 {{post.date | date:'MM/dd/YY'}}
             </p>   

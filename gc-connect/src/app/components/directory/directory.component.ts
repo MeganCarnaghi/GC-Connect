@@ -11,9 +11,10 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 export class DirectoryComponent implements OnInit {
   users: any | null = null;
   currentUser: any | null = null;
+  displayDetails: boolean = false;
   faSearch = faSearch;
   faArrowRight = faArrowRight;
-  displayDetails: boolean = false;
+  
 
   // Variable for search text in filter
   public searchFilter: any = '';

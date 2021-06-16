@@ -132,10 +132,12 @@ div.user-details{
     align-items: center;
 }
 
-div.item-details{
+.item-details{
     display: flex;
     align-items: center;
     width: 80%;
+    color: black;
+    text-decoration: none;
 }
 
 p.date{
