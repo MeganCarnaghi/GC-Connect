@@ -10,6 +10,7 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { DirectoryComponent } from './components/directory/directory.component';
 import { AuthGuard } from './auth.guard';
 import { GroupDetailsComponent } from './components/group-details/group-details.component';
+import { CareerServicesComponent } from './components/career-services/career-services.component';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
@@ -19,10 +20,19 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
   { path: 'groups', component: GroupsComponent, canActivate: [AuthGuard] },
-  { path: 'groups/:id', component: GroupDetailsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'groups/:id',
+    component: GroupDetailsComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'directory',
     component: DirectoryComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'career-services',
+    component: CareerServicesComponent,
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
