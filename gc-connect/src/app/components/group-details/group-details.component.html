@@ -35,32 +35,30 @@
   </form>
 </section>
 
-
-
-<section class='group-posts bg-gray'>
-
-    <div *ngFor='let post of groupPosts; let i = index' class='item-container'>
-        <div class='user-details'>
-            <a class='item-details' routerLink="[]"
-            (click)="onUserSelect(post.user_id)">
-                <img src='{{post.photo}}' class='round-photo'/>
-                <h3>{{post.first_name}} {{post.last_name}}</h3>
-            </a>
-            <p class='letter-space date'>
-                {{post.date | date:'MM/dd/YY'}}
-            </p>   
-          <button
+<section class="group-posts bg-gray">
+  <div *ngFor="let post of groupPosts; let i = index" class="item-container">
+    <div class="user-details">
+      <a
+        class="item-details"
+        routerLink="[]"
+        (click)="onUserSelect(post.user_id)"
+      >
+        <img src="{{ post.photo }}" class="round-photo" />
+        <h3>{{ post.first_name }} {{ post.last_name }}</h3>
+      </a>
+      <p class="letter-space date">
+        {{ post.date | date: "MM/dd/YY" }}
+      </p>
+      <button
         class="delete"
         *ngIf="post.user_id == user.id"
         (click)="deleteComment(i)"
       >
         <fa-icon [icon]="faTrash"></fa-icon>DELETE
       </button>
-        </div>
-        <p class='body'>
-            {{post.body}}
-        </p>
-       
-
-
+    </div>
+    <p class="body">
+      {{ post.body }}
+    </p>
+  </div>
 </section>
