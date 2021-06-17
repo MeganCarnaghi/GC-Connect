@@ -278,6 +278,11 @@ p.user-type {
   padding: 4px 12px;
   border-radius: 20px;
 }
+
+.hidden{
+  display: none;
+}
+
 /* MEDIA QUERIES */
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
