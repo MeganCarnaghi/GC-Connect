@@ -14,12 +14,15 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./group-details.component.css']
 })
 export class GroupDetailsComponent implements OnInit {
+  uid: any = null;
+  userGroups: any | null;
   group: any | null = null;
   groupPosts: any | null = null;
   subscription: any;
   subscription2: any;
   currentUser: any | null = null;
   displayDetails: boolean = false;
+  groupMember: any;
   faEdit = faEdit;
   faPlus = faPlus;
   commentForm = this.formbuilder.group({
@@ -33,7 +36,11 @@ export class GroupDetailsComponent implements OnInit {
     private formbuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.uid = NgAuthService.userState.uid;
+
     this.subscription = this.route.paramMap.pipe(switchMap(p => this.SQLservice.getGroupById(p?.get('id')))).subscribe(group => this.group = group);
+
+    this.checkIfUserIsGroupMember();
 
     this.getComments();
   }
@@ -47,14 +54,49 @@ export class GroupDetailsComponent implements OnInit {
     this.subscription2 = this.route.paramMap.pipe(switchMap(p => this.SQLservice.getGroupPostsById(p?.get('id')))).subscribe(posts => this.groupPosts = posts);
   }
 
+  checkIfUserIsGroupMember(){
+ 
+    this.route.paramMap.pipe(switchMap(p => this.SQLservice.getCheckIfGroupMember(p?.get('id'), this.uid))).subscribe(data => this.groupMember = data);
+    
+  }
+
+  getGroupsJoinedByUser(){
+    let uid = NgAuthService.userState.uid;
+
+    try{
+      this.SQLservice.getGroupsJoinedByUID(uid).subscribe(data => this.userGroups = data);
+    } catch{
+      this.userGroups = [{}];
+    }
+  }
+
+
+  joinLeaveGroup(groupId: any){
+
+    if( this.groupMember === true ){
+      this.leaveGroup(groupId);
+    } else if ( this.groupMember === false ){
+      this.joinGroup(groupId);
+    }
+
+  }
+
+  joinGroup(groupId: any){
+    this.SQLservice.addUserToGroup(this.uid, groupId).subscribe();
+    this.groupMember = true;
+  }
+
+  leaveGroup(groupId: any){
+    this.SQLservice.deleteUserFromGroup(this.uid, groupId).subscribe();
+    this.groupMember = false;
+  }
+
+
   postComment(comment: any){
     let uid = NgAuthService.userState.uid;
     let groupId = this.group.id;
     
-    this.SQLservice.addPostToGroup(uid, groupId, comment);
-    
-    this.getComments();
-    window.location.reload();
+    this.SQLservice.addPostToGroup(uid, groupId, comment).subscribe(posts => this.groupPosts = posts);
 
     this.commentForm.reset();
   }

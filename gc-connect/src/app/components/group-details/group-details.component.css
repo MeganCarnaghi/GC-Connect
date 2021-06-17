@@ -23,10 +23,11 @@ div.group-details{
 
 button.join{
     height: 35px;
-    width: 75px;
+    min-width: 75px;
     border: none;
     border-radius: 5px;
     font-size: 0.9em;
+    padding: 0 15px;
 }
 
 button.join:hover{

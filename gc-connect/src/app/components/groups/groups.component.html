@@ -17,7 +17,7 @@
   </a>
 
   <div
-    *ngFor="let group of groups | searchFilter: query"
+    *ngFor="let group of groups | searchFilter: query; let i = index"
     class="item-container"
   >
     <a class="item-link-container" routerLink="/groups/{{ group.id }}">
@@ -27,6 +27,7 @@
         <p class="uppercase letter-space type">{{ group.type }}</p>
       </div>
     </a>
-    <button class="join bg-gray uppercase">Join</button>
+    <button class="join bg-gray uppercase" *ngIf="!checkIfGroupMember(group.id)"
+    (click)='joinGroup(group.id)'>Join</button>
   </div>
 </section>
