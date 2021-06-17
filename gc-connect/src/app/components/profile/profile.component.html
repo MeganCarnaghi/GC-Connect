@@ -16,19 +16,21 @@
 <div class="profile-header">
   <div class="item-content">
     <div class="item-header">
-      <img
-        #userPhoto
-        class="profile-pic"
-        src="{{ user.photo }}"
-        alt="User Profile Image"
-      />
-      <div class="item-details">
-        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-        <p class="uppercase letter-space class-type">{{ user.bootcamp }}</p>
-        <button class="update-photo" (click)="uploadFile()">
-          <fa-icon [icon]="faPencilAlt"></fa-icon>
-          Update Photo
-        </button>
+      <div class='flex-align-center'>
+        <img
+          #userPhoto
+          class="profile-pic"
+          src="{{ user.photo }}"
+          alt="User Profile Image"
+        />
+        <div class="item-details">
+          <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+          <p class="uppercase letter-space class-type">{{ user.bootcamp }}</p>
+          <button class="update-photo" (click)="uploadFile()">
+            <fa-icon [icon]="faPencilAlt"></fa-icon>
+            Update Photo
+          </button>
+        </div>
       </div>
       <p
         class="uppercase user-type"

@@ -22,7 +22,7 @@ const db = pgp({
 router.get("/users", async (req, res) => {
 	res.json(
 		await db.many(
-			"SELECT * from users WHERE authorized = true ORDER BY last_name"
+			"SELECT * from users WHERE authorized = true AND firebase_uid != 'UID' ORDER BY last_name"
 		)
 	);
 });
@@ -38,6 +38,22 @@ router.get("/users/:uid", async (req, res) => {
 		"SELECT * from users WHERE firebase_uid = $(uid)",
 		{
 			uid: req.params.uid,
+		}
+	);
+
+	if (!result) {
+		return res.status(404).send("The user could not be found");
+	}
+
+	res.json(result);
+});
+
+// get user by id for profile/popup
+router.get("/users-id/:id", async (req, res) => {
+	const result = await db.one(
+		"SELECT * from users WHERE id = $(id)",
+		{
+			id: req.params.id,
 		}
 	);
 

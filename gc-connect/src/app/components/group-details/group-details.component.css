@@ -33,6 +33,12 @@ button.join:hover {
   background-color: #dddddd;
 }
 
+button.join:hover{
+    cursor: pointer;
+    filter: brightness(80%);
+    transition: 0.3s;
+}
+
 p.type {
   margin-top: 8px;
   font-size: 0.8em;
@@ -99,6 +105,12 @@ section.group-posts {
   min-height: 50vh;
   padding-bottom: 50px;
 }
+button.create-save:hover{
+    cursor: pointer;
+    filter: brightness(80%);
+    transition: 0.3s;
+}
+
 
 h3 {
   font-size: 20px;
@@ -136,6 +148,13 @@ p.body {
   margin-top: 15px;
   font-size: 1.1em;
 }
+.item-details{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    color: black;
+    text-decoration: none;
+}
 
 .round-photo {
   border: 1px rgb(142, 142, 142) solid;
@@ -162,6 +181,7 @@ p.body {
 }
 
 .delete:hover {
-  background-color: rgb(179, 50, 50);
-  transition: 0.3s;
+  cursor: pointer;
+    filter: brightness(80%);
+    transition: 0.3s;
 }

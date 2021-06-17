@@ -18,6 +18,8 @@ export class GroupDetailsComponent implements OnInit {
   groupPosts: any | null = null;
   subscription: any;
   subscription2: any;
+  currentUser: any | null = null;
+  displayDetails: boolean = false;
   faEdit = faEdit;
   faPlus = faPlus;
   faTrash = faTrash;
@@ -79,10 +81,22 @@ export class GroupDetailsComponent implements OnInit {
     this.SQLservice.getUserByUid(this.userStateId).subscribe(
       (user) => (this.user = user)
     );
-
+    
     console.log(this.user);
     this.getDeleteButton();
   }
+
+  onUserSelect(userId: any) {
+    this.SQLservice.getUserById(userId).subscribe(user => this.currentUser = user);
+    this.displayDetails = true;
+  }
+
+  onClose(event: any) {
+    this.displayDetails = false;
+  }
+
+
+
 
   getDeleteButton() {
     this.isShown = true;
