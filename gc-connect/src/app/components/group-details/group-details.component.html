@@ -6,6 +6,7 @@
 <app-navigation></app-navigation>
 <img src="{{ group?.photo }}" class="header-photo" />
 
+
 <section class="group-header">
   <div class="group-details">
     <div>
@@ -13,12 +14,13 @@
       <p class="uppercase letter-space type">{{ group?.type }}</p>
     </div>
 
-    <button class="join bg-gray uppercase">Join</button>
+    <button class="join bg-gray uppercase" (click)='joinLeaveGroup(group.id)'>{{ groupMember ? 'Leave Group' : 'Join' }}</button>
   </div>
 
   <p class="bio">{{ group?.bio }}</p>
 
-  <form [formGroup]="commentForm" (ngSubmit)="postComment(comment.value)">
+
+  <form [formGroup]="commentForm" *ngIf="groupMember" (ngSubmit)="postComment(comment.value)">
     <textarea
       name="comment"
       type="text"
@@ -35,7 +37,7 @@
   </form>
 </section>
 
-<section class="group-posts bg-gray">
+<section class="group-posts bg-gray" *ngIf="groupMember">
   <div *ngFor="let post of groupPosts; let i = index" class="item-container">
     <div class="user-details">
       <a

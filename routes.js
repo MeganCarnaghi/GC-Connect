@@ -109,6 +109,34 @@ router.get("/group-members/:id", async (req, res) => {
 	res.json(result);
 });
 
+// check if entry exists for group id and user uid
+router.get("/group-member-check/:group_id", async (req, res) => {
+	const userId = await db.oneOrNone(
+		"SELECT id FROM users WHERE firebase_uid = $(uid)",
+		{
+			uid: req.query.uid,
+		}
+	);
+
+	if (!userId) {
+		return res.status(404).send("The user could not be found");
+	}
+
+	try{
+		const groupList = await db.many(
+		"SELECT group_id from group_members WHERE user_id = $(id) AND group_id = $(groupId)",
+			{
+				id: userId.id,
+				groupId: req.params.group_id
+			}
+		);
+	} catch{
+		return res.json(false);
+	}
+
+	res.json(true);
+});
+
 // get list of groups that user is apart of
 router.get("/groups-joined-by-user/:uid", async (req, res) => {
 	const userId = await db.oneOrNone(
@@ -122,7 +150,7 @@ router.get("/groups-joined-by-user/:uid", async (req, res) => {
 		return res.status(404).send("The user could not be found");
 	}
 
-	const groupList = await db.many(
+	const groupList = await db.manyOrNone(
 		"SELECT group_id from group_members WHERE user_id = $(id)",
 		{
 			id: userId.id,
@@ -130,8 +158,7 @@ router.get("/groups-joined-by-user/:uid", async (req, res) => {
 	);
 
 	if (!groupList) {
-		let emptyArray = [];
-		return res.json(emptyArray).send("The user is not in any groups");
+		return res.status(404).send("The user is not in any groups");
 	}
 
 	res.json(groupList);
@@ -215,28 +242,36 @@ router.put("/users/:email", async (req, res) => {
 });
 
 //add a user to a group (join button)
-router.post("/group-members", async (req, res) => {
+router.post("/group-members/:uid", async (req, res) => {
 	try {
+		const userId = await db.oneOrNone(
+			"SELECT id FROM users WHERE firebase_uid = $(uid)",
+			{
+				uid: req.params.uid,
+			}
+		);
+	
+		if (!userId) {
+			return res.status(404).send("The user could not be found");
+		}
+
 		const ins = await db.oneOrNone(
-			"INSERT INTO group-members (group_id, user_id) VALUES ($(group_id), $(user_id)) RETURNING id",
+			"INSERT INTO group_members (group_id, user_id) VALUES ($(group_id), $(user_id)) RETURNING id",
 			{
 				group_id: req.body.group_id,
-				user_id: req.body.user_id,
+				user_id: userId.id,
 			}
 		);
 
-		const groupMember = await db.one(
-			"SELECT * FROM group-members WHERE id = $(id)",
+		const groupList = await db.many(
+			"SELECT group_id from group_members WHERE user_id = $(id)",
 			{
-				id: ins.id,
+				id: userId.id,
 			}
 		);
 
-		res.status(201).json(groupMember);
+		res.status(201).json(groupList);
 	} catch (error) {
-		// if (error.constraint === 'users_pkey'){
-		//     return res.status(400).send('The state already exists');
-		// }
 		console.log(error);
 		res.status(500).send(error);
 	}
@@ -252,7 +287,7 @@ router.post("/group-posts", async (req, res) => {
 			}
 		);
 
-		const ins = await db.oneOrNone(
+		await db.oneOrNone(
 			"INSERT INTO group_posts (group_id, user_id, body) VALUES ($(group_id), $(user_id),$(comment)) RETURNING id",
 			{
 				group_id: req.body.group_id,
@@ -261,18 +296,15 @@ router.post("/group-posts", async (req, res) => {
 			}
 		);
 
-		const groupPost = await db.one(
-			"SELECT * FROM group_posts WHERE id = $(id)",
+		const result = await db.many(
+			"SELECT gp.id, gp.group_id, gp.date, gp.user_id, gp.body, u.first_name, u.last_name, u.photo FROM group_posts gp INNER JOIN users u ON u.id = gp.user_id WHERE gp.group_id = $(group_id) ORDER BY date DESC",
 			{
-				id: ins.id,
+				group_id: req.body.group_id,
 			}
 		);
 
-		res.status(201).json(groupPost);
+		res.status(201).json(result);
 	} catch (error) {
-		// if (error.constraint === 'users_pkey'){
-		//     return res.status(400).send('The state already exists');
-		// }
 		console.log(error);
 		res.status(500).send(error);
 	}
@@ -321,6 +353,49 @@ router.put("/users-profile/:id", async (req, res) => {
 	}
 });
 
+
+//remove user from group (leave group)
+router.delete("/group-members/:uid", async (req, res) => {
+	try {
+		const userId = await db.oneOrNone(
+			"SELECT id FROM users WHERE firebase_uid = $(uid)",
+			{
+				uid: req.params.uid,
+			}
+		);
+	
+		if (!userId) {
+			return res.status(404).send("The user could not be found");
+		}
+
+		await db.none(
+			"DELETE FROM group_members WHERE user_id = $(user_id) AND group_id = $(group_id)",
+			{
+				group_id: req.query.groupid,
+				user_id: userId.id,
+			}
+		);
+		
+		const groupList = await db.manyOrNone(
+			"SELECT group_id from group_members WHERE user_id = $(id)",
+			{
+				id: userId.id,
+			}
+		);
+	
+		if (!groupList) {
+			return res.json([]);
+		}
+		
+		res.status(200).json(groupList);
+    
+  } catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
+});
+
+
 router.delete("/group-comments/:id", async (req, res) => {
 	console.log("Deleted");
 	try {
@@ -341,6 +416,7 @@ router.delete("/group-comments/:id", async (req, res) => {
 		const updatedPosts = await db.one("SELECT * FROM group_posts");
 
 		res.status(201).json(updatedPosts);
+
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);

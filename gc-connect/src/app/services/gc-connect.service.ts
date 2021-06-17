@@ -33,9 +33,22 @@ export class GcConnectService {
     return this.client.get(`http://localhost:3000/group-posts/${id}`);
   }
 
+  getCheckIfGroupMember(group_id: any, uid: any ) {
+    return this.client.get(`http://localhost:3000/group-member-check/${group_id}?uid=${uid}`);
+  }
+
+  getGroupsJoinedByUID(uid: any) {
+    return this.client.get(`http://localhost:3000/groups-joined-by-user/${uid}`);
+  }
+
+  getMembersByGroupId(group_id: any) {
+    return this.client.get(`http://localhost:3000/group-members/${group_id}`);
+  }
+
   addNewUser(user: any) {
     return this.client.post('http://localhost:3000/users', user);
   }
+
   addPostToGroup(uid: any, groupId: any, comment: any) {
     let post: Object = {
       uid: uid,
@@ -43,11 +56,15 @@ export class GcConnectService {
       comment: comment,
     };
 
-    return this.client
-      .post(`http://localhost:3000/group-posts`, post)
-      .subscribe((data) => {
-        console.log(data);
-      });
+    return this.client.post(`http://localhost:3000/group-posts`, post);
+  }
+
+  addUserToGroup(uid: any, groupId: any) {
+    let group: Object = {
+      group_id: groupId
+    };
+
+    return this.client.post(`http://localhost:3000/group-members/${uid}`, group);
   }
 
   addFirebaseUser(email: any, uid: any) {
@@ -103,6 +120,11 @@ export class GcConnectService {
       .subscribe((data) => {
         console.log(data);
       });
+  }
+
+
+  deleteUserFromGroup(uid: any, groupId: number) {
+    return this.client.delete(`http://localhost:3000/group-members/${uid}?groupid=${groupId}`);
   }
 
   removePost(id: any) {

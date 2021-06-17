@@ -22,18 +22,16 @@ div.group-details {
 }
 
 button.join {
-  height: 35px;
-  width: 75px;
-  border: none;
-  border-radius: 5px;
-  font-size: 0.9em;
-}
-
-button.join:hover {
-  background-color: #dddddd;
+    height: 35px;
+    min-width: 75px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    padding: 0 15px;
 }
 
 button.join:hover{
+  background-color: #dddddd;
     cursor: pointer;
     filter: brightness(80%);
     transition: 0.3s;
