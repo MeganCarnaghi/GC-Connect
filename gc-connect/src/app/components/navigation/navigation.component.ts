@@ -3,7 +3,7 @@ import {
   faCalendarAlt,
   faAddressBook,
 } from '@fortawesome/free-regular-svg-icons';
-import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faUserFriends,faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { GcConnectService } from 'src/app/services/gc-connect.service';
 import { NgAuthService } from 'src/app/services/ng-auth.service';
 
@@ -16,6 +16,7 @@ export class NavigationComponent implements OnInit {
   faCalendarAlt = faCalendarAlt;
   faUserFriends = faUserFriends;
   faAddressBook = faAddressBook;
+  faBriefcase = faBriefcase;
   userStateId: string = '';
 
   @Input() user: any = '';
