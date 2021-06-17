@@ -100,4 +100,13 @@ export class GcConnectService {
         console.log(data);
       });
   }
+
+  removePost(id: any) {
+    console.log('Deleted in service');
+    return this.client
+      .delete(`http://localhost:3000/group-comments/${id}`)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
 }
