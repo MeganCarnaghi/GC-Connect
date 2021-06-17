@@ -1,6 +1,6 @@
 /* Padding for full component */
-section{
-    padding: 20px 20px 15px 20px;
+section {
+  padding: 20px 20px 15px 20px;
 }
 
 /* Group Header Styling */
@@ -8,20 +8,20 @@ section{
     margin-bottom: 50px;
 } */
 
-img.header-photo{
-    width: 100%;
-    height: 20vh;
-    object-fit: cover;
+img.header-photo {
+  width: 100%;
+  height: 20vh;
+  object-fit: cover;
 }
 
-div.group-details{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+div.group-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-button.join{
+button.join {
     height: 35px;
     min-width: 75px;
     border: none;
@@ -31,72 +31,78 @@ button.join{
 }
 
 button.join:hover{
+  background-color: #dddddd;
     cursor: pointer;
     filter: brightness(80%);
     transition: 0.3s;
 }
 
-p.type{
-    margin-top: 8px;
-    font-size: 0.8em;
+p.type {
+  margin-top: 8px;
+  font-size: 0.8em;
 }
 
-p.bio{
-    font-size: 1.2em;
+p.bio {
+  font-size: 1.2em;
 }
 
 /* Create a Post Section */
-form{
-    margin-top: 25px;
-    position: relative;
+form {
+  margin-top: 25px;
+  position: relative;
 }
 
-textarea{
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 120px;
-    max-height: 120px;
-    box-sizing: border-box;
-    padding: 15px 50px;
-    border: 1px #d7d7d7 solid;
-    border-radius: 5px;
-    background-color: #f5f5f5;
-    font-size: 1.1em;
-    font-family: "Fira Sans", sans-serif;
-    line-height: 1.5em;
+textarea {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 120px;
+  max-height: 120px;
+  box-sizing: border-box;
+  padding: 15px 50px;
+  border: 1px #d7d7d7 solid;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  font-size: 1.1em;
+  font-family: "Fira Sans", sans-serif;
+  line-height: 1.5em;
 }
 
-textarea::placeholder{
-    color: #bfbfbf;
+textarea::placeholder {
+  color: #bfbfbf;
 }
 
-.comment-icon{
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
-    color: #bfbfbf;
+.comment-icon {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+  color: #bfbfbf;
 }
 
-button.create-save{
-    width: 100%;
-    height: 55px;
-    background-color: #7a324a;
-    color: white;
-    text-decoration: none;
-    border: none;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin:15px 0 5px 0;
-    font-size: 1.1em;
+button.create-save {
+  width: 100%;
+  height: 55px;
+  background-color: #7a324a;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0 5px 0;
+  font-size: 1.1em;
 }
 
-button.create-save fa-icon{
-    padding-right: 10px;
+button.create-save fa-icon {
+  padding-right: 10px;
 }
 
+/* Group Posts Section */
+section.group-posts {
+  min-height: 50vh;
+  padding-bottom: 50px;
+}
 button.create-save:hover{
     cursor: pointer;
     filter: brightness(80%);
@@ -104,35 +110,42 @@ button.create-save:hover{
 }
 
 
-
-/* Group Posts Section */
-section.group-posts{
-    min-height: 50vh;
-    padding-bottom: 50px;
+h3 {
+  font-size: 20px;
+  font-weight: normal;
 }
 
-h3{
-    font-size: 20px;
-    font-weight: normal;
+.item-container {
+  margin-bottom: 15px;
+  padding: 15px 20px 20px 20px;
+  border: 1px #d7d7d7 solid;
+  border-radius: 8px;
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  min-height: 75px;
 }
 
-.item-container{
-    margin-bottom: 15px;
-    padding: 15px 20px 20px 20px;
-    border: 1px #d7d7d7 solid;
-    border-radius: 8px;
-    text-decoration: none;
-    background-color: white;
-    color: black;
-    min-height: 75px;
+div.user-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-div.user-details{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+div.item-details {
+  display: flex;
+  align-items: center;
+  width: 80%;
 }
 
+p.date {
+  color: rgb(142, 142, 142);
+}
+
+p.body {
+  margin-top: 15px;
+  font-size: 1.1em;
+}
 .item-details{
     display: flex;
     align-items: center;
@@ -141,19 +154,32 @@ div.user-details{
     text-decoration: none;
 }
 
-p.date{
-    color: rgb(142, 142, 142);
+.round-photo {
+  border: 1px rgb(142, 142, 142) solid;
+  border-radius: 100%;
+  margin-right: 20px;
+  height: 35px;
+  width: 35px;
 }
 
-p.body{
-    margin-top: 15px;
-    font-size: 1.1em;
+.delete {
+  border: 1px solid rgb(232, 71, 71);
+  color: white;
+  background-color: rgb(232, 71, 71);
+  height: 35px;
+  width: 75px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9em;
+  margin-left: 10px;
 }
 
-.round-photo{
-    border: 1px rgb(142, 142, 142) solid;
-    border-radius: 100%;
-    margin-right: 20px;
-    height: 35px;
-    width: 35px;
+.delete fa-icon {
+  padding-right: 5px;
+}
+
+.delete:hover {
+  cursor: pointer;
+    filter: brightness(80%);
+    transition: 0.3s;
 }

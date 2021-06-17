@@ -122,7 +122,17 @@ export class GcConnectService {
       });
   }
 
+
   deleteUserFromGroup(uid: any, groupId: number) {
     return this.client.delete(`http://localhost:3000/group-members/${uid}?groupid=${groupId}`);
+  }
+
+  removePost(id: any) {
+    console.log('Deleted in service');
+    return this.client
+      .delete(`http://localhost:3000/group-comments/${id}`)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }
