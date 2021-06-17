@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sessionUid = sessionStorage.getItem('key');
+    // this.sessionUid = sessionStorage.getItem('key');
     // console.log(this.sessionUid);
 
     if (!this.userStateId) {

@@ -321,4 +321,30 @@ router.put("/users-profile/:id", async (req, res) => {
 	}
 });
 
+router.delete("/group-comments/:id", async (req, res) => {
+	console.log("Deleted");
+	try {
+		const post = await db.oneOrNone(
+			"SELECT * FROM group_posts WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
+
+		if (!post) {
+			return res.status(404).send("Post does not exist.");
+		}
+
+		await db.none(`DELETE FROM group_posts WHERE id = $(id)`, {
+			id: req.params.id,
+		});
+		const updatedPosts = await db.one("SELECT * FROM group_posts");
+
+		res.status(201).json(updatedPosts);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
+});
+
 module.exports = router;
