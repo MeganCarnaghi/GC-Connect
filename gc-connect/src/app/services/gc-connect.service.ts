@@ -33,12 +33,16 @@ export class GcConnectService {
     return this.client.get(`http://localhost:3000/group-posts/${id}`);
   }
 
-  getCheckIfGroupMember(group_id: any, uid: any ) {
-    return this.client.get(`http://localhost:3000/group-member-check/${group_id}?uid=${uid}`);
+  getCheckIfGroupMember(group_id: any, uid: any) {
+    return this.client.get(
+      `http://localhost:3000/group-member-check/${group_id}?uid=${uid}`
+    );
   }
 
   getGroupsJoinedByUID(uid: any) {
-    return this.client.get(`http://localhost:3000/groups-joined-by-user/${uid}`);
+    return this.client.get(
+      `http://localhost:3000/groups-joined-by-user/${uid}`
+    );
   }
 
   getMembersByGroupId(group_id: any) {
@@ -61,10 +65,13 @@ export class GcConnectService {
 
   addUserToGroup(uid: any, groupId: any) {
     let group: Object = {
-      group_id: groupId
+      group_id: groupId,
     };
 
-    return this.client.post(`http://localhost:3000/group-members/${uid}`, group);
+    return this.client.post(
+      `http://localhost:3000/group-members/${uid}`,
+      group
+    );
   }
 
   addFirebaseUser(email: any, uid: any) {
@@ -122,9 +129,10 @@ export class GcConnectService {
       });
   }
 
-
   deleteUserFromGroup(uid: any, groupId: number) {
-    return this.client.delete(`http://localhost:3000/group-members/${uid}?groupid=${groupId}`);
+    return this.client.delete(
+      `http://localhost:3000/group-members/${uid}?groupid=${groupId}`
+    );
   }
 
   removePost(id: any) {
@@ -134,5 +142,74 @@ export class GcConnectService {
       .subscribe((data) => {
         console.log(data);
       });
+  }
+
+  getOnboardingTasksById(uid: any): Observable<any> {
+    return this.client.get(
+      `http://localhost:3000/user-onboarding-tasks/${uid}`
+    );
+  }
+
+  setupSlack(id: any, slackCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-slack/${id}`,
+      slackCheckbox
+    );
+  }
+
+  payTuition(id: any, tuitionCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-tuition/${id}`,
+      tuitionCheckbox
+    );
+  }
+
+  completeSurvey(id: any, surveyCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-survey/${id}`,
+      surveyCheckbox
+    );
+  }
+
+  completeProfile(id: any, profileCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-profile/${id}`,
+      profileCheckbox
+    );
+  }
+
+  exploreLms(id: any, lmsCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-lms/${id}`,
+      lmsCheckbox
+    );
+  }
+
+  bookmarkZoom(id: any, zoomCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-zoom/${id}`,
+      zoomCheckbox
+    );
+  }
+
+  checkCalendar(id: any, calendarCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-calendar/${id}`,
+      calendarCheckbox
+    );
+  }
+
+  checkCareerServices(id: any, csCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-cs/${id}`,
+      csCheckbox
+    );
+  }
+
+  exploreGroups(id: any, exploreCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-groups/${id}`,
+      exploreCheckbox
+    );
   }
 }
