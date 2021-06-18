@@ -138,7 +138,7 @@ router.get("/group-details/:groupId", async (req, res) => {
 
 // getGroupPostsById(id) : get group-posts by group with user id name & photo
 router.get("/group-posts/:id", async (req, res) => {
-	const result = await db.many(
+	const result = await db.manyOrNone(
 		"SELECT gp.id, gp.group_id, gp.date, gp.user_id, gp.body, u.first_name, u.last_name, u.photo FROM group_posts gp INNER JOIN users u ON u.id = gp.user_id WHERE gp.group_id = $(id) ORDER BY date DESC",
 		{
 			id: req.params.id,
