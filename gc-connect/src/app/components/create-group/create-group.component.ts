@@ -65,7 +65,6 @@ export class CreateGroupComponent implements OnInit {
         groupBio,
         groupPhoto
       ).subscribe((group) => (this.groups = group));
-      alert('Group has been created!');
     }
   }
 

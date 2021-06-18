@@ -1,5 +1,4 @@
 <app-navigation></app-navigation>
-
 <img
   #groupPhoto
   class="profile-pic"
@@ -8,12 +7,18 @@
   alt="Group Image"
   class="header-photo"
 />
-
 <!-- Gray body with inputs for sgned in user to edit -->
 <div class="profile-body">
   <!-- Profile Picture -->
   <!-- Image and button go here -->
-  <h2>Create Group</h2>
+  <div class="group-header">
+    <h2>Create Group</h2>
+    <!-- Upload Image -->
+    <button class="update-photo" (click)="uploadFile()">
+      <fa-icon [icon]="faUpload"></fa-icon>
+      Upload Photo
+    </button>
+  </div>
   <!-- [formGroup]="uploadForm" (ngSubmit)="onSubmit()" -->
   <form class="user-bio" ng-submit="onSubmit()" novalidate>
     <!-- Name -->
@@ -36,18 +41,18 @@
       <div class="last-name">
         <label for="last-name" class="input-label">GROUP TYPE</label>
         <div class="input-parent">
-          <select #groupType id="group-type" name="group-type">
+          <select
+            #groupType
+            id="group-type"
+            name="group-type"
+            class="input-text"
+          >
             <option value="Affinity Group">Affinity Group</option>
             <option value="Student Group">Student Group</option>
             <option value="Career Services Group">Career Services Group</option>
           </select>
         </div>
       </div>
-      <!-- Upload Image -->
-      <button class="update-photo" (click)="uploadFile()">
-        <fa-icon [icon]="faUpload"></fa-icon>
-        Upload Photo
-      </button>
     </div>
 
     <!-- Bio -->
