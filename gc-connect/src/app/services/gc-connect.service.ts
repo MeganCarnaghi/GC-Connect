@@ -44,6 +44,7 @@ export class GcConnectService {
   // Group Comments Get
   getGroupPostsById(id: any) {
     return this.client.get(`http://localhost:3000/group-posts/${id}`);
+
   }
 
 
@@ -51,9 +52,9 @@ export class GcConnectService {
 
   // User Posts
   
-  // addNewUser(user: any) {
-  //   return this.client.post('http://localhost:3000/users', user);
-  // }
+  addNewUser(user: any) {
+     return this.client.post('http://localhost:3000/users', user);
+  }
 
   addFirebaseUser(email: any, uid: any) {
     let newUser: Object = {
@@ -83,10 +84,11 @@ export class GcConnectService {
   // Group Member Posts
   addUserToGroupReturnGroups(uid: any, groupId: any) {
     let group: Object = {
-      group_id: groupId
+      group_id: groupId,
     };
 
     return this.client.post(`http://localhost:3000/group-members/groups/${uid}`, group);
+
   }
 
   addUserToGroupReturnGroup(uid: any, groupId: any) {
@@ -143,6 +145,7 @@ export class GcConnectService {
   }
 
 
+
   // *** DELETE ROUTES ***
 
   // Group Member Delete
@@ -158,5 +161,74 @@ export class GcConnectService {
       .subscribe((data) => {
         console.log(data);
       });
+  }
+
+  getOnboardingTasksById(uid: any): Observable<any> {
+    return this.client.get(
+      `http://localhost:3000/user-onboarding-tasks/${uid}`
+    );
+  }
+
+  setupSlack(id: any, slackCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-slack/${id}`,
+      slackCheckbox
+    );
+  }
+
+  payTuition(id: any, tuitionCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-tuition/${id}`,
+      tuitionCheckbox
+    );
+  }
+
+  completeSurvey(id: any, surveyCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-survey/${id}`,
+      surveyCheckbox
+    );
+  }
+
+  completeProfile(id: any, profileCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-profile/${id}`,
+      profileCheckbox
+    );
+  }
+
+  exploreLms(id: any, lmsCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-lms/${id}`,
+      lmsCheckbox
+    );
+  }
+
+  bookmarkZoom(id: any, zoomCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-zoom/${id}`,
+      zoomCheckbox
+    );
+  }
+
+  checkCalendar(id: any, calendarCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-calendar/${id}`,
+      calendarCheckbox
+    );
+  }
+
+  checkCareerServices(id: any, csCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-cs/${id}`,
+      csCheckbox
+    );
+  }
+
+  exploreGroups(id: any, exploreCheckbox: any) {
+    return this.client.put(
+      `http://localhost:3000/users-onboarding-groups/${id}`,
+      exploreCheckbox
+    );
   }
 }
