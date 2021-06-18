@@ -1,17 +1,4 @@
-<div
-  class="onboarding-checklist__container"
-  *ngIf="
-    slackCheckbox === false ||
-    tuitionCheckbox === false ||
-    surveyCheckbox === false ||
-    profileCheckbox === false ||
-    lmsCheckbox === false ||
-    zoomCheckbox === false ||
-    calendarCheckbox === false ||
-    csCheckbox === false ||
-    groupsCheckbox === false
-  "
->
+<div class="onboarding-checklist__container">
   <h2 class="onboarding-checklist__heading">Welcome to GC-Connect!</h2>
   <p class="onboarding-checklist__info">
     Welcome to Grand Circus (GC) Connect! GC-Connect will serve as the main hub
@@ -223,9 +210,9 @@
         Explore the
         <a
           class="onboarding-checklist__link"
-          href="https://docs.google.com/document/d/1zHc9eWbT3OyAk_16MB7QxyiSqOhUW5pYZqvW75uvsjk/edit"
+          routerLink="/career-services"
           target="_blank"
-          >Career Services Syllabus</a
+          >Career Services Page</a
         >. Learn about the CS team members, review the requirements for
         graduation, make note of the upcoming Soft Skills session dates and
         assignment due dates, begin scheduling your 1:1 sessions, etc.
