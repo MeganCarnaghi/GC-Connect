@@ -39,9 +39,8 @@ export class ProfileComponent implements OnInit {
   displayGithub: boolean = true;
   displayCalendly: boolean = true;
   userPhoto: any = null;
-  isShown: boolean = true;
-
-  @Input() user: any = '';
+  isShown: boolean = false;
+  user: any = '';
 
   constructor(
     private SQLservice: GcConnectService,
@@ -50,9 +49,6 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.sessionUid = sessionStorage.getItem('key');
-    // console.log(this.sessionUid);
-
     if (!this.userStateId) {
       this.userStateId = NgAuthService.userState.uid;
     }
