@@ -56,6 +56,19 @@ export class GcConnectService {
      return this.client.post('http://localhost:3000/users', user);
   }
 
+
+  createGroup(groupName: any, groupType: any, groupBio: any, groupPhoto: any) {
+    console.log('received by service');
+    let group: Object = {
+      name: groupName,
+      type: groupType,
+      bio: groupBio,
+      photo: groupPhoto,
+    };
+    return this.client.post(`http://localhost:3000/groups`, group);
+  }
+
+
   addFirebaseUser(email: any, uid: any) {
     let newUser: Object = {
       firebase_uid: uid,
@@ -71,6 +84,7 @@ export class GcConnectService {
   }
 
   // Group Comments Posts
+
   addPostToGroup(uid: any, groupId: any, comment: any) {
     let post: Object = {
       uid: uid,

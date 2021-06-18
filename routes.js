@@ -7,18 +7,19 @@ router.use(express.json());
 
 // *** Database here
 const db = pgp({
-  host: process.env.PGHOST,
-  port: process.env.PGPORT,
-  database: process.env.PGDATABASE,
-  user: process.env.PGUSER,
-  password: process.env.PGPASSWORD,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-  max: process.env.PGMAX,
+	host: process.env.PGHOST,
+	port: process.env.PGPORT,
+	database: process.env.PGDATABASE,
+	user: process.env.PGUSER,
+	password: process.env.PGPASSWORD,
+	ssl: {
+		rejectUnauthorized: false,
+	},
+	max: process.env.PGMAX,
 });
 
 // *** GET ROUTES ***
+
 
 // getAllUsers() : gets all users for directory
 router.get("/users", async (req, res) => {
@@ -26,30 +27,34 @@ router.get("/users", async (req, res) => {
 });
 
 
+
 //  getUserByUid(uid) : gets user by uid for profile/popup
 router.get("/users/:uid", async (req, res) => {
-  const result = await db.one("SELECT * from users WHERE firebase_uid = $(uid)", {
-    uid: req.params.uid,
-  });
+	const result = await db.one(
+		"SELECT * from users WHERE firebase_uid = $(uid)",
+		{
+			uid: req.params.uid,
+		}
+	);
 
-  if (!result) {
-    return res.status(404).send("The user could not be found");
-  }
+	if (!result) {
+		return res.status(404).send("The user could not be found");
+	}
 
-  res.json(result);
+	res.json(result);
 });
 
 // getUserById(id) : gets user by id for profile/popup
 router.get("/users-id/:id", async (req, res) => {
-  const result = await db.one("SELECT * from users WHERE id = $(id)", {
-    id: req.params.id,
-  });
+	const result = await db.one("SELECT * from users WHERE id = $(id)", {
+		id: req.params.id,
+	});
 
-  if (!result) {
-    return res.status(404).send("The user could not be found");
-  }
+	if (!result) {
+		return res.status(404).send("The user could not be found");
+	}
 
-  res.json(result);
+	res.json(result);
 });
 
 // getAllGroups() : get all groups for group list
@@ -59,19 +64,20 @@ router.get("/groups", async (req, res) => {
 
 // getGroupById(id) : get group by id for details
 router.get("/groups/:id", async (req, res) => {
-  const result = await db.one("SELECT * from groups WHERE id = $(id)", {
-    id: req.params.id,
-  });
+	const result = await db.one("SELECT * from groups WHERE id = $(id)", {
+		id: req.params.id,
+	});
 
-  if (!result) {
-    return res.status(404).send("The group could not be found");
-  }
+	if (!result) {
+		return res.status(404).send("The group could not be found");
+	}
 
-  res.json(result);
+	res.json(result);
 });
 
 // getAllGroupsWithUserJoinInfo(uid) : get all groups with user member info
 router.get("/groups-joined/:uid", async (req, res) => {
+
 try{
 	const userId = await db.one(
 		"SELECT id from users WHERE firebase_uid = $(uid)",
@@ -100,19 +106,21 @@ try{
 	console.log(error);
 	res.status(500).send(error);
 }
-	
+
 });
 
 // getGroupByIdAndUserJoin(groupId, uid) : get specific group by group ID with user ID if member
 router.get("/group-details/:groupId", async (req, res) => {
+
 	try{
+
 		const userId = await db.oneOrNone(
 			"SELECT id FROM users WHERE firebase_uid = $(uid)",
 			{
 				uid: req.query.uid,
 			}
 		);
-	
+
 		if (!userId) {
 			return res.status(404).send("The user could not be found");
 		}
@@ -123,6 +131,7 @@ router.get("/group-details/:groupId", async (req, res) => {
 					group_id: +req.params.groupId
 				}
 			);
+
 
 		if (!group) {
 			return res.status(404).send("The group could not be found");
@@ -151,6 +160,7 @@ router.get("/group-posts/:id", async (req, res) => {
 
 	res.json(result);
 });
+
 
 
 // *** POST ROUTES ***
@@ -225,6 +235,7 @@ router.post("/users-uid", async (req, res) => {
 		);
 
 		res.status(201).json(newUser);
+
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);
@@ -264,45 +275,6 @@ router.post("/group-posts", async (req, res) => {
 	}
 });
 
-// addUserToGroupReturnGroups(uid, groupId) : add a user to a group (join button) & get back list of all groups
-router.post("/group-members/groups/:uid", async (req, res) => {
-	try {
-		const userId = await db.oneOrNone(
-			"SELECT id FROM users WHERE firebase_uid = $(uid)",
-			{
-				uid: req.params.uid,
-			}
-		);
-	
-		if (!userId) {
-			return res.status(404).send("The user could not be found");
-		}
-
-		await db.oneOrNone(
-			"INSERT INTO group_members (group_id, user_id) VALUES ($(group_id), $(user_id)) RETURNING id",
-			{
-				group_id: +req.body.group_id,
-				user_id: userId.id,
-			}
-		);
-
-		const groups = await db.manyOrNone("SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(id)",
-			{
-				id: userId.id
-			}
-		);
-
-		if (!groups) {
-			return res.status(404).send("The groups could not be found");
-		}
-
-		res.status(201).json(groups);
-
-	} catch (error) {
-		console.log(error);
-		res.status(500).send(error);
-	}
-});
 
 // addUserToGroupReturnGroup(uid, groupId) : add a user to a group (join button) & get back only specific group
 router.post("/group-members/group/:uid", async (req, res) => {
@@ -386,41 +358,46 @@ router.put("/users/:email", async (req, res) => {
 
 // updateProfile(many) : update a user based on profile input values
 router.put("/users-profile/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone(
-      "UPDATE users SET photo = $(photo), first_name = $(first_name), last_name = $(last_name), bio = $(bio), bootcamp = $(bootcamp), linked_in = $(linked_in), github = $(github), calendly = $(calendly) WHERE id = $(id)",
-      {
-        id: req.params.id,
-        photo: req.body.photo,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        bio: req.body.bio,
-        bootcamp: req.body.bootcamp,
-        linked_in: req.body.linked_in,
-        github: req.body.github,
-        calendly: req.body.calendly,
-      }
-    );
+		await db.oneOrNone(
+			"UPDATE users SET photo = $(photo), first_name = $(first_name), last_name = $(last_name), bio = $(bio), bootcamp = $(bootcamp), linked_in = $(linked_in), github = $(github), calendly = $(calendly) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				photo: req.body.photo,
+				first_name: req.body.first_name,
+				last_name: req.body.last_name,
+				bio: req.body.bio,
+				bootcamp: req.body.bootcamp,
+				linked_in: req.body.linked_in,
+				github: req.body.github,
+				calendly: req.body.calendly,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
-
 
 // *** DELETE ROUTES ***
 
@@ -433,7 +410,7 @@ router.delete("/group-members/:uid", async (req, res) => {
 				uid: req.params.uid,
 			}
 		);
-	
+
 		if (!userId) {
 			return res.status(404).send("The user could not be found");
 		}
@@ -456,6 +433,7 @@ router.delete("/group-members/:uid", async (req, res) => {
 		if (!group) {
 			return res.status(404).send("The group could not be found");
 		}
+
 		
 		res.status(200).json(group);
     
@@ -463,274 +441,359 @@ router.delete("/group-members/:uid", async (req, res) => {
     console.log(error);
     res.status(500).send(error);
   }
+
 });
 
 // removePost(id) : delete comment from a group
 router.delete("/group-comments/:id", async (req, res) => {
-  console.log("Deleted");
-  try {
-    const post = await db.oneOrNone("SELECT * FROM group_posts WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	console.log("Deleted");
+	try {
+		const post = await db.oneOrNone(
+			"SELECT * FROM group_posts WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!post) {
-      return res.status(404).send("Post does not exist.");
-    }
+		if (!post) {
+			return res.status(404).send("Post does not exist.");
+		}
 
-    await db.none(`DELETE FROM group_posts WHERE id = $(id)`, {
-      id: req.params.id,
-    });
-    const updatedPosts = await db.one("SELECT * FROM group_posts");
+		await db.none(`DELETE FROM group_posts WHERE id = $(id)`, {
+			id: req.params.id,
+		});
+		const updatedPosts = await db.one("SELECT * FROM group_posts");
 
-    res.status(201).json(updatedPosts);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedPosts);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // update a user's onboarding tasks based on completion (checkbox checked)
 //--SLACK ONLY
 router.put("/users-onboarding-slack/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET setup_slack = $(setup_slack) WHERE id = $(id)", {
-      id: req.params.id,
-      setup_slack: req.body.setup_slack,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET setup_slack = $(setup_slack) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				setup_slack: req.body.setup_slack,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 //--TUITION ONLY
 router.put("/users-onboarding-tuition/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET pay_tuition = $(pay_tuition) WHERE id = $(id)", {
-      id: req.params.id,
-      pay_tuition: req.body.pay_tuition,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET pay_tuition = $(pay_tuition) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				pay_tuition: req.body.pay_tuition,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // --GTKY SURVEY
 router.put("/users-onboarding-survey/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET gtky_survey = $(gtky_survey) WHERE id = $(id)", {
-      id: req.params.id,
-      gtky_survey: req.body.gtky_survey,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET gtky_survey = $(gtky_survey) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				gtky_survey: req.body.gtky_survey,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // --CREATE PROFILE
 router.put("/users-onboarding-profile/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET create_profile = $(create_profile) WHERE id = $(id)", {
-      id: req.params.id,
-      create_profile: req.body.create_profile,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET create_profile = $(create_profile) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				create_profile: req.body.create_profile,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // --CHECK LMS
 router.put("/users-onboarding-lms/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET check_lms = $(check_lms) WHERE id = $(id)", {
-      id: req.params.id,
-      check_lms: req.body.check_lms,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET check_lms = $(check_lms) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				check_lms: req.body.check_lms,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // --CHECK LMS
 router.put("/users-onboarding-zoom/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET mark_zoom = $(mark_zoom) WHERE id = $(id)", {
-      id: req.params.id,
-      mark_zoom: req.body.mark_zoom,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET mark_zoom = $(mark_zoom) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				mark_zoom: req.body.mark_zoom,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // --CHECK CALENDAR
 router.put("/users-onboarding-calendar/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET check_calendar = $(check_calendar) WHERE id = $(id)", {
-      id: req.params.id,
-      check_calendar: req.body.check_calendar,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET check_calendar = $(check_calendar) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				check_calendar: req.body.check_calendar,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // --CAREER SERVICES
 router.put("/users-onboarding-cs/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET career_services = $(career_services) WHERE id = $(id)", {
-      id: req.params.id,
-      career_services: req.body.career_services,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET career_services = $(career_services) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				career_services: req.body.career_services,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // --EXPLORE GROUPS
 router.put("/users-onboarding-groups/:id", async (req, res) => {
-  try {
-    const user = await db.oneOrNone("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+	try {
+		const user = await db.oneOrNone(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    if (!user) {
-      return res.status(404).send("User does not exist.");
-    }
+		if (!user) {
+			return res.status(404).send("User does not exist.");
+		}
 
-    await db.oneOrNone("UPDATE users SET explore_groups = $(explore_groups) WHERE id = $(id)", {
-      id: req.params.id,
-      explore_groups: req.body.explore_groups,
-    });
+		await db.oneOrNone(
+			"UPDATE users SET explore_groups = $(explore_groups) WHERE id = $(id)",
+			{
+				id: req.params.id,
+				explore_groups: req.body.explore_groups,
+			}
+		);
 
-    const updatedUser = await db.one("SELECT * FROM users WHERE id = $(id)", {
-      id: req.params.id,
-    });
+		const updatedUser = await db.one(
+			"SELECT * FROM users WHERE id = $(id)",
+			{
+				id: req.params.id,
+			}
+		);
 
-    res.status(201).json(updatedUser);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
-  }
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 // // update a user's onboarding tasks based on completion (checkbox checked)
@@ -773,18 +836,56 @@ router.put("/users-onboarding-groups/:id", async (req, res) => {
 
 // get onboarding checklist completion information for a user
 router.get("/user-onboarding-tasks/:uid", async (req, res) => {
-  const taskStatus = await db.oneOrNone(
-    "SELECT setup_slack, pay_tuition, gtky_survey, create_profile, check_lms, mark_zoom, check_calendar, career_services, explore_groups FROM users WHERE firebase_uid = $(uid)",
-    {
-      uid: req.params.uid,
-    }
-  );
+	const taskStatus = await db.oneOrNone(
+		"SELECT setup_slack, pay_tuition, gtky_survey, create_profile, check_lms, mark_zoom, check_calendar, career_services, explore_groups FROM users WHERE firebase_uid = $(uid)",
+		{
+			uid: req.params.uid,
+		}
+	);
 
-  if (!taskStatus) {
-    return res.status(404).send("The information could not be found.");
-  }
+	if (!taskStatus) {
+		return res.status(404).send("The information could not be found.");
+	}
 
-  res.json(taskStatus);
+	res.json(taskStatus);
+});
+
+// create a new group
+router.post("/groups", async (req, res) => {
+	try {
+		const group = await db.oneOrNone(
+			"SELECT name FROM groups WHERE name = $(name)",
+			{
+				name: req.body.name,
+			}
+		);
+
+		if (group) {
+			return res.status(404).send("This group already exists.");
+		}
+
+		await db.none(
+			"INSERT INTO groups (name, type, bio, photo) VALUES ($(name), $(type), $(bio), $(photo))",
+			{
+				name: req.body.name,
+				type: req.body.type,
+				bio: req.body.bio,
+				photo: req.body.photo,
+			}
+		);
+
+		const newGroup = await db.one(
+			"SELECT name FROM groups WHERE name = $(name)",
+			{
+				name: req.body.name,
+			}
+		);
+
+		res.status(201).json(newGroup);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
 });
 
 module.exports = router;

@@ -11,6 +11,7 @@ import { DirectoryComponent } from './components/directory/directory.component';
 import { AuthGuard } from './auth.guard';
 import { GroupDetailsComponent } from './components/group-details/group-details.component';
 import { CareerServicesComponent } from './components/career-services/career-services.component';
+import { CreateGroupComponent } from './components/create-group/create-group.component';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'groups/:id',
     component: GroupDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'create-group',
+    component: CreateGroupComponent,
     canActivate: [AuthGuard],
   },
   {

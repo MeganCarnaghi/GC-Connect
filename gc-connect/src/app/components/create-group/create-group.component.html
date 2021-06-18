@@ -1,0 +1,88 @@
+<app-navigation></app-navigation>
+<img
+  #groupPhoto
+  class="profile-pic"
+  src="{{ this.url }}"
+  onerror="this.onerror=null;this.src='/assets/group-default.png'"
+  alt="Group Image"
+  class="header-photo"
+/>
+<!-- Gray body with inputs for sgned in user to edit -->
+<div class="profile-body">
+  <!-- Profile Picture -->
+  <!-- Image and button go here -->
+  <div class="group-header">
+    <h2>Create Group</h2>
+    <!-- Upload Image -->
+    <button class="update-photo" (click)="uploadFile()">
+      <fa-icon [icon]="faUpload"></fa-icon>
+      Upload Photo
+    </button>
+  </div>
+  <!-- [formGroup]="uploadForm" (ngSubmit)="onSubmit()" -->
+  <form class="user-bio" ng-submit="onSubmit()" novalidate>
+    <!-- Name -->
+    <div class="full-name">
+      <!-- First name -->
+      <div class="first-name">
+        <label for="first-name" class="input-label">GROUP NAME</label>
+        <div class="input-parent">
+          <fa-icon [icon]="faUser" class="input-icon"></fa-icon>
+          <input
+            #groupName
+            type="text"
+            class="input-text"
+            name="first-name"
+            placeholder="Enter your group name"
+          />
+        </div>
+      </div>
+      <!-- Group Type -->
+      <div class="last-name">
+        <label for="last-name" class="input-label">GROUP TYPE</label>
+        <div class="input-parent">
+          <select
+            #groupType
+            id="group-type"
+            name="group-type"
+            class="input-text"
+          >
+            <option value="Affinity Group">Affinity Group</option>
+            <option value="Student Group">Student Group</option>
+            <option value="Career Services Group">Career Services Group</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <label for="bio" class="input-label">GROUP BIO</label>
+    <div class="input-parent multi-row">
+      <fa-icon [icon]="faEdit" class="input-icon"></fa-icon>
+      <textarea
+        #groupBio
+        class="input-text"
+        name="bio"
+        rows="4"
+        maxlength="200"
+        placeholder="Say somehthing about the group..."
+      ></textarea>
+    </div>
+    <button
+      class="save-changes profile-button"
+      type="submit"
+      (click)="
+        onSubmit(
+          groupName.value,
+          groupType.value,
+          groupBio.value,
+          groupPhoto.src
+        )
+      "
+      routerLink="/groups"
+    >
+      <fa-icon [icon]="faSave" class="button-icon"></fa-icon>
+      <span>Save Changes</span>
+    </button>
+  </form>
+</div>

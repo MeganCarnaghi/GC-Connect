@@ -1,0 +1,266 @@
+img.header-photo {
+  width: 100%;
+  height: 20vh;
+  object-fit: cover;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+div.group-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+p.bio {
+  font-size: 1.2em;
+}
+
+/* Profile section */
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: 1px #d7d7d7 solid;
+  /* background-image: url("src/assets/gcc-square-default.png"); */
+}
+.update-photo {
+  padding: 10px;
+  min-width: 60px;
+  border: 1px solid #d7d7d7;
+  font-size: 15px;
+  border-radius: 5px;
+  color: #343d46;
+  background-color: white;
+}
+
+.update-photo:hover {
+  cursor: pointer;
+  filter: brightness(80%);
+  transition: 0.3s;
+}
+
+.update-photo fa-icon {
+  padding-right: 5px;
+}
+
+/* White section above gray body */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 15px;
+}
+
+div.item-content {
+  padding: 0 20px;
+  width: 100%;
+}
+
+div.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+div.item-details {
+  padding-left: 25px;
+}
+
+p.class-type {
+  margin-top: 8px;
+  font-size: 0.9em;
+}
+
+p.user-type {
+  color: white;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+p.user-bio {
+  font-size: 1.2em;
+  margin: 30px 0;
+}
+
+/* Link Section */
+div.link-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.link-container a {
+  height: 40px;
+  flex-grow: 1;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  border: 1px #d7d7d7 solid;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 5px 0;
+  font-size: 1.1em;
+}
+
+.link-container a fa-icon {
+  padding-right: 10px;
+}
+
+/* Gray section containing bio inputs */
+
+.profile-body {
+  background-color: #f5f5f5;
+  padding: 15px;
+  height: 100vh;
+}
+
+.input-label {
+  letter-spacing: 0.1rem;
+}
+/* Parent container for the icon and input tag */
+.input-parent {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px #d7d7d7 solid;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 1em;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.input-icon {
+  padding: 15px;
+  color: #bfbfbf;
+}
+
+.input-text {
+  width: 100%;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* First & Last Name */
+.full-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.first-name,
+.last-name {
+  width: 100%;
+}
+
+.first-name {
+  margin-right: 15px;
+}
+.last-name input {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* Class for disabled inputs */
+input[type="text"]:disabled {
+  background: none;
+}
+
+.disabled-input-parent {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px #d7d7d7 solid;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  font-size: 1em;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* Styling for text area */
+textarea.input-text {
+  resize: none;
+  padding-top: 15px;
+}
+
+.multi-row {
+  align-items: flex-start;
+}
+
+/* Button styling */
+.profile-button {
+  height: 55px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 5px 0;
+  font-size: 1.1em;
+}
+
+.button-icon {
+  padding-right: 15px;
+}
+
+.save-changes {
+  background-color: #05d0cd;
+}
+
+.sign-out {
+  background-color: #7a324a;
+}
+
+.save-changes:hover,
+.sign-out:hover {
+  cursor: pointer;
+  filter: brightness(80%);
+  transition: 0.3s;
+}
+
+/* Student/Staff Badging */
+p.user-type {
+  color: white;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* MEDIA QUERIES */
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .profile-body {
+    padding-bottom: 70px;
+  }
+}
