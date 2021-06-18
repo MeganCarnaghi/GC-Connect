@@ -29,6 +29,7 @@ import { UserPopupComponent } from './components/user-popup/user-popup.component
 import { OnboardingChecklistComponent } from './components/onboarding-checklist/onboarding-checklist.component';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { CareerServicesComponent } from './components/career-services/career-services.component';
+import { CreateGroupComponent } from './components/create-group/create-group.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -53,6 +54,7 @@ FullCalendarModule.registerPlugins([
     OnboardingChecklistComponent,
     SearchFilterPipe,
     CareerServicesComponent,
+    CreateGroupComponent,
   ],
   imports: [
     BrowserModule,

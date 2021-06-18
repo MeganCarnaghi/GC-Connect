@@ -11,7 +11,7 @@
 </form>
 
 <section class="bg-gray">
-  <a href="/groups/" class="a-button">
+  <a href="/groups/" class="a-button" routerLink="/create-group">
     <fa-icon class="" [icon]="faPlus" size="sm"></fa-icon>
     Create Group
   </a>
@@ -27,7 +27,12 @@
         <p class="uppercase letter-space type">{{ group.type }}</p>
       </div>
     </a>
-    <button class="join bg-gray uppercase" *ngIf="!checkIfGroupMember(group.id)"
-    (click)='joinGroup(group.id)'>Join</button>
+    <button
+      class="join bg-gray uppercase"
+      *ngIf="!checkIfGroupMember(group.id)"
+      (click)="joinGroup(group.id)"
+    >
+      Join
+    </button>
   </div>
 </section>
