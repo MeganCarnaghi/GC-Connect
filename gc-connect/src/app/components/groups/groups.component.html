@@ -27,7 +27,7 @@
         <p class="uppercase letter-space type">{{ group.type }}</p>
       </div>
     </a>
-    <button class="join bg-gray uppercase" *ngIf="!checkIfGroupMember(group.id)"
+    <button class="join bg-gray uppercase" *ngIf="!group.user_id"
     (click)='joinGroup(group.id)'>Join</button>
   </div>
 </section>
