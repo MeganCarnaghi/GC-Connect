@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-career-services',
@@ -8,6 +9,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 })
 export class CareerServicesComponent implements OnInit {
   faEnvelope = faEnvelope;
+  faCalendarAlt = faCalendarAlt;
 
   constructor() {}
 
