@@ -11,6 +11,7 @@ import { NgAuthService } from 'src/app/services/ng-auth.service';
 })
 export class GroupsComponent implements OnInit {
   groups: any | null = null;
+  uid: any | null = null;
   userGroups: any | null = null;
   faPlus = faPlus;
   faSearch = faSearch;
@@ -22,40 +23,18 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.SQLservice.getAllGroups().subscribe((group) => (this.groups = group));
+    this.uid = NgAuthService.userState.uid;
 
-    this.getGroupsJoinedByUser();
+    this.SQLservice.getAllGroupsWithUserJoinInfo(this.uid).subscribe((group) => {
+      this.groups = group;
+    });
 
-  }
-
-  getGroupsJoinedByUser(){
-    let uid = NgAuthService.userState.uid;
-
-    try{
-      this.SQLservice.getGroupsJoinedByUID(uid).subscribe(data => this.userGroups = data);
-    } catch{
-      this.userGroups = [{}];
-    }
-    
-
-  }
-
-  checkIfGroupMember(groupId: any){
-    let groupList = this.userGroups;
-    
-    for (let group of groupList){
-        if (groupId === group.group_id){
-          return true;
-        }
-    }
-
-    return false;
   }
 
   joinGroup(groupId: any){
-    let uid = NgAuthService.userState.uid;
 
-    this.SQLservice.addUserToGroup(uid, groupId).subscribe(data => this.userGroups = data);
+    this.SQLservice.addUserToGroupReturnGroups(this.uid, groupId).subscribe(data => this.groups = data);
+
   }
 
 }

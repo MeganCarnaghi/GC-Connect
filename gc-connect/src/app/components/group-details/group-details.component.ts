@@ -15,14 +15,12 @@ import { FormBuilder } from '@angular/forms';
 })
 export class GroupDetailsComponent implements OnInit {
   uid: any = null;
-  userGroups: any | null;
   group: any | null = null;
   groupPosts: any | null = null;
   subscription: any;
   subscription2: any;
   currentUser: any | null = null;
   displayDetails: boolean = false;
-  groupMember: any;
   faEdit = faEdit;
   faPlus = faPlus;
   faTrash = faTrash;
@@ -44,16 +42,16 @@ export class GroupDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.uid = NgAuthService.userState.uid;
+    this.getUser();
 
     this.subscription = this.route.paramMap
-      .pipe(switchMap((p) => this.SQLservice.getGroupById(p?.get('id'))))
-      .subscribe((group) => (this.group = group));
-
-
-    this.checkIfUserIsGroupMember();
+      .pipe(switchMap((p) => this.SQLservice.getGroupByIdAndUserJoin(p?.get('id'), this.uid)))
+      .subscribe((group) => {
+        this.group = group;
+      });
 
     this.getComments();
-    this.getUser();
+    
   }
 
   ngOnDestroy(): void {
@@ -69,41 +67,24 @@ export class GroupDetailsComponent implements OnInit {
     return this.groupPosts;
   }
 
-  checkIfUserIsGroupMember(){
- 
-    this.route.paramMap.pipe(switchMap(p => this.SQLservice.getCheckIfGroupMember(p?.get('id'), this.uid))).subscribe(data => this.groupMember = data);
-    
-  }
-
-  getGroupsJoinedByUser(){
-    let uid = NgAuthService.userState.uid;
-
-    try{
-      this.SQLservice.getGroupsJoinedByUID(uid).subscribe(data => this.userGroups = data);
-    } catch{
-      this.userGroups = [{}];
-    }
-  }
-
-
   joinLeaveGroup(groupId: any){
 
-    if( this.groupMember === true ){
+    if( this.group.user_id ){
       this.leaveGroup(groupId);
-    } else if ( this.groupMember === false ){
+    } else {
       this.joinGroup(groupId);
     }
 
   }
 
   joinGroup(groupId: any){
-    this.SQLservice.addUserToGroup(this.uid, groupId).subscribe();
-    this.groupMember = true;
+    this.SQLservice.addUserToGroupReturnGroup(this.uid, groupId)
+    .subscribe((data) => this.group = data);
   }
 
   leaveGroup(groupId: any){
-    this.SQLservice.deleteUserFromGroup(this.uid, groupId).subscribe();
-    this.groupMember = false;
+    this.SQLservice.deleteUserFromGroup(this.uid, groupId)
+    .subscribe((data) => this.group = data);;
   }
 
 
@@ -126,7 +107,6 @@ export class GroupDetailsComponent implements OnInit {
       (user) => (this.user = user)
     );
     
-    console.log(this.user);
     this.getDeleteButton();
   }
 
