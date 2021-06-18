@@ -20,14 +20,13 @@ const db = pgp({
 
 // *** GET ROUTES ***
 
+
 // getAllUsers() : gets all users for directory
 router.get("/users", async (req, res) => {
-	res.json(
-		await db.many(
-			"SELECT * from users WHERE authorized = true AND firebase_uid != 'UID' ORDER BY last_name"
-		)
-	);
+  res.json(await db.many("SELECT * from users WHERE authorized = true AND firebase_uid != 'UID' ORDER BY last_name"));
 });
+
+
 
 //  getUserByUid(uid) : gets user by uid for profile/popup
 router.get("/users/:uid", async (req, res) => {
@@ -78,39 +77,43 @@ router.get("/groups/:id", async (req, res) => {
 
 // getAllGroupsWithUserJoinInfo(uid) : get all groups with user member info
 router.get("/groups-joined/:uid", async (req, res) => {
-	try {
-		const userId = await db.one(
-			"SELECT id from users WHERE firebase_uid = $(uid)",
-			{
-				uid: req.params.uid,
-			}
-		);
 
-		if (!userId) {
-			return res.status(404).send("The user could not be found");
+try{
+	const userId = await db.one(
+		"SELECT id from users WHERE firebase_uid = $(uid)",
+		{
+			uid: req.params.uid,
 		}
+	);
 
-		const groups = await db.manyOrNone(
-			"SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(id)",
-			{
-				id: userId.id,
-			}
-		);
-
-		if (!groups) {
-			return res.status(404).send("There are no groups.");
-		}
-
-		res.status(200).json(groups);
-	} catch (error) {
-		console.log(error);
-		res.status(500).send(error);
+	if (!userId) {
+		return res.status(404).send("The user could not be found");
 	}
+
+	const groups = await db.manyOrNone("SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(id)",
+		{
+			id: userId.id
+		}
+	);
+
+	if (!groups) {
+		return res.status(404).send("There are no groups.");
+	}
+
+	res.status(200).json(groups);
+
+} catch(error) {
+	console.log(error);
+	res.status(500).send(error);
+}
+
 });
 
 // getGroupByIdAndUserJoin(groupId, uid) : get specific group by group ID with user ID if member
 router.get("/group-details/:groupId", async (req, res) => {
-	try {
+
+	try{
+
 		const userId = await db.oneOrNone(
 			"SELECT id FROM users WHERE firebase_uid = $(uid)",
 			{
@@ -122,19 +125,20 @@ router.get("/group-details/:groupId", async (req, res) => {
 			return res.status(404).send("The user could not be found");
 		}
 
-		const group = await db.oneOrNone(
-			"SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(user_id) WHERE g.id = $(group_id)",
-			{
-				user_id: userId.id,
-				group_id: +req.params.groupId,
-			}
-		);
+		const group = await db.oneOrNone("SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(user_id) WHERE g.id = $(group_id)",
+				{
+					user_id: userId.id,
+					group_id: +req.params.groupId
+				}
+			);
+
 
 		if (!group) {
 			return res.status(404).send("The group could not be found");
 		}
 
 		res.status(200).json(group);
+
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);
@@ -157,47 +161,43 @@ router.get("/group-posts/:id", async (req, res) => {
 	res.json(result);
 });
 
+
+
 // *** POST ROUTES ***
 
 // addNewUser(user) : create a new user
 router.post("/users", async (req, res) => {
-	try {
-		const user = await db.oneOrNone(
-			"SELECT email FROM users WHERE email = $(email)",
-			{
-				email: req.body.email,
-			}
-		);
+  try {
+    const user = await db.oneOrNone("SELECT email FROM users WHERE email = $(email)", {
+      email: req.body.email,
+    });
 
-		if (user) {
-			return res.status(404).send("User email already exists.");
-		}
+    if (user) {
+      return res.status(404).send("User email already exists.");
+    }
 
-		await db.none(
-			"INSERT INTO users (firebase_uid, email, first_name, last_name, type, bootcamp, authorized) VALUES ($(firebase_uid), $(email), $(first_name), $(last_name), $(type), $(bootcamp), $(authorized))",
-			{
-				firebase_uid: req.body.firebase_uid,
-				email: req.body.email,
-				first_name: req.body.first_name,
-				last_name: req.body.last_name,
-				type: req.body.type,
-				bootcamp: req.body.bootcamp,
-				authorized: req.body.authorized,
-			}
-		);
+    await db.none(
+      "INSERT INTO users (firebase_uid, email, first_name, last_name, type, bootcamp, authorized) VALUES ($(firebase_uid), $(email), $(first_name), $(last_name), $(type), $(bootcamp), $(authorized))",
+      {
+        firebase_uid: req.body.firebase_uid,
+        email: req.body.email,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        type: req.body.type,
+        bootcamp: req.body.bootcamp,
+        authorized: req.body.authorized,
+      }
+    );
 
-		const newUser = await db.one(
-			"SELECT email FROM users WHERE email = $(email)",
-			{
-				email: req.body.email,
-			}
-		);
+    const newUser = await db.one("SELECT email FROM users WHERE email = $(email)", {
+      email: req.body.email,
+    });
 
-		res.status(201).json(newUser);
-	} catch (error) {
-		console.log(error);
-		res.status(500).send(error);
-	}
+    res.status(201).json(newUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 });
 
 // addFirebaseUser(email, uid) : create a new user
@@ -235,6 +235,7 @@ router.post("/users-uid", async (req, res) => {
 		);
 
 		res.status(201).json(newUser);
+
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);
@@ -274,45 +275,6 @@ router.post("/group-posts", async (req, res) => {
 	}
 });
 
-// addUserToGroupReturnGroups(uid, groupId) : add a user to a group (join button) & get back list of all groups
-router.post("/group-members/groups/:uid", async (req, res) => {
-	try {
-		const userId = await db.oneOrNone(
-			"SELECT id FROM users WHERE firebase_uid = $(uid)",
-			{
-				uid: req.params.uid,
-			}
-		);
-
-		if (!userId) {
-			return res.status(404).send("The user could not be found");
-		}
-
-		await db.oneOrNone(
-			"INSERT INTO group_members (group_id, user_id) VALUES ($(group_id), $(user_id)) RETURNING id",
-			{
-				group_id: +req.body.group_id,
-				user_id: userId.id,
-			}
-		);
-
-		const groups = await db.manyOrNone(
-			"SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(id)",
-			{
-				id: userId.id,
-			}
-		);
-
-		if (!groups) {
-			return res.status(404).send("The groups could not be found");
-		}
-
-		res.status(201).json(groups);
-	} catch (error) {
-		console.log(error);
-		res.status(500).send(error);
-	}
-});
 
 // addUserToGroupReturnGroup(uid, groupId) : add a user to a group (join button) & get back only specific group
 router.post("/group-members/group/:uid", async (req, res) => {
@@ -323,7 +285,7 @@ router.post("/group-members/group/:uid", async (req, res) => {
 				uid: req.params.uid,
 			}
 		);
-
+	
 		if (!userId) {
 			return res.status(404).send("The user could not be found");
 		}
@@ -336,24 +298,25 @@ router.post("/group-members/group/:uid", async (req, res) => {
 			}
 		);
 
-		const group = await db.oneOrNone(
-			"SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(user_id) WHERE g.id = $(group_id)",
-			{
-				user_id: userId.id,
-				group_id: +req.body.group_id,
-			}
-		);
+		const group = await db.oneOrNone("SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(user_id) WHERE g.id = $(group_id)",
+				{
+					user_id: userId.id,
+					group_id: +req.body.group_id
+				}
+			);
 
 		if (!group) {
 			return res.status(404).send("The group could not be found");
 		}
 
 		res.status(201).json(group);
+
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);
 	}
 });
+
 
 // *** PUT ROUTES ***
 
@@ -459,12 +422,11 @@ router.delete("/group-members/:uid", async (req, res) => {
 				user_id: userId.id,
 			}
 		);
-
-		const group = await db.oneOrNone(
-			"SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(user_id) WHERE g.id = $(group_id)",
+		
+		const group = await db.oneOrNone("SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(user_id) WHERE g.id = $(group_id)",
 			{
 				user_id: userId.id,
-				group_id: +req.query.groupId,
+				group_id: +req.query.groupId
 			}
 		);
 
@@ -472,11 +434,14 @@ router.delete("/group-members/:uid", async (req, res) => {
 			return res.status(404).send("The group could not be found");
 		}
 
+		
 		res.status(200).json(group);
-	} catch (error) {
-		console.log(error);
-		res.status(500).send(error);
-	}
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+
 });
 
 // removePost(id) : delete comment from a group

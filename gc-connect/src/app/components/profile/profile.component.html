@@ -1,5 +1,4 @@
 <app-navigation></app-navigation>
-<!-- MEGAN TESTING ONBOARDING CHECKLIST -->
 <div class="onboard-section" *ngIf="user.type === 'Student'">
   <div class="toggle-section">
     <p>Onboarding Checklist</p>
@@ -16,7 +15,7 @@
 <div class="profile-header">
   <div class="item-content">
     <div class="item-header">
-      <div class='flex-align-center'>
+      <div class="flex-align-center">
         <img
           #userPhoto
           class="profile-pic"
@@ -165,7 +164,12 @@
       />
     </div>
     <!-- Calendly -->
-    <label for="calendly" class="input-label" [ngClass]="user.type === 'Staff' ? '' : 'hidden'">CALENDLY</label>
+    <label
+      for="calendly"
+      class="input-label"
+      [ngClass]="user.type === 'Staff' ? '' : 'hidden'"
+      >CALENDLY</label
+    >
     <div class="input-parent" [ngClass]="user.type === 'Staff' ? '' : 'hidden'">
       <fa-icon [icon]="faLink" class="input-icon"></fa-icon>
       <input

@@ -54,6 +54,7 @@ button.arrow {
 /* Group Section Styling */
 section {
   min-height: 80vh;
+  padding-bottom: 70px;
 }
 
 /* Group Card Styling */
