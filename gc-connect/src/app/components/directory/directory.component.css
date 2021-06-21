@@ -115,7 +115,7 @@ p.user-type {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .directory-search-parent {
-    width: 665px;
+    width: 800px;
     margin-top: 5px;
   }
   .directory-search-container {
@@ -125,7 +125,7 @@ p.user-type {
   }
 
   a.item-container {
-    width: 625px;
+    width: 760px;
   }
 
   .directory-results {

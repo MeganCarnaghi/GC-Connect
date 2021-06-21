@@ -150,7 +150,7 @@ button.join:hover {
   }
   form {
     margin-top: 0;
-    width: 500px;
+    width: 630px;
   }
 
   input {
@@ -158,7 +158,7 @@ button.join:hover {
   }
 
   .item-container {
-    width: 665px;
+    width: 800px;
   }
   .groups-container {
     display: flex;
