@@ -181,28 +181,30 @@
         placeholder="Link your Calendly"
       />
     </div>
-    <button
-      class="save-changes profile-button"
-      type="submit"
-      (click)="
-        onSubmit(
-          userPhoto.src,
-          userFirstName.value,
-          userLastName.value,
-          userBio.value,
-          userBootcamp.value,
-          userLinkedin.value,
-          userGithub.value,
-          userCalendly.value
-        )
-      "
-    >
-      <fa-icon [icon]="faSave" class="button-icon"></fa-icon>
-      <span>Save Changes</span>
-    </button>
+    <div class="button-container">
+      <button
+        class="save-changes profile-button"
+        type="submit"
+        (click)="
+          onSubmit(
+            userPhoto.src,
+            userFirstName.value,
+            userLastName.value,
+            userBio.value,
+            userBootcamp.value,
+            userLinkedin.value,
+            userGithub.value,
+            userCalendly.value
+          )
+        "
+      >
+        <fa-icon [icon]="faSave" class="button-icon"></fa-icon>
+        <span>Save Changes</span>
+      </button>
+      <button class="sign-out profile-button" (click)="ngAuthService.SignOut()">
+        <fa-icon [icon]="faSignOutAlt" class="button-icon"></fa-icon>
+        <span>Sign Out</span>
+      </button>
+    </div>
   </form>
-  <button class="sign-out profile-button" (click)="ngAuthService.SignOut()">
-    <fa-icon [icon]="faSignOutAlt" class="button-icon"></fa-icon>
-    <span>Sign Out</span>
-  </button>
 </div>

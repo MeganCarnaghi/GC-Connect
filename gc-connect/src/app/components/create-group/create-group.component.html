@@ -56,17 +56,19 @@
     </div>
 
     <!-- Bio -->
-    <label for="bio" class="input-label">GROUP BIO</label>
-    <div class="input-parent multi-row">
-      <fa-icon [icon]="faEdit" class="input-icon"></fa-icon>
-      <textarea
-        #groupBio
-        class="input-text"
-        name="bio"
-        rows="4"
-        maxlength="200"
-        placeholder="Say somehthing about the group..."
-      ></textarea>
+    <div class="bio-parent">
+      <label for="bio" class="input-label">GROUP BIO</label>
+      <div class="input-parent multi-row">
+        <fa-icon [icon]="faEdit" class="input-icon"></fa-icon>
+        <textarea
+          #groupBio
+          class="input-text"
+          name="bio"
+          rows="4"
+          maxlength="200"
+          placeholder="Say somehthing about the group..."
+        ></textarea>
+      </div>
     </div>
     <button
       class="save-changes profile-button"
