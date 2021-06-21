@@ -264,3 +264,48 @@ p.user-type {
     padding-bottom: 70px;
   }
 }
+@media only screen and (min-width: 768px) {
+  img.header-photo {
+    width: 100%;
+    height: 35vh;
+    object-fit: cover;
+  }
+  .profile-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-bio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .first-name,
+  .last-name,
+  .input-parent {
+    width: 100%;
+  }
+  .group-header,
+  .user-bio,
+  .input-parent.multi-row,
+  .full-name {
+    width: 800px;
+  }
+
+  button.save-changes {
+    width: 200px;
+  }
+
+  .bio-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 800px;
+  }
+
+  .input-text {
+    width: 100%;
+  }
+}
