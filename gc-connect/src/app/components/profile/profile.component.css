@@ -1,8 +1,8 @@
 /* Onboarding checklist */
 .onboard-section {
-  width: 96%;
+  width: 100%;
   background-color: #343d46;
-  padding: 25px;
+  padding: 25px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,10 +10,10 @@
 }
 
 .onboard-parent {
-  width: 85vw;
+  width: 90%;
   background-color: white;
   border-radius: 8px;
-  padding: 35px;
+  padding: 10px;
 }
 
 .toggle-section {
@@ -300,7 +300,8 @@ p.user-type {
     justify-content: center;
   }
   .item-content,
-  .user-bio {
+  .user-bio{
+    width: 100%;
     max-width: 800px;
   }
   .item-content {
@@ -318,12 +319,10 @@ p.user-type {
     flex-direction: column;
     align-items: center;
   }
-  .user-bio {
-    width: 800px;
-  }
 
   .profile-body h2 {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
     text-align: left;
   }
 
