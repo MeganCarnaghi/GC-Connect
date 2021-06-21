@@ -176,3 +176,32 @@ td a:visited,
 li.resources__listItem a:visited {
   color: #0097a7;
 }
+
+/* MEDIA QUERIES */
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 1190px) {
+  .career-services-requirements__container,
+  .career-services-team__container,
+  .career-services-resources__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .headline-container,
+  .team-members__container,
+  .career-services-requirements__child {
+    max-width: 1190px;
+  }
+  .headline-container {
+    width: 100%;
+  }
+
+  .career-services-requirements__child {
+    width: 1130px;
+  }
+  .resources__container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: minmax(100px, auto);
+    width: 1190px;
+  }
+}

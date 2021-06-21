@@ -1,21 +1,25 @@
 <app-navigation></app-navigation>
 
-<form>
-  <input
-    type="text"
-    name="group-search-text"
-    placeholder="Search for a group..."
-    [(ngModel)]="query"
-  />
-  <fa-icon class="search-icon" [icon]="faSearch" size="lg"></fa-icon>
-</form>
+<div class="group-search-parent">
+  <form class="search-form">
+    <input
+      type="text"
+      name="group-search-text"
+      placeholder="Search for a group..."
+      [(ngModel)]="query"
+    />
+    <fa-icon class="search-icon" [icon]="faSearch" size="lg"></fa-icon>
+  </form>
 
-<section class="bg-gray">
-  <a href="/groups/" class="a-button" routerLink="/create-group">
-    <fa-icon class="" [icon]="faPlus" size="sm"></fa-icon>
-    Create Group
-  </a>
+  <div class="button-container">
+    <a href="/groups/" class="a-button" routerLink="/create-group">
+      <fa-icon class="" [icon]="faPlus" size="sm"></fa-icon>
+      Create Group
+    </a>
+  </div>
+</div>
 
+<section class="bg-gray groups-container">
   <div
     *ngFor="let group of groups | searchFilter: query; let i = index"
     class="item-container"
@@ -27,7 +31,12 @@
         <p class="uppercase letter-space type">{{ group.type }}</p>
       </div>
     </a>
-    <button class="join bg-gray uppercase" *ngIf="!group.user_id"
-    (click)='joinGroup(group.id)'>Join</button>
+    <button
+      class="join bg-gray uppercase"
+      *ngIf="!group.user_id"
+      (click)="joinGroup(group.id)"
+    >
+      Join
+    </button>
   </div>
 </section>

@@ -5,18 +5,20 @@
 ></app-user-popup>
 <app-navigation></app-navigation>
 
-<form>
-  <input
-    type="text"
-    name="group-search-text"
-    placeholder="Search for a user..."
-    [(ngModel)]="query"
-  />
-
-  <fa-icon class="search-icon" [icon]="faSearch" size="lg"></fa-icon>
+<form class="directory-search-container">
+  <div class="directory-search-parent">
+    <fa-icon class="search-icon" [icon]="faSearch" size="lg"></fa-icon>
+    <input
+      class="directory-search"
+      type="text"
+      name="group-search-text"
+      placeholder="Search for a user..."
+      [(ngModel)]="query"
+    />
+  </div>
 </form>
 
-<section class="bg-gray">
+<section class="bg-gray directory-results">
   <a
     *ngFor="let user of users | searchFilter: query"
     class="item-container"
