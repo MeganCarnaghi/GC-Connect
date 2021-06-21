@@ -168,13 +168,10 @@ export class GcConnectService {
   }
 
   // Group Comment Delete
-  removePost(id: any) {
+  removePost(id: any, groupId:any) {
     console.log('Deleted in service');
     return this.client
-      .delete(`http://localhost:3000/group-comments/${id}`)
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .delete(`http://localhost:3000/group-comments/${id}?groupId=${groupId}`);
   }
 
   getOnboardingTasksById(uid: any): Observable<any> {

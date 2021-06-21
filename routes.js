@@ -90,7 +90,7 @@ try{
 		return res.status(404).send("The user could not be found");
 	}
 
-	const groups = await db.manyOrNone("SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(id)",
+	const groups = await db.manyOrNone("SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(id) ORDER BY gm.user_id ASC",
 		{
 			id: userId.id
 		}
@@ -275,6 +275,45 @@ router.post("/group-posts", async (req, res) => {
 	}
 });
 
+// addUserToGroupReturnGroups(uid, groupId) : add a user to a group (join button) & get back list of all groups
+router.post("/group-members/groups/:uid", async (req, res) => {
+	try {
+		const userId = await db.oneOrNone(
+			"SELECT id FROM users WHERE firebase_uid = $(uid)",
+			{
+				uid: req.params.uid,
+			}
+		);
+	
+		if (!userId) {
+			return res.status(404).send("The user could not be found");
+		}
+
+		await db.oneOrNone(
+			"INSERT INTO group_members (group_id, user_id) VALUES ($(group_id), $(user_id)) RETURNING id",
+			{
+				group_id: +req.body.group_id,
+				user_id: userId.id,
+			}
+		);
+
+		const groups = await db.manyOrNone("SELECT g.*, gm.user_id FROM groups g LEFT JOIN group_members gm on gm.group_id = g.id AND gm.user_id = $(id) ORDER BY gm.user_id ASC",
+			{
+				id: userId.id
+			}
+		);
+
+		if (!groups) {
+			return res.status(404).send("The groups could not be found");
+		}
+
+		res.status(201).json(groups);
+
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
+});
 
 // addUserToGroupReturnGroup(uid, groupId) : add a user to a group (join button) & get back only specific group
 router.post("/group-members/group/:uid", async (req, res) => {
@@ -462,7 +501,15 @@ router.delete("/group-comments/:id", async (req, res) => {
 		await db.none(`DELETE FROM group_posts WHERE id = $(id)`, {
 			id: req.params.id,
 		});
-		const updatedPosts = await db.one("SELECT * FROM group_posts");
+
+		// const updatedPosts = await db.one("SELECT * FROM group_posts");
+
+		const updatedPosts = await db.many(
+			"SELECT gp.id, gp.group_id, gp.date, gp.user_id, gp.body, u.first_name, u.last_name, u.photo FROM group_posts gp INNER JOIN users u ON u.id = gp.user_id WHERE gp.group_id = $(group_id) ORDER BY date DESC",
+			{
+				group_id: req.query.groupId,
+			}
+		);
 
 		res.status(201).json(updatedPosts);
 	} catch (error) {

@@ -39,8 +39,10 @@ input::placeholder {
 }
 
 /* Group Section Styling */
-section {
-  min-height: 80vh;
+
+section{
+    min-height: 80vh;
+    padding-bottom: 70px;
 }
 
 .a-button {
