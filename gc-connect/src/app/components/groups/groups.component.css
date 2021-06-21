@@ -148,11 +148,13 @@ button.join:hover {
   }
   .a-button {
     height: 35px;
+    width: 150px;
     padding: 5px 10px;
   }
   form {
     margin-top: 0;
-    width: 630px;
+    width: 100%;
+    max-width: 610px;
   }
 
   input {
@@ -160,7 +162,8 @@ button.join:hover {
   }
 
   .item-container {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
   }
   .groups-container {
     display: flex;
