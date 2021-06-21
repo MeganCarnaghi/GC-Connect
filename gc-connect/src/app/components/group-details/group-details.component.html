@@ -54,7 +54,7 @@
       <button
         class="delete"
         *ngIf="post.user_id == user.id"
-        (click)="deleteComment(i)"
+        (click)="deleteComment(i, post.group_id)"
       >
         <fa-icon [icon]="faTrash"></fa-icon>DELETE
       </button>

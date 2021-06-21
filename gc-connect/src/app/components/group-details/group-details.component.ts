@@ -124,10 +124,10 @@ export class GroupDetailsComponent implements OnInit {
     this.isShown = true;
   }
 
-  deleteComment(i: any) {
+  deleteComment(i: any, groupId: any) {
     console.log('clicked!', this.groupPosts[i].id);
     let deletedComment = this.groupPosts[i].id;
-    this.SQLservice.removePost(deletedComment);
-    window.location.reload();
+    this.SQLservice.removePost(deletedComment, groupId).subscribe(posts => this.groupPosts = posts);
+    // window.location.reload();
   }
 }
