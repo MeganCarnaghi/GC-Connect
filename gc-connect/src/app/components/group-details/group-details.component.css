@@ -195,11 +195,13 @@ p.body {
   .group-details,
   .bio,
   .group-comment {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
   }
 
   .item-container {
-    width: 760px;
+    width: 95%;
+    max-width: 760px;
   }
 
   section {

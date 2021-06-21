@@ -291,7 +291,8 @@ p.user-type {
   .user-bio,
   .input-parent.multi-row,
   .full-name {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
   }
 
   button.save-changes {
@@ -302,7 +303,8 @@ p.user-type {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
   }
 
   .input-text {
