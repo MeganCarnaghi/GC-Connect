@@ -31,7 +31,7 @@ router.get("/users", async (req, res) => {
 //  getUserByUid(uid) : gets user by uid for profile/popup
 router.get("/users/:uid", async (req, res) => {
 	const result = await db.one(
-		"SELECT * from users WHERE firebase_uid = $(uid)",
+		"SELECT u.*, b.zoom from users u LEFT JOIN bootcamps b on u.bootcamp = b.name WHERE firebase_uid = $(uid)",
 		{
 			uid: req.params.uid,
 		}
