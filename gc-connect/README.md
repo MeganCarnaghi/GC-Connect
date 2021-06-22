@@ -1,27 +1,49 @@
-# GcConnect
+# Grand Circus Connect
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
+## Description
 
-## Development server
+GC-Connect is a group project for [Grand Circus](https://www.grandcircus.co/bootcamps/) Front-End Bootcamp. GC-Connect is a web-based application designed specifically for Grand Circus staff and students. It serves as a central location for onboarding new students, finding student and staff information, learning about upcoming events, and joining and creating groups.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## User Story
 
-## Code scaffolding
+As a Grand Circus student, I want a way to:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Keep track of all of my onboarding tasks and their completion status.
+- Find contact information for Grand Circus staff and students.
+- See all of the activities going on within Grand Circus and related to my specific bootcamp cohort.
+- Join existing affinity groups and create new groups.
 
-## Build
+## Technologies Used
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- HTML
+- CSS
+- Google Fonts
+- Angular
+- Typescript
+- Node.js
+- Express
+- PostgreSQL
+- Filestack
+- Firebase
+- Full Calendar
+- Google Calendar
+- Heroku
+- Netlify
 
-## Running unit tests
+## Link to Deployed Application
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<https://www.gc-connect.net/sign-in>
 
-## Running end-to-end tests
+## Screenshots
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Sign In Page Screenshot](src/assets/gc-connect-login.jpg)
 
-## Further help
+![Profile Page Screenshot](src/assets/gc-connect-profile.jpg)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![Groups Screenshot](src/assets/gc-connect-groups.jpg)
+
+## Collaborators
+
+- [Katherine Holland](https://github.com/kkholland)
+- [Paige Blakeslee](https://github.com/pblakeslee)
+- [Megan Carnaghi](https://github.com/MeganCarnaghi)
