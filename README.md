@@ -40,7 +40,7 @@ As a Grand Circus student, I want a way to:
 
 ![Profile Page Screenshot](gc-connect/src/assets/gc-connect-profile.jpg)
 
-![Groups Screenshot](gc-connect/src/assets/gc-connect-groups.jpg)
+![Groups Screenshot](gc-connect/src/assets/gc-connect-group.jpg)
 
 ## Collaborators
 
