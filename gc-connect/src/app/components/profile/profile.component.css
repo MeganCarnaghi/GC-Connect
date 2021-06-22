@@ -39,6 +39,7 @@ button.toggle {
 button.toggle:hover {
   background-color: #23292e;
   transition: 00.3s;
+  cursor: pointer;
 }
 
 button.toggle fa-icon {
@@ -300,7 +301,7 @@ p.user-type {
     justify-content: center;
   }
   .item-content,
-  .user-bio{
+  .user-bio {
     width: 100%;
     max-width: 800px;
   }

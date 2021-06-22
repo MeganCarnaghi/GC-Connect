@@ -2,8 +2,6 @@
 
 # environments
 .env
-/src/environments/api.environment.ts
-/src/environments/api.environment.prod.ts
 
 # compiled output
 /dist

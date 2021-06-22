@@ -56,7 +56,7 @@ export class CalendarComponent implements AfterViewInit {
         calendar.setOption('height', calendarHeight);
       },
 
-      googleCalendarApiKey: environment.googleCalendar.apiKey,
+      googleCalendarApiKey: 'AIzaSyCKRYZ_1cqytLIn4R8YlqrKo6Ha9hdUIv4',
       eventSources: [
         {
           googleCalendarId:
