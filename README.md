@@ -36,11 +36,11 @@ As a Grand Circus student, I want a way to:
 
 ## Screenshots
 
-![Sign In Page Screenshot](src/assets/gc-connect-login.jpg)
+![Sign In Page Screenshot](gc-connect/src/assets/gc-connect-login.jpg)
 
-![Profile Page Screenshot](src/assets/gc-connect-profile.jpg)
+![Profile Page Screenshot](gc-connect/src/assets/gc-connect-profile.jpg)
 
-![Groups Screenshot](src/assets/gc-connect-groups.jpg)
+![Groups Screenshot](gc-connect/src/assets/gc-connect-groups.jpg)
 
 ## Collaborators
 
