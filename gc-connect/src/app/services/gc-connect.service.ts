@@ -13,49 +13,52 @@ export class GcConnectService {
 
   // User Gets
   getAllUsers() {
-    return this.client.get('http://localhost:3000/users');
+    return this.client.get('https://gc-connect.herokuapp.com/users');
   }
 
   getUserByUid(uid: any) {
-    return this.client.get(`http://localhost:3000/users/${uid}`);
+    return this.client.get(`https://gc-connect.herokuapp.com/users/${uid}`);
   }
 
   getUserById(id: any) {
-    return this.client.get(`http://localhost:3000/users-id/${id}`);
+    return this.client.get(`https://gc-connect.herokuapp.com/users-id/${id}`);
   }
 
   // Group Gets
   getAllGroups() {
-    return this.client.get('http://localhost:3000/groups');
+    return this.client.get('https://gc-connect.herokuapp.com/groups');
   }
 
   getGroupById(id: any) {
-    return this.client.get(`http://localhost:3000/groups/${id}`);
+    return this.client.get(`https://gc-connect.herokuapp.com/groups/${id}`);
   }
 
   getAllGroupsWithUserJoinInfo(uid: any) {
-    return this.client.get(`http://localhost:3000/groups-joined/${uid}`);
+    return this.client.get(
+      `https://gc-connect.herokuapp.com/groups-joined/${uid}`
+    );
   }
 
   getGroupByIdAndUserJoin(groupId: any, uid: any) {
-    return this.client.get(`http://localhost:3000/group-details/${groupId}?uid=${uid}`);
+    return this.client.get(
+      `https://gc-connect.herokuapp.com/group-details/${groupId}?uid=${uid}`
+    );
   }
 
   // Group Comments Get
   getGroupPostsById(id: any) {
-    return this.client.get(`http://localhost:3000/group-posts/${id}`);
-
+    return this.client.get(
+      `https://gc-connect.herokuapp.com/group-posts/${id}`
+    );
   }
-
 
   // *** POST ROUTES ***
 
   // User Posts
-  
-  addNewUser(user: any) {
-     return this.client.post('http://localhost:3000/users', user);
-  }
 
+  addNewUser(user: any) {
+    return this.client.post('https://gc-connect.herokuapp.com/users', user);
+  }
 
   createGroup(groupName: any, groupType: any, groupBio: any, groupPhoto: any) {
     console.log('received by service');
@@ -65,9 +68,8 @@ export class GcConnectService {
       bio: groupBio,
       photo: groupPhoto,
     };
-    return this.client.post(`http://localhost:3000/groups`, group);
+    return this.client.post(`https://gc-connect.herokuapp.com/groups`, group);
   }
-
 
   addFirebaseUser(email: any, uid: any) {
     let newUser: Object = {
@@ -77,7 +79,7 @@ export class GcConnectService {
     };
 
     return this.client
-      .post(`http://localhost:3000/users-uid`, newUser)
+      .post(`https://gc-connect.herokuapp.com/users-uid`, newUser)
       .subscribe((data) => {
         console.log(data);
       });
@@ -92,7 +94,10 @@ export class GcConnectService {
       comment: comment,
     };
 
-    return this.client.post(`http://localhost:3000/group-posts`, post);
+    return this.client.post(
+      `https://gc-connect.herokuapp.com/group-posts`,
+      post
+    );
   }
 
   // Group Member Posts
@@ -101,18 +106,22 @@ export class GcConnectService {
       group_id: groupId,
     };
 
-    return this.client.post(`http://localhost:3000/group-members/groups/${uid}`, group);
-
+    return this.client.post(
+      `https://gc-connect.herokuapp.com/group-members/groups/${uid}`,
+      group
+    );
   }
 
   addUserToGroupReturnGroup(uid: any, groupId: any) {
     let group: Object = {
-      group_id: groupId
+      group_id: groupId,
     };
 
-    return this.client.post(`http://localhost:3000/group-members/group/${uid}`, group);
+    return this.client.post(
+      `https://gc-connect.herokuapp.com/group-members/group/${uid}`,
+      group
+    );
   }
-
 
   //  *** PUT ROUTES ***
 
@@ -123,7 +132,7 @@ export class GcConnectService {
     };
 
     return this.client
-      .put(`http://localhost:3000/users/${email}`, firebase_uid)
+      .put(`https://gc-connect.herokuapp.com/users/${email}`, firebase_uid)
       .subscribe((data) => {
         console.log(data);
       });
@@ -152,93 +161,94 @@ export class GcConnectService {
     };
     console.log(targetedUser);
     return this.client
-      .put(`http://localhost:3000/users-profile/${id}`, targetedUser)
+      .put(`https://gc-connect.herokuapp.com/users-profile/${id}`, targetedUser)
       .subscribe((data) => {
         console.log(data);
       });
   }
 
-
-
   // *** DELETE ROUTES ***
 
   // Group Member Delete
   deleteUserFromGroup(uid: any, groupId: number) {
-    return this.client.delete(`http://localhost:3000/group-members/${uid}?groupId=${groupId}`);
+    return this.client.delete(
+      `https://gc-connect.herokuapp.com/group-members/${uid}?groupId=${groupId}`
+    );
   }
 
   // Group Comment Delete
-  removePost(id: any, groupId:any) {
+  removePost(id: any, groupId: any) {
     console.log('Deleted in service');
-    return this.client
-      .delete(`http://localhost:3000/group-comments/${id}?groupId=${groupId}`);
+    return this.client.delete(
+      `https://gc-connect.herokuapp.com/group-comments/${id}?groupId=${groupId}`
+    );
   }
 
   getOnboardingTasksById(uid: any): Observable<any> {
     return this.client.get(
-      `http://localhost:3000/user-onboarding-tasks/${uid}`
+      `https://gc-connect.herokuapp.com/user-onboarding-tasks/${uid}`
     );
   }
 
   setupSlack(id: any, slackCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-slack/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-slack/${id}`,
       slackCheckbox
     );
   }
 
   payTuition(id: any, tuitionCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-tuition/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-tuition/${id}`,
       tuitionCheckbox
     );
   }
 
   completeSurvey(id: any, surveyCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-survey/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-survey/${id}`,
       surveyCheckbox
     );
   }
 
   completeProfile(id: any, profileCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-profile/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-profile/${id}`,
       profileCheckbox
     );
   }
 
   exploreLms(id: any, lmsCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-lms/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-lms/${id}`,
       lmsCheckbox
     );
   }
 
   bookmarkZoom(id: any, zoomCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-zoom/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-zoom/${id}`,
       zoomCheckbox
     );
   }
 
   checkCalendar(id: any, calendarCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-calendar/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-calendar/${id}`,
       calendarCheckbox
     );
   }
 
   checkCareerServices(id: any, csCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-cs/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-cs/${id}`,
       csCheckbox
     );
   }
 
   exploreGroups(id: any, exploreCheckbox: any) {
     return this.client.put(
-      `http://localhost:3000/users-onboarding-groups/${id}`,
+      `https://gc-connect.herokuapp.com/users-onboarding-groups/${id}`,
       exploreCheckbox
     );
   }
