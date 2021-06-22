@@ -1,18 +1,10 @@
-import { environment } from '../../environments/environment';
-
 declare var filestack: any;
 export class FilestackClient {
   static instance: any;
   static pick(): Promise<string> {
     return FilestackClient.instance
       .pick({
-        fromSources: [
-          'local_file_system',
-          'webcam',
-          'facebook',
-          'instagram',
-          'googledrive',
-        ],
+        fromSources: ['local_file_system', 'webcam'],
         transformations: {
           crop: {
             aspectRatio: 1,
@@ -24,6 +16,6 @@ export class FilestackClient {
       });
   }
   static initialize() {
-    FilestackClient.instance = filestack.init(environment.filestack.apiKey);
+    FilestackClient.instance = filestack.init('APolcSi1mRB6sMqckiRdiz');
   }
 }
